@@ -13,9 +13,11 @@
                 $_POST["lastName"],
                 $_POST["email"],
                 $_POST["phone"],
-                password_hash("1234567", PASSWORD_DEFAULT)
+                password_hash($_POST["password"], PASSWORD_DEFAULT)
             ));
-            print_r(json_encode($id));
+            $tab= array();
+            $tab["id"]=$id;
+            print_r(json_encode($tab));
         }catch (PDOException $e){
             echo "connection failed :". $e->getMessage();
         }
