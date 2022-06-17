@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "body": ["body"]
+        "body": ["body"],
+        "title": ["title"]
       }
     },
   },

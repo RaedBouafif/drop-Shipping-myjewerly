@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { Link } from "react-router-dom"
+import React, { useRef, useState, useEffect } from 'react'
+import { Link, useNavigate } from "react-router-dom"
 import { UseDynamicInput } from '../../hooks/UseDyInp'
 import { UseTrueEmail, UseTrueString } from "../../hooks/strings"
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,13 +7,20 @@ import axios from 'axios'
 import { loginReducer } from '../../reducer/loginReducer'
 import { useCookies } from "react-cookie"
 import Loader from '../Loader/Loader'
+import { UseLogged } from "../../hooks/UseLogged"
 const Login = () => {
+
+    UseLogged("/")
+    const navigate = useNavigate()
+
+
     /*cookie */
     const [cookies, setCookies] = useCookies()
     const [isLoading, setIsLoading] = useState(false)
 
     const dispatcher = useDispatch()
     const url = useSelector(element => element.url)
+
     const emailInput = useRef(null)
     const passwordInput = useRef(null)
     const [fetchError, setFetchError] = useState(false)
@@ -41,10 +48,11 @@ const Login = () => {
             var data = new FormData()
             data.append("email", email)
             data.append("password", password)
-            axios.post(url + "/login.php").then((res) => {
+            axios.post(url + "/login.php", data).then((res) => {
                 if (res.success) {
                     dispatcher(loginReducer(res.id))
                     setCookies("clid", res.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
+                    navigate("/")
                 }
                 else {
                     setFetchError(true)
@@ -61,7 +69,7 @@ const Login = () => {
             <div className='w-full lg:fixed lg:inset-0 min-h-full flex items-center justify-center'>
                 <div className='min-h-screen lg:flex hidden w-7/12 bg-neutral-900 selection:bg-white selection:text-blue-300'>
                     <div className='mx-auto relative right-10 flex flex-col items-center justify-center'>
-                        <img className='h-[450px] w-[600px]' src="./assets/images/online-shopping.png" alt="" />
+                        <img className='h-[450px] w-[600px]' src="/assets/images/online-shopping.png" alt="" />
                         <h1 className='text-lg text-white w-7/12 text-center mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</h1>
                     </div>
                 </div>
