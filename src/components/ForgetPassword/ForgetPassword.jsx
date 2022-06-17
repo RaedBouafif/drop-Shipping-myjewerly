@@ -34,9 +34,7 @@ const ForgetPassword = () => {
         e.preventDefault()
         if (!emailErrors.length) {
             setIsLoading(true)
-            var data = new FormData()
-            data.append("email", email)
-            axios.post(url + "/resetPassword.php").then((res) => {
+            axios.get(url + "/resetPassword.php?email" + encodeURIComponent(email)).then((res) => {
                 if (res.success) {
                     setSuccess(true)
                 }
@@ -62,7 +60,7 @@ const ForgetPassword = () => {
                 <div className='selection:bg-blue-300 selection:text-white py-8 lg:w-5/12 w-full shadow-lg shadow-black/20 lg:relative bottom-5 rounded-lg right-24 bg-white  min-h-screen lg:min-h-min flex flex-col items-center justify-center'>
                     <Link to="/login" className='lg:relative absolute top-7 left-2 flex items-center self-start lg:left-2 lg:-top-3 space-x-2'>
                         <img src="/assets/icons/left-arrow.png" className='h-5 w-5' />
-                        <p className='font-bold tracking-wider text-lg hover:underline underline-offset-1 decoration-neutral-700 text-neutral-700'>Back to Login</p>
+                        <p className='font-bold tracking-wider text-lg hover:underline underline-offset-1 decoration-neutral-700 text-neutral-700'>Back to Log in</p>
                     </Link>
                     <div className='z-10 my-4 w-full flex space-y-5 flex-col items-center justify-center'>
                         <h2 className='text-blue-400 font-bold lg:text-4xl text-3xl text-center'>Reset Your Password</h2>

@@ -1,10 +1,13 @@
 import React from 'react'
-import Loader from './Loader/Loader'
-import Login from './Login/Login'
 import "../index.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ForgetPassword from './ForgetPassword/ForgetPassword'
+import Loader from './Loader/Loader'
+import Login from './Login/Login'
 import Sign from './Sign/Sign'
+import Verify from './VerifyEmail/Verify'
+import ChangePassword from './changePassword/ChangePassword'
+import ErrorPage from './ErrorPage/ErrorPage'
 const App = () => {
 
   return (
@@ -13,8 +16,17 @@ const App = () => {
         <Route path="/login" >
           <Route element={<Login />} index />
           <Route path="ForgetPassword" element={<ForgetPassword />} />
+          <Route element={<Login />} path="*"></Route>
         </Route>
-        <Route element={<Sign />} path="/sign" />
+        <Route path="/sign">
+          <Route element={<Sign />} index />
+          <Route element={<Verify />} path="emailVerify" />
+          <Route element={<Sign />} path="*"></Route>
+        </Route>
+        <Route path="/account">
+          <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
+        </Route>
+        <Route element={<ErrorPage />} path="*"></Route>
       </Routes>
     </BrowserRouter>
   )
