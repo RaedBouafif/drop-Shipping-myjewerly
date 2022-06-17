@@ -8,6 +8,7 @@ import Sign from './Sign/Sign'
 import Verify from './VerifyEmail/Verify'
 import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
+import Test from './test/Test'
 const App = () => {
 
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
+        <Route path="test" element={<Test />}></Route>
       </Routes>
     </BrowserRouter>
   )

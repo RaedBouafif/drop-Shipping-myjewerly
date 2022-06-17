@@ -8,6 +8,10 @@ import { Provider } from 'react-redux';
 const state = {
   isLogged: false,
   clid: null,
+  search: {
+    name: null,
+    type: null
+  },
   url: "http://localhost",
   notification: {
     message: null,

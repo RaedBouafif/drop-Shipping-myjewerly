@@ -139,13 +139,13 @@ const Sign = () => {
             <div className='w-6/12 h-screen order-2 lg:flex hidden fixed top-0 right-0 items-center justify-end'>
                 <Image src="/assets/images/littleGril.jpg" className="h-full w-full" alt="image for sign up" />
                 <div className='absolute mr-5'>
-                    <h1 className='text-pink-500 text-[27px] font-bold'>Why <span className='text-[35px] text-neutral-700 tracking-widest font-title'>MyJewerly</span></h1>
+                    <h1 className='text-pink-500 text-[27px] font-bold'>Why <span className='text-[35px] text-neutral-700 tracking-widest font-title'>MyJewelry</span></h1>
                     <ul className='pr-2 mt-5 space-y-2 text-neutral-600 text-[18px]'>
                         <li>
                             <p className=' font-bold w-60 text-right'>Express delivery</p>
                         </li>
                         <li>
-                            <p className=' font-bold w-60 text-right'>Top Branded Jewerly & Watches</p>
+                            <p className=' font-bold w-60 text-right'>Top Branded Jewelry & Watches</p>
                         </li>
                         <li>
                             <p className=' font-bold w-60 text-right'>Cheapest prices</p>
