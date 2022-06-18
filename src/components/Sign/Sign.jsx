@@ -135,116 +135,116 @@ const Sign = () => {
         }
     }
     return (
-        <div className='w-full min-h-screen flex items-center font-body'>
-            <div className='w-6/12 h-screen order-2 lg:flex hidden fixed top-0 right-0 items-center justify-end'>
-                <Image src="/assets/images/littleGril.jpg" className="h-full w-full" alt="image for sign up" />
-                <div className='absolute mr-5'>
-                    <h1 className='text-pink-500 text-[27px] font-bold'>Why <span className='text-[35px] text-neutral-700 tracking-widest font-title'>MyJewelry</span></h1>
-                    <ul className='pr-2 mt-5 space-y-2 text-neutral-600 text-[18px]'>
+        <div className='t-w-full t-min-h-screen t-flex t-items-center t-font-body'>
+            <div className='t-w-6/12 t-h-screen t-order-2 lg:t-flex t-hidden t-fixed t-top-0 t-right-0 t-items-center t-justify-end'>
+                <Image src="/assets/images/littleGril.jpg" className="t-h-full t-w-full" alt="image for sign up" />
+                <div className='t-absolute t-mr-5'>
+                    <h1 className='t-text-pink-500 t-text-[27px] t-font-bold'>Why <span className='t-text-[35px] t-text-neutral-700 t-tracking-widest t-font-title'>MyJewelry</span></h1>
+                    <ul className='t-pr-2 t-mt-5 t-space-y-2 t-text-neutral-600 t-text-[18px]'>
                         <li>
-                            <p className=' font-bold w-60 text-right'>Express delivery</p>
+                            <p className='t-font-bold t-w-60 t-text-right'>Express delivery</p>
                         </li>
                         <li>
-                            <p className=' font-bold w-60 text-right'>Top Branded Jewelry & Watches</p>
+                            <p className='t-font-bold t-w-60 t-text-right'>Top Branded Jewelry & Watches</p>
                         </li>
                         <li>
-                            <p className=' font-bold w-60 text-right'>Cheapest prices</p>
+                            <p className='t-font-bold w-60 t-text-right'>Cheapest prices</p>
                         </li>
                         <li>
-                            <p className='font-bold w-60 text-right'>Security</p>
+                            <p className='t-font-bold w-60 t-text-right'>Security</p>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div className='order-1 selection:bg-blue-300 selection:text-white py-8 lg:py-12 lg:w-6/12 w-full shadow-lg shadow-black/20 rounded-lg bg-white  min-h-screen flex flex-col items-center justify-center'>
-                <h2 className='text-neutral-600 text-md mb-5 font-semibold'>You Have An Account ?<Link to="/login" className="text-blue-500 hover:underline decoration-blue-500"> Log in</Link> </h2>
-                <div className='lg:w-6/12 w-9/12 flex items-center space-x-6 justify-center'>
-                    <div className='h-1 bg-neutral-700 w-1/3'></div>
+            <div className='t-order-1 selection:t-bg-blue-300 selection:t-text-white t-py-8 lg:t-py-12 lg:t-w-6/12 t-w-full t-shadow-lg t-shadow-black/20 t-rounded-lg t-bg-white t-min-h-screen t-flex t-flex-col t-items-center t-justify-center'>
+                <h2 className='t-text-neutral-600 t-text-md t-mb-5 t-font-semibold'>You Have An Account ?<Link to="/login" className="t-text-blue-500 hover:t-underline decoration-blue-500"> Log in</Link> </h2>
+                <div className='lg:t-w-6/12 t-w-9/12 t-flex t-items-center t-space-x-6 t-justify-center'>
+                    <div className='t-h-1 t-bg-neutral-700 t-w-1/3'></div>
                     <p>OR</p>
-                    <div className='h-1 bg-neutral-700 w-1/3'></div>
+                    <div className='t-h-1 t-bg-neutral-700 t-w-1/3'></div>
                 </div>
-                <div className='z-10 my-10 w-full flex space-y-5 flex-col items-center justify-center'>
-                    <h2 className='text-blue-400 font-bold text-5xl lg:text-4xl'>Sign Up</h2>
-                    <p className='lg:text-sm text-md text-stone-500 lg:w-6/12 w-10/12 text-center '>Please fill up this Formuler  with your personal informations.</p>
+                <div className='t-z-10 t-my-10 t-w-full t-flex t-space-y-5 t-flex-col t-items-center t-justify-center'>
+                    <h2 className='t-text-blue-400 t-font-bold t-text-5xl lg:t-text-4xl'>Sign Up</h2>
+                    <p className='lg:t-text-sm t-text-md t-text-stone-500 lg:t-w-6/12 t-w-10/12 t-text-center '>Please fill up this Formuler  with your personal informations.</p>
                 </div>
-                <div className='z-10 lg:w-7/12 w-10/12 md:w-8/12'>
-                    <div className='flex lg:flex-row flex-col w-full mb-2'>
-                        <div className='flex space-y-1 flex-col lg:w-[49%] w-full mb-2 lg:mb-0'>
-                            <label onClick={() => { firstName.current.focus() }} className='relative h-0 duration-150  left-2 cursor-text select-none text-stone-700 translate-y-[21px] text-sm'>First name</label>
-                            <input ref={firstName} type="text" className="bg-white duration-150 rounded-md outline-none h-10 px-2 py-[25px] border-2 border-stone-200  before:z-50 before:left-0" />
+                <div className='t-z-10 lg:t-w-7/12 t-w-10/12 md:t-w-8/12'>
+                    <div className='t-flex lg:t-flex-row t-flex-col t-w-full t-mb-2'>
+                        <div className='t-flex t-space-y-1 t-flex-col lg:t-w-[49%] t-w-full t-mb-2 lg:t-mb-0'>
+                            <label onClick={() => { firstName.current.focus() }} className='t-relative t-h-0 t-duration-150 t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>First name</label>
+                            <input ref={firstName} type="text" className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200  before:t-z-50 before:t-left-0" />
                         </div>
-                        <div className='mb-5 lg:hidden'>
+                        <div className='t-mb-5 lg:t-hidden'>
                             {firstNameErros.map((element, index) => {
                                 return (
-                                    <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                    <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                                 )
                             })}
                         </div>
-                        <div className='flex space-y-1 mb-2 lg:ml-[2%] flex-col lg:w-[49%] w-full'>
-                            <label onClick={() => { lastName.current.focus() }} className='relative h-0 duration-150  left-2 cursor-text select-none text-stone-700 translate-y-[21px] text-sm'>Last name</label>
-                            <input ref={lastName} type="text" className="bg-white duration-150 rounded-md outline-none h-10 px-2 py-[25px] border-2 border-stone-200  before:z-50 before:left-0" />
+                        <div className='t-flex t-space-y-1 t-mb-2 lg:t-ml-[2%] t-flex-col lg:t-w-[49%] t-w-full'>
+                            <label onClick={() => { lastName.current.focus() }} className='t-relative t-h-0 t-duration-150  t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>Last name</label>
+                            <input ref={lastName} type="text" className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200  before:t-z-50 before:t-left-0" />
                         </div>
-                        <div className='mb-5 lg:hidden'>
+                        <div className='t-mb-5 lg:t-hidden'>
                             {lastNameErrors.map((element, index) => {
                                 return (
-                                    <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                    <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                                 )
                             })}
                         </div>
                     </div>
-                    <div className='mb-5 hidden lg:flex flex-col'>
+                    <div className='t-mb-5 t-hidden lg:t-flex t-flex-col'>
                         {[...firstNameErros, ...lastNameErrors].map((element, index) => {
                             return (
-                                <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                             )
                         })}
                     </div>
-                    <div className='flex space-y-1 flex-col w-full mb-2'>
-                        <label onClick={() => { email.current.focus() }} className='relative h-0 duration-150  left-2 cursor-text select-none text-stone-700 translate-y-[21px] text-sm'>email</label>
-                        <input ref={email} type="text" className="bg-white duration-150 rounded-md outline-none h-10 px-2 py-[25px] border-2 border-stone-200  before:z-50 before:left-0" />
+                    <div className='t-flex t-space-y-1 t-flex-col t-w-full t-mb-2'>
+                        <label onClick={() => { email.current.focus() }} className='t-relative t-h-0 t-duration-150 t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>email</label>
+                        <input ref={email} type="text" className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200 before:t-z-50 before:t-left-0" />
                     </div>
-                    <div className='flex flex-col mb-5'>
+                    <div className='t-flex t-flex-col t-mb-5'>
                         {emailErrors.map((element, index) => {
                             return (
-                                <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                             )
                         })}
                     </div>
-                    <div className='mb-2 flex items-center justify-end'>
-                        <div className='flex space-y-1 flex-col w-full'>
-                            <label onClick={() => { tel.current.focus() }} className='relative h-0 duration-150 left-2 cursor-text select-none text-stone-700 translate-y-[21px] text-sm'>number</label>
-                            <input ref={tel} type="tel" className="bg-white duration-150 rounded-md outline-none h-10 px-2 py-[25px] border-2 border-stone-200  before:z-50 before:left-0" />
+                    <div className='t-mb-2 t-flex t-items-center t-justify-end'>
+                        <div className='t-flex t-space-y-1 t-flex-col t-w-full'>
+                            <label onClick={() => { tel.current.focus() }} className='t-relative t-h-0 t-duration-150 t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>number</label>
+                            <input ref={tel} type="tel" className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200 before:t-z-50 before:t-left-0" />
                         </div>
-                        <select id="test" ref={indexTel} className='signSelect absolute h-[52px] text-[9px] cursor-pointer rounded-sm mt-1 mr-[1px] text-center outline-none w-[90px]  text-white border-2 bg-blue-400 border-transparent'>
+                        <select id="test" ref={indexTel} className='signSelect t-absolute t-h-[52px] t-text-[9px] t-cursor-pointer t-rounded-sm t-mt-1 t-mr-[1px] t-text-center t-outline-none t-w-[90px] t-text-white t-border-2 t-bg-blue-400 t-border-transparent'>
                             <Options />
                         </select>
                     </div>
-                    <div className='flex flex-col mb-5'>
+                    <div className='t-flex t-flex-col t-mb-5'>
                         {telErros.map((element, index) => {
                             return (
-                                <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                             )
                         })}
                     </div>
-                    <div className='flex space-y-1 flex-col w-full mb-2'>
-                        <label onClick={() => { password.current.focus() }} className='relative h-0 duration-150  left-2 cursor-text select-none text-stone-700 translate-y-[21px] text-sm'>password</label>
-                        <input ref={password} type="password" className="bg-white duration-150 rounded-md outline-none h-10 px-2 py-[25px] border-2 border-stone-200  before:z-50 before:left-0" />
+                    <div className='t-flex t-space-y-1 t-flex-col t-w-full t-mb-2'>
+                        <label onClick={() => { password.current.focus() }} className='t-relative t-h-0 t-duration-150 t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>password</label>
+                        <input ref={password} type="password" className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200  before:t-z-50 before:t-left-0" />
                     </div>
-                    <div className='flex flex-col mb-5'>
+                    <div className='t-flex t-flex-col t-mb-5'>
                         {passwordErrors.map((element, index) => {
                             return (
-                                <p key={index} className='text-red-500 text-sm'>{element}</p>
+                                <p key={index} className='t-text-red-500 t-text-sm'>{element}</p>
                             )
                         })}
                     </div>
                 </div>
-                {emailExist && (<div className='lg:w-7/12 w-10/12 md:w-8/12 flex items-center space-x-2'>
-                    <img src="/assets/icons/cross.png" className='h-5 w-5' />
-                    <p className='text-red-500 text-sm font-semi font-semibold'>Email exist</p>
+                {emailExist && (<div className='lg:t-w-7/12 t-w-10/12 md:t-w-8/12 t-flex t-items-center t-space-x-2'>
+                    <img src="/assets/icons/cross.png" className='t-h-5 t-w-5' />
+                    <p className='t-text-red-500 t-text-sm t-font-semibold'>Email exist</p>
                 </div>)}
-                <div className='z-10 lg:w-7/12 w-10/12 md:w-8/12 mt-10'>
-                    {!isLoading && (<button disabled={submit} onClick={handleSubmit} className={`will-change-auto ${!submit ? "hover:text-blue-400 shadow-lg bg-blue-400 hover:bg-white hover:shadow-none border-blue-400" : "bg-blue-400/30 cursor-not-allowed border-none shadow-none"}   border-2 duration-200 delay-75 h-12 lg:w-40 w-full text-white text-lg rounded-md shadow-lg shadow-blue-300`}>Create Account</button>)
-                        || (<Loader className="mx-auto lg:mx-0" height="55px" size="50px" border="5px" color="#60a5fa" />)}
+                <div className='t-z-10 lg:t-w-7/12 t-w-10/12 md:t-w-8/12 t-mt-10'>
+                    {!isLoading && (<button disabled={submit} onClick={handleSubmit} className={`t-will-change-auto ${!submit ? "hover:t-text-blue-400 t-shadow-lg t-bg-blue-400 hover:t-bg-white hover:t-shadow-none t-border-blue-400" : "t-bg-blue-400/30 t-cursor-not-allowed t-border-none t-shadow-none"}   t-border-2 t-duration-200 t-delay-75 t-h-12 lg:t-w-40 t-w-full t-text-white t-text-lg t-rounded-md t-shadow-lg t-shadow-blue-300`}>Create Account</button>)
+                        || (<Loader className="t-mx-auto lg:t-mx-0" height="55px" size="50px" border="5px" color="#60a5fa" />)}
                 </div>
             </div >
         </div >

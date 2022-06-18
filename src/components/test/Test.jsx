@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from "react-router-dom"
 import Panier from "./Panier"
 const Test = () => {
     const [toggleMenu, setToggleMenu] = useState(false)
+    const [scroll, setScroll] = useState(false)
     const handleShowChilds = (e) => {
         const thchild = e.target.parentNode.childNodes[2]
-        if (!e.target.classList.contains("rotate-90")) {
-            e.target.classList.add("rotate-90")
+        if (!e.target.classList.contains("t-rotate-90")) {
+            e.target.classList.add("t-rotate-90")
         } else {
-            e.target.classList.remove("rotate-90")
+            e.target.classList.remove("t-rotate-90")
         }
         if (thchild.style.display == "flex") {
             thchild.style.display = "none"
@@ -16,17 +18,39 @@ const Test = () => {
             thchild.style.display = "flex"
         }
     }
+    const toHide = useRef()
+    const handleScroll = () => {
+        if (window.innerWidth > 991) {
+            if (window.scrollY > toHide.current.clientHeight) {
+                toHide.current.style.display = "none"
+                setScroll(true)
+            }
+            else {
+                toHide.current.style.display = "flex"
+                setScroll(false)
+            }
+        }
+        else {
+
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    })
     return (
-        <div>
-            <div class="header_middle">
+        <div className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
+            <div ref={toHide} class="header_middle t-bg-white">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="logo">
-                                <a href="index.html"><img src="/temp/assets/img/logo/logo.png" alt="" /></a>
+                    <div class="row t-flex t-items-center">
+                        <div class="col-lg-1 col-md-6">
+                            <div class="">
+                                <Link to="/" className='t-text-[35px] t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-6">
+                        <div class="col-lg-11 col-md-6 t-ml-auto">
                             <div class="middel_right">
                                 <div class="search_container">
                                     <form action="#">
@@ -56,9 +80,11 @@ const Test = () => {
                                         </div>
                                     </form>
                                 </div>
-                                <div class="middel_right_info">
+                                <div className="middel_right_info t-font-body mt-0">
                                     <Panier />
-                                    <div style={{ marginLeft: "40px" }}>name</div>
+                                    <Link to="/login" className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
+                                    <Link to="/sign" className='mr t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
+                                    {/*  */}
                                 </div>
                             </div>
                         </div>
@@ -70,75 +96,47 @@ const Test = () => {
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12">
-                            <div class="categories_menu select-none">
+                            {scroll && <p className='col-lg-1 t-text-white t-text-2xl t-font-bold' >MyJewelry</p>}
+                            {!scroll && <div class="categories_menu select-none">
                                 <div onClick={() => { setToggleMenu(!toggleMenu) }} class="categories_title">
                                     <h2 class="">ALL CATEGORIES</h2>
                                 </div>
-                                <div className={` ${toggleMenu ? "py-3 h-auto" : "max-h-0 overflow-y-hidden"} w-full space-y-3 px-8 bg-white absolute border border-stone-200 text-neutral-900 `}>
-                                    <div className='flex w-full flex-wrap items-center'>
-                                        <div className='cursor-pointer hover:text-blue-500 hover:scale-105 hover:text-blue' >Video Games</div>
-                                        <p onClick={handleShowChilds} className='  cursor-pointer select-none ml-auto text-xl'>{">"}</p>
-                                        <div className='hidden flex-col ml-10 mt-1 space-y-2 flex-none w-full'>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
+                                <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
+                                    <div className='t-flex t-w-full flex-wrap items-center'>
+                                        <div className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue' >Video Games</div>
+                                        <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
+                                        <div className='t-hidden t-flex-col t-ml-10 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
+                                            <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
+                                                <div className='hover:t-scale-105'>Video Games</div>
                                             </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
+                                            <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
+                                                <div className='hover:t-scale-105'>Video Games</div>
                                             </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='flex w-full flex-wrap items-center'>
-                                        <div className='cursor-pointer hover:text-blue-500 hover:scale-105 hover:text-blue' >Video Games</div>
-                                        <p onClick={handleShowChilds} className='  cursor-pointer select-none ml-auto text-xl'>{">"}</p>
-                                        <div className='hidden flex-col ml-10 mt-1 space-y-2 flex-none w-full'>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                        </div>
-                                    </div><div className='flex w-full flex-wrap items-center'>
-                                        <div className='cursor-pointer hover:text-blue-500 hover:scale-105 hover:text-blue' >Video Games</div>
-                                        <p onClick={handleShowChilds} className='  cursor-pointer select-none ml-auto text-xl'>{">"}</p>
-                                        <div className='hidden flex-col ml-10 mt-1 space-y-2 flex-none w-full'>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
-                                            </div>
-                                            <div className='flex hover:text-blue-500 cursor-pointer w-full items-center'>
-                                                <div className='hover:scale-105'>Video Games</div>
+                                            <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
+                                                <div className='hover:t-scale-105'>Video Games</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>}
                         </div>
-                        <div class="col-lg-9 col-md-12">
+                        <div class="col-lg-5 col-md-12">
                             <div class="main_menu menu_position">
                                 <nav>
                                     <ul>
-                                        <li><a class="active" href="index.html">home<i class="fa"></i></a>
+                                        <li><Link class="active" to="/">home<i class="fa"></i></Link>
                                         </li>
-                                        <li class="mega_items"><a href="shop.html">shop</a>
+                                        <li class="mega_items"><Link to="/shop">shop</Link>
                                         </li>
-                                        <li><a href="about.html">about Us</a></li>
-                                        <li><a href="contact.html"> Contact Us</a></li>
+                                        <li><Link to="/about">about Us</Link></li>
+                                        <li><Link to="/contact"> Contact Us</Link></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         </div >
     )
 }

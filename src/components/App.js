@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/test" element={<Test />}></Route>
         <Route path="/navBonde" element={<NavBonde paths={["Login"]} />}></Route>
         <Route path="/shop" >
-          <Route index element={<Shop />} />
+          <Route index element={<div className='t-w-full'><Test /><Shop /></div>} />
         </Route>
       </Routes>
     </BrowserRouter>
