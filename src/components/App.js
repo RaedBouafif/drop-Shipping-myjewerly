@@ -31,7 +31,7 @@ const App = () => {
         <Route element={<ErrorPage />} path="*"></Route>
         <Route path="/test" element={<Test />}></Route>
         <Route path="/shop" >
-          <Route index element={<Shop />} />
+          <Route index element={<div className='t-w-full'><Test /><Shop /></div>} />
         </Route>
       </Routes>
     </BrowserRouter>
