@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { removeFromPanier } from '../../reducer/removeFromPanier'
 const Panier = () => {
     const dispacher = useDispatch()
@@ -19,14 +20,14 @@ const Panier = () => {
                 {panier.map((element, index) => {
                     return (<div class="cart_item">
                         <div key={index} class="cart_img">
-                            <a href="#"><img src={element.image} alt="" /></a>
+                            <Link to="#"><img src={element.image} alt="" /></Link>
                         </div>
                         <div class="cart_info">
-                            <a href="#">{element.title}</a>
+                            <Link to={"/product/" + element.id}>{element.title}</Link>
                             <p>Qty: {element.qte} X <span> {"$" + element.price} </span></p>
                         </div>
                         <div class="cart_remove">
-                            <a onClick={() => { removeCart(element.id) }} href="#"><i class="ion-android-close"></i></a>
+                            <div className='t-cursor-pointer' onClick={() => { removeCart(element.id) }} href="#"><i class="ion-android-close"></i></div>
                         </div>
                     </div>)
                 })}
@@ -43,10 +44,10 @@ const Panier = () => {
 
                 <div class="mini_cart_footer">
                     <div class="cart_button">
-                        <a href="cart.html">View cart</a>
+                        <Link to="/cart">View cart</Link>
                     </div>
                     <div class="cart_button">
-                        <a href="checkout.html">Checkout</a>
+                        <Link to="/Checkout">Checkout</Link>
                     </div>
                 </div>
             </div>

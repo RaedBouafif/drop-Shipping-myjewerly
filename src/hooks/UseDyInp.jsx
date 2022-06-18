@@ -9,8 +9,8 @@ export const UseDynamicInput = (input, errorFunction = (input) => { return [] },
             label.style.left = ""
             label.style.transform = "translateY(2px)"
             label.style.fontSize = "12px"
-            input.current.classList.replace("border-stone-200", "border-blue-400")
-            label.classList.replace("text-stone-700", "text-blue-400")
+            input.current.classList.replace("t-border-stone-200", "t-border-blue-400")
+            label.classList.replace("t-text-stone-700", "t-text-blue-400")
         }
     }
     const handleBlur = () => {
@@ -19,8 +19,8 @@ export const UseDynamicInput = (input, errorFunction = (input) => { return [] },
             label.style.left = ""
             label.style.transform = "translateY(21px)"
             label.style.fontSize = ""
-            input.current.classList.replace("border-blue-400", "border-stone-200")
-            label.classList.replace("text-blue-400", "text-stone-700")
+            input.current.classList.replace("t-border-blue-400", "t-border-stone-200")
+            label.classList.replace("t-text-blue-400", "t-text-stone-700")
         }
     }
     const handleErrors = () => {
@@ -28,12 +28,12 @@ export const UseDynamicInput = (input, errorFunction = (input) => { return [] },
         setErrors(() => errorFunction(input.current.value))
         const label = input.current.parentNode.children[0]
         if (errorFunction(input.current.value).length) {
-            input.current.classList.replace("border-blue-400", "border-red-500")
-            label.classList.replace("text-blue-400", "text-red-500")
+            input.current.classList.replace("t-border-blue-400", "t-border-red-500")
+            label.classList.replace("t-text-blue-400", "t-text-red-500")
         }
         else {
-            input.current.classList.replace("border-red-500", "border-blue-400")
-            label.classList.replace("text-red-500", "text-blue-400")
+            input.current.classList.replace("t-border-red-500", "t-border-blue-400")
+            label.classList.replace("t-text-red-500", "t-text-blue-400")
         }
     }
     useEffect(() => {
