@@ -9,6 +9,7 @@ import Verify from './VerifyEmail/Verify'
 import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
+import Shop from "./Shop/Shop"
 const App = () => {
 
   return (
@@ -28,7 +29,10 @@ const App = () => {
           <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
-        <Route path="test" element={<Test />}></Route>
+        <Route path="/test" element={<Test />}></Route>
+        <Route path="/shop" >
+          <Route index element={<Shop />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

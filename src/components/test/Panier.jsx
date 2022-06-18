@@ -1,36 +1,35 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeFromPanier } from '../../reducer/removeFromPanier'
 const Panier = () => {
+    const dispacher = useDispatch()
+    const [increment, setIncrement] = useState(0)
+    const panier = useSelector(element => element.panier.products)
+    const removeCart = (id) => {
+        dispacher(removeFromPanier(id));
+        setIncrement(increment + 1)
+        console.log(panier)
+    }
     return (
         <div class="mini_cart_wrapper">
             <a href="javascript:void(0)"><i class="fa fa-shopping-bag"
                 aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
             <span class="cart_quantity">2</span>
             <div class="mini_cart">
-                <div class="cart_item">
-                    <div class="cart_img">
-                        <a href="#"><img src="assets/img/s-product/product.jpg" alt="" /></a>
-                    </div>
-                    <div class="cart_info">
-                        <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                        <p>Qty: 1 X <span> $60.00 </span></p>
-                    </div>
-                    <div class="cart_remove">
-                        <a href="#"><i class="ion-android-close"></i></a>
-                    </div>
-                </div>
-                <div class="cart_item">
-                    <div class="cart_img">
-                        <a href="#"><img src="assets/img/s-product/product2.jpg" alt="" /></a>
-                    </div>
-                    <div class="cart_info">
-                        <a href="#">Natus erro at congue massa commodo</a>
-                        <p>Qty: 1 X <span> $60.00 </span></p>
-                    </div>
-                    <div class="cart_remove">
-                        <a href="#"><i class="ion-android-close"></i></a>
-                    </div>
-                </div>
+                {panier.map((element, index) => {
+                    return (<div class="cart_item">
+                        <div key={index} class="cart_img">
+                            <a href="#"><img src={element.image} alt="" /></a>
+                        </div>
+                        <div class="cart_info">
+                            <a href="#">{element.title}</a>
+                            <p>Qty: {element.qte} X <span> {"$" + element.price} </span></p>
+                        </div>
+                        <div class="cart_remove">
+                            <a onClick={() => { removeCart(element.id) }} href="#"><i class="ion-android-close"></i></a>
+                        </div>
+                    </div>)
+                })}
                 <div class="mini_cart_table">
                     <div class="cart_total">
                         <span>Sub total:</span>
@@ -49,7 +48,6 @@ const Panier = () => {
                     <div class="cart_button">
                         <a href="checkout.html">Checkout</a>
                     </div>
-
                 </div>
             </div>
         </div>
