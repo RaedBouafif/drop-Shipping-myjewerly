@@ -10,6 +10,7 @@ import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
+import NavBonde from './navBonde/NavBonde'
 const App = () => {
 
   return (
@@ -30,6 +31,7 @@ const App = () => {
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
         <Route path="/test" element={<Test />}></Route>
+        <Route path="/navBonde" element={<NavBonde paths={["Login"]} />}></Route>
         <Route path="/shop" >
           <Route index element={<Shop />} />
         </Route>

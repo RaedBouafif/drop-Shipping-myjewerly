@@ -63,29 +63,29 @@ const Verify = () => {
 
 
     return (
-        <div className='min-h-screen w-full justify-center flex items-center font-body bg-blue-50'>
-            <Link to="/sign" className='absolute left-4 top-5 flex items-center self-start space-x-2'>
-                <img src="/assets/icons/left-arrow.png" className='h-5 w-5' />
-                <p className='font-bold tracking-wider text-lg hover:underline underline-offset-1 decoration-neutral-600 text-neutral-600'>Back to Sign up</p>
+        <div className='t-min-h-screen t-w-full t-justify-center t-flex t-items-center t-font-body t-bg-blue-50'>
+            <Link to="/sign" className='t-absolute t-left-4 t-top-5 t-flex t-items-center t-self-start t-space-x-2'>
+                <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5' />
+                <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-600'>Back to Sign up</p>
             </Link>
-            <form className="mx-auto rounded-md shadow-lg lg:py-16 py-7 min-h-screen lg:min-h-0 bg-white my-0 lg:my-16 flex flex-col justify-center space-y-12 items-center lg:w-6/12 w-full font-body">
-                <div className='mt-10 md:mt-0'>
-                    <img className="h-56 w-96" src="/assets/images/subscribe.png" alt="email illustration" />
+            <form className="t-mx-auto t-rounded-md t-shadow-lg lg:t-py-16 t-py-7 t-min-h-screen lg:t-min-h-0 t-bg-white t-my-0 lg:t-my-16 t-flex t-flex-col t-justify-center t-space-y-12 t-items-center lg:t-w-6/12 t-w-full t-font-body">
+                <div className='t-mt-10 md:t-mt-0'>
+                    <img className="t-h-56 t-w-96" src="/assets/images/subscribe.png" alt="email illustration" />
                 </div>
-                <div className="space-y-3">
-                    <h2 className="text-2xl font-bold text-center tracking-widest text-neutral-600">Verify Your Email</h2>
-                    <p className="text-sm lg:text-xs text-stone-400 tracking-wider">We have sent a verification code to your email</p>
+                <div className="t-space-y-3">
+                    <h2 className="t-text-2xl t-font-bold t-text-center t-tracking-widest t-text-neutral-600">Verify Your Email</h2>
+                    <p className="t-text-sm lg:t-text-xs t-text-stone-400 t-tracking-wider">We have sent a verification code to your email</p>
                 </div>
-                <div className="w-10/12 lg:w-8/12">
-                    <input ref={codeInput} onInput={() => { setCode(() => UseTrueString(codeInput.current.value)) }} className="border-b-2 inputCode focus:bg-stone-50 rounded-t-md text-lg font-semibold text-neutral-800 tracking-widest lg:h-12 h-14 border-blue-400 w-full pl-1 outline-none"
+                <div className="t-w-10/12 lg:t-w-8/12">
+                    <input ref={codeInput} onInput={() => { setCode(() => UseTrueString(codeInput.current.value)) }} className="t-border-b-2 t-inputCode focus:t-bg-stone-50 t-rounded-t-md t-text-lg t-font-semibold t-text-neutral-800 t-tracking-widest lg:t-h-12 h-14 t-border-blue-400 t-w-full t-pl-1 t-outline-none"
                         type="text" placeholder="6 characters code" />
                 </div>
-                {error && (<div className='h-14 p-3 w-10/12 lg:w-auto space-x-2 bg-red-300 rounded-md items-center flex'>
-                    <img src="/assets/icons/cross.png" className='h-5 w-5' />
-                    <p className='text-sm text-red-500 tracking-widest font-semibold '>Invalid verification code</p>
+                {error && (<div className='t-h-14 t-p-3 t-w-10/12 lg:t-w-auto t-space-x-2 t-bg-red-300 t-rounded-md t-items-center t-flex'>
+                    <img src="/assets/icons/cross.png" className='t-h-5 t-w-5' />
+                    <p className='t-text-sm t-text-red-500 t-tracking-widest t-font-semibold '>Invalid verification code</p>
                 </div>)}
-                {!isLoading && (<button onClick={handleSubmit} className="text-white shadow-lg hover:bg-white border-2 border-blue-400 hover:shadow-none hover:text-blue-400 duration-150 delay-100  bg-blue-400 rounded-sm w-10/12 lg:w-40 py-2">Send</button>)
-                    || (<Loader className="lg:mx-0 mx-auto" height="40px" size="35px" border="6px" color="#60a5fa" />)}
+                {!isLoading && (<button onClick={handleSubmit} className="t-text-white t-shadow-lg hover:t-bg-white t-border-2 t-border-blue-400 hover:t-shadow-none hover:t-text-blue-400 t-duration-150 t-delay-100  t-bg-blue-400 t-rounded-sm t-w-10/12 lg:t-w-40 t-py-2">Send</button>)
+                    || (<Loader className="lg:t-mx-0 t-mx-auto" height="40px" size="35px" border="6px" color="#60a5fa" />)}
             </form>
         </div>
     )
