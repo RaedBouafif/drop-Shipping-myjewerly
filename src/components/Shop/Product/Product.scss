@@ -1,0 +1,24 @@
+.firstContainer {
+  .img2 {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .butt {
+    transition: opacity 0.5s;
+  }
+}
+.firstContainer:hover {
+  cursor: pointer;
+  .img2 {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  .butt {
+    transition: opacity 0.5s;
+    opacity: 1;
+  }
+  .img1 {
+    transition: opacity 0.5s;
+    opacity: 0;
+  }
+}

@@ -11,6 +11,7 @@ import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
 import NavBonde from './navBonde/NavBonde'
+import ProductDetails from './productDetails/ProductDetails'
 const App = () => {
 
   return (
@@ -31,7 +32,8 @@ const App = () => {
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
         <Route path="/test" element={<Test />}></Route>
-        <Route path="/navBonde" element={<NavBonde paths={["Login"]} />}></Route>
+        <Route path="/navBonde" element={<NavBonde paths={["Shop"]} />}></Route>
+        <Route path="/productDetails" element={<ProductDetails />}></Route>
         <Route path="/shop" >
           <Route index element={<div className='t-w-full'><Test /><Shop /></div>} />
         </Route>
