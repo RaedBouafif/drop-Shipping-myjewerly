@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import Panier from "./Panier"
 import "./Nav.scss"
+import { useSelector } from 'react-redux'
 const Test = () => {
+    const isLogged = useSelector(element => element.isLogged)
+    const clid = useSelector(element => element.clid)
     useEffect(() => {
         if (window.innerWidth > 991) {
             document.querySelector(".Offcanvas_menu_wrapper").style.display = "none"
@@ -43,26 +46,31 @@ const Test = () => {
 
         }
     }
+    const [count, setCount] = useState(true)
+    const handleResize = () => {
+        setCount(!count)
+    }
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
+        window.addEventListener("resize", handleResize)
         return () => {
+            window.removeEventListener("resize", handleResize)
             window.removeEventListener("scroll", handleScroll)
         }
     })
-    const [showMobileNav, setShowMobileNav] = useState(false)
     return (
         <>
-            <div className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
+            <div style={{ zIndex: 5000000 }} className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
                 <div ref={toHide} class="header_middle t-bg-white">
                     <div class="container">
                         <div class="row t-flex t-items-center">
-                            <div class="col-lg-1 col-md-6">
-                                <div class="t-flex t-items-center w-full">
+                            <div class="col-lg-1">
+                                <div class="t-flex t-items-center t-w-full">
                                     <Link to="/" className='t-text-[35px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
-                                    <div onClick={(e) => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("notactive", "active"); document.querySelector("#burger").style.display = "none" }} className="lg:t-hidden t-z-40" id="burger"><div className="burger t-h-12 t-w-12 t-flex t-flex-col t-justify-center lg:t-hidden t-items-center"></div></div>
+                                    <div onClick={(e) => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("notactive", "active"); document.querySelector("#burger").style.display = "none" }} className="t-z-40" id="burger"><div className="burger t-h-12 t-w-12 t-flex t-flex-col t-justify-center lg:t-hidden t-items-center"></div></div>
                                 </div>
                             </div>
-                            <div class="col-lg-11 col-md-6 t-ml-auto">
+                            <div class="col-lg-10 col-md-6 t-ml-auto">
                                 <div class="middel_right">
                                     <div class="search_container">
                                         <form action="#">
@@ -94,9 +102,10 @@ const Test = () => {
                                     </div>
                                     <div className="middel_right_info t-font-body mt-0">
                                         <Panier />
-                                        <Link to="/login" className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
-                                        <Link to="/sign" className='mr t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
-                                        {/*  */}
+                                        {!isLogged && (<><Link to="/login" className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
+                                            <Link to="/sign" className='mr t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link></>) ||
+                                            <Link to={"/Account/" + clid} className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-text-blue-600'>My Account</Link>}
+
                                     </div>
                                 </div>
                             </div>
@@ -104,14 +113,14 @@ const Test = () => {
                     </div>
                 </div>
                 {/*categorie*/}
-                <div class="main_menu_area">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 col-md-12">
+                <div className="main_menu_area">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-3 col-md-12 t-z-50">
                                 {scroll && <p className='col-lg-1 t-text-white t-text-2xl t-font-bold' >MyJewelry</p>}
-                                {!scroll && <div class="categories_menu select-none">
+                                {!scroll && <div className="categories_menu t-select-none t-bg-white">
                                     <div onClick={() => { setToggleMenu(!toggleMenu) }} class="categories_title">
-                                        <h2 class="">ALL CATEGORIES</h2>
+                                        <h2 className="">ALL CATEGORIES</h2>
                                     </div>
                                     <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
                                         <div className='t-flex t-w-full flex-wrap items-center'>
@@ -132,13 +141,13 @@ const Test = () => {
                                     </div>
                                 </div>}
                             </div>
-                            <div class="col-lg-5 col-md-12">
-                                <div class="main_menu menu_position">
+                            <div className="col-lg-5 col-md-12">
+                                <div className="main_menu menu_position">
                                     <nav>
                                         <ul>
-                                            <li><Link class="active" to="/">home<i class="fa"></i></Link>
+                                            <li><Link className="active" to="/">home<i className="fa"></i></Link>
                                             </li>
-                                            <li class="mega_items"><Link to="/shop">shop</Link>
+                                            <li className="mega_items"><Link to="/shop">shop</Link>
                                             </li>
                                             <li><Link to="/about">about Us</Link></li>
                                             <li><Link to="/contact"> Contact Us</Link></li>
@@ -151,104 +160,55 @@ const Test = () => {
                 </div >
             </div >
             {/*mobile */}
-            <div class="Offcanvas_menu_wrapper notactive">
-                <div class="canvas_close" onClick={() => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("active", "notactive"); document.querySelector("#burger").style.display = "" }}>
-                    <i class="ion-android-close"></i>
+            <div className="Offcanvas_menu_wrapper notactive">
+                <div className="canvas_close" onClick={() => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("active", "notactive"); document.querySelector("#burger").style.display = "" }}>
+                    <i className="ion-android-close"></i>
                 </div>
-                <div class="search_container">
+                <div className="search_container">
                     <form action="#">
-                        <div class="search_box">
+                        <div className="search_box">
                             <input placeholder="Search product..." type="text" />
                             <button type="submit">Search</button>
                         </div>
                     </form>
                 </div>
 
-                <div class="middel_right_info">
-                    <div class="mini_cart_wrapper t-flex t-items-center t-flex-col" onClick={() => { setShowMobileNav(!showMobileNav) }}>
-                        <div className='t-mb-2 t-w-full t-flex t-items-center t-justify-center'>
-                            <span class="t-border-0 t-w-4 t-h-4 t-p-1 t-relative t-bottom-1.5 t-left-1 t-rounded-full t-text-white t-flex t-items-center t-justify-center t-bg-blue-700" >2</span>
-                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i>
-                        </div>
-                        <div class="mini_cart" style={{ display: showMobileNav ? "block" : "none", position: "relative", right: 0 }}>
-                            <div class="cart_item">
-                                <div class="cart_img">
-                                    <a href="#"><img src="temp/assets/img/s-product/product.jpg" alt="" /></a>
-                                </div>
-                                <div class="cart_info">
-                                    <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                    <p>Qty: 1 X <span> $60.00 </span></p>
-                                </div>
-                                <div class="cart_remove">
-                                    <a href="#"><i class="ion-android-close"></i></a>
-                                </div>
-                            </div>
-                            <div class="cart_item">
-                                <div class="cart_img">
-                                    <a href="#"><img src="/temp/assets/img/s-product/product2.jpg" alt="" /></a>
-                                </div>
-                                <div class="cart_info">
-                                    <a href="#">Natus erro at congue massa commodo</a>
-                                    <p>Qty: 1 X <span> $60.00 </span></p>
-                                </div>
-                                <div class="cart_remove">
-                                    <a href="#"><i class="ion-android-close"></i></a>
-                                </div>
-                            </div>
-                            <div class="mini_cart_table">
-                                <div class="cart_total">
-                                    <span>Sub total:</span>
-                                    <span class="price">$138.00</span>
-                                </div>
-                                <div class="cart_total mt-10">
-                                    <span>total:</span>
-                                    <span class="price">$138.00</span>
-                                </div>
-                            </div>
-
-                            <div class="mini_cart_footer">
-                                <div class="cart_button">
-                                    <a href="cart.html">View cart</a>
-                                </div>
-                                <div class="cart_button">
-                                    <a href="checkout.html">Checkout</a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                <div className="middel_right_info">
+                    <Panier />
                 </div>
-                <div id="menu" class="text-left ">
-                    <ul class="offcanvas_main_menu">
-                        <li class="menu-item-has-children active"><span class="menu-expand"></span>
+                <div id="menu" className="text-left ">
+                    <ul className="offcanvas_main_menu">
+                        <li className="menu-item-has-children active"><span className="menu-expand"></span>
                             <Link to="/">Home</Link>
 
                         </li>
-                        <li class="menu-item-has-children"><span class="menu-expand"></span>
+                        <li className="menu-item-has-children"><span className="menu-expand"></span>
                             <Link to="/shop">Shop</Link>
                         </li>
-                        <li class="menu-item-has-children">
-                            <Link to="/account/">my account</Link>{/*id account here*/}
-                        </li>
-                        <li class="menu-item-has-children">
+                        {isLogged && (<li className="menu-item-has-children">
+                            <Link to={"/account/" + clid}>my account</Link>{/*id account here*/}
+                        </li>)}
+                        <li className="menu-item-has-children">
                             <Link to="/about">about Us</Link>
                         </li>
-                        <li class="menu-item-has-children">
+                        <li className="menu-item-has-children">
                             <Link to="/contact"> Contact Us</Link>
                         </li>
                     </ul>
                 </div>
+                {!isLogged && (<div className='t-flex t-items-center t-justify-center t-space-x-7 t-mt-7 t-w-full'>
+                    <Link to="/login" className=' t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700'>Login</Link>
+                    <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-700 t-border-2 t-border-blue-700 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-700 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
+                </div>)}
                 <div class="modal_social t-mt-20">
                     <h2>Share this product</h2>
                     <ul>
-                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a>
+                        <li className="facebook"><a href="#"><i className="fa fa-facebook"></i></a></li>
+                        <li className="twitter"><a href="#"><i className="fa fa-twitter"></i></a></li>
+                        <li className="pinterest"><a href="#"><i className="fa fa-pinterest"></i></a></li>
+                        <li className="google-plus"><a href="#"><i className="fa fa-google-plus"></i></a>
                         </li>
-                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li className="linkedin"><a href="#"><i className="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div >
