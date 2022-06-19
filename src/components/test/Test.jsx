@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import Panier from "./Panier"
+import "./Nav.scss"
 const Test = () => {
     useEffect(() => {
         if (window.innerWidth > 991) {
@@ -56,8 +57,9 @@ const Test = () => {
                     <div class="container">
                         <div class="row t-flex t-items-center">
                             <div class="col-lg-1 col-md-6">
-                                <div class="">
-                                    <Link to="/" className='t-text-[35px] t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
+                                <div class="t-flex t-items-center w-full">
+                                    <Link to="/" className='t-text-[35px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
+                                    <div onClick={(e) => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("notactive", "active"); document.querySelector("#burger").style.display = "none" }} className="lg:t-hidden t-z-40" id="burger"><div className="burger t-h-12 t-w-12 t-flex t-flex-col t-justify-center lg:t-hidden t-items-center"></div></div>
                                 </div>
                             </div>
                             <div class="col-lg-11 col-md-6 t-ml-auto">
@@ -149,8 +151,8 @@ const Test = () => {
                 </div >
             </div >
             {/*mobile */}
-            <div class="Offcanvas_menu_wrapper active">
-                <div class="canvas_close" onClick={() => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("active", "notactive") }}>
+            <div class="Offcanvas_menu_wrapper notactive">
+                <div class="canvas_close" onClick={() => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("active", "notactive"); document.querySelector("#burger").style.display = "" }}>
                     <i class="ion-android-close"></i>
                 </div>
                 <div class="search_container">
@@ -221,20 +223,20 @@ const Test = () => {
                 <div id="menu" class="text-left ">
                     <ul class="offcanvas_main_menu">
                         <li class="menu-item-has-children active"><span class="menu-expand"></span>
-                            <a href="#">Home</a>
+                            <Link to="/">Home</Link>
 
                         </li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span>
-                            <a href="#">Shop</a>
+                            <Link to="/shop">Shop</Link>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="my-account.html">my account</a>
+                            <Link to="/account/">my account</Link>{/*id account here*/}
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="about.html">about Us</a>
+                            <Link to="/about">about Us</Link>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="contact.html"> Contact Us</a>
+                            <Link to="/contact"> Contact Us</Link>
                         </li>
                     </ul>
                 </div>

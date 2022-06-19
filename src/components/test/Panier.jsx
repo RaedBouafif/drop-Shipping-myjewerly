@@ -9,7 +9,6 @@ const Panier = () => {
     const removeCart = (id) => {
         dispacher(removeFromPanier(id));
         setIncrement(increment + 1)
-        console.log(panier)
     }
     return (
         <div class="mini_cart_wrapper">
@@ -18,8 +17,8 @@ const Panier = () => {
             <span class="cart_quantity">2</span>
             <div class="mini_cart">
                 {panier.map((element, index) => {
-                    return (<div class="cart_item">
-                        <div key={index} class="cart_img">
+                    return (<div key={index} class="cart_item">
+                        <div class="cart_img">
                             <Link to="#"><img src={element.image} alt="" /></Link>
                         </div>
                         <div class="cart_info">

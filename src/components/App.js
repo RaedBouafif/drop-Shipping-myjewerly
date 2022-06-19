@@ -28,6 +28,7 @@ const App = () => {
           <Route element={<Sign />} path="*"></Route>
         </Route>
         <Route path="/account">
+          <Route path=":idAccount" element={<div>My account </div>} ></Route>
           <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
@@ -36,7 +37,9 @@ const App = () => {
         <Route path="/productDetails" element={<ProductDetails />}></Route>
         <Route path="/shop" >
           <Route index element={<div className='t-w-full'><Test /><Shop /></div>} />
+          <Route path=":categorieId" element={<div>only products with this categorie</div>} />
         </Route>
+        <Route path="/product/:id" element={<div>one product</div>} />
       </Routes>
     </BrowserRouter>
   )
