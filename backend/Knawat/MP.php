@@ -351,7 +351,7 @@ class MP
      */
     public function getProductBySku($sku)
     {
-        $path = '/catalog/products/' . $sku;
+        $path = '/products/' . $sku;
         return $this->client->get($path);
     }
 
@@ -476,20 +476,20 @@ class MP
         return $this->client->delete($path, $data, $return_array);
     }
 }
-$connect = new MP("8afc2a10-ec3b-11ec-96bc-7d52ad4edc25", "c000646b-fbd9-46e5-9329-937e8385926d");
-$data =
-    [
-        "items" => [
-            ["sku" => "EBE20YBMMKTST001-0015", "quantity" => 1]
-        ],
-        "shipping" => [
-            "first_name" => "baligh",
-            "last_name" => "zoghlami",
-            "address_1" => "hay nasim",
-            "city" => "ben arous",
-            "state" => "Khlidia",
-            "country" => "TN"
-        ]
-    ];
+// $connect = new MP("8afc2a10-ec3b-11ec-96bc-7d52ad4edc25", "c000646b-fbd9-46e5-9329-937e8385926d");
+// $data =
+//     [
+//         "items" => [
+//             ["sku" => "EBE20YBMMKTST001-0015", "quantity" => 1]
+//         ],
+//         "shipping" => [
+//             "first_name" => "baligh",
+//             "last_name" => "zoghlami",
+//             "address_1" => "hay nasim",
+//             "city" => "ben arous",
+//             "state" => "Khlidia",
+//             "country" => "TN"
+//         ]
+//     ];
 
-echo json_encode($connect->createOrder($data));
+// echo json_encode($connect->createOrder($data));
