@@ -28,7 +28,7 @@ const Shop = () => {
                                 <div className='t-flex t-w-full t-border-b py-2 t-flex-wrap t-items-center'>
                                     <div className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue' >Video Games</div>
                                     <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
-                                    <div className='t-hidden t-flex-col t-ml-10 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
+                                    <div className='t-hidden t-flex-col t-ml-2 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
                                         <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
                                             <div className='hover:t-scale-105'>Video Games</div>
                                         </div>
@@ -68,9 +68,11 @@ const Shop = () => {
 
                     <div className='t-flex t-justify-around t-flex-wrap t-mb-16 t-w-full'>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
-                        <Product title="qsdqsd" image1="/assets/images/darius.jpg" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
-                        <Product title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
-                        <Product title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
+                        <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
+                        <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
+                        <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
+                        <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
+
                     </div>
                 </div>
             </div>

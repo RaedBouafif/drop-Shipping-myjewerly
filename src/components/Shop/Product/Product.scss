@@ -22,3 +22,8 @@
     opacity: 0;
   }
 }
+
+.firstContainer:hover .action_links {
+  opacity: 1;
+  visibility: visible;
+}

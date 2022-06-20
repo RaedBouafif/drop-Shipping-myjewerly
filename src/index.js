@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 const state = {
   isLogged: false,
-  clid: null,
+  clid: 546465,
   search: {
     name: null,
     type: null

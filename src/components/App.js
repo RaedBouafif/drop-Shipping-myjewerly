@@ -10,7 +10,6 @@ import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
-import NavBonde from './navBonde/NavBonde'
 import ProductDetails from './productDetails/ProductDetails'
 const App = () => {
 
@@ -33,13 +32,11 @@ const App = () => {
         </Route>
         <Route element={<ErrorPage />} path="*"></Route>
         <Route path="/test" element={<Test />}></Route>
-        <Route path="/navBonde" element={<NavBonde paths={["Shop"]} />}></Route>
-        <Route path="/productDetails" element={<ProductDetails />}></Route>
         <Route path="/shop" >
           <Route index element={<div className='t-w-full'><Test /><Shop /></div>} />
           <Route path=":categorieId" element={<div>only products with this categorie</div>} />
         </Route>
-        <Route path="/product/:id" element={<div>one product</div>} />
+        <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
     </BrowserRouter>
   )
