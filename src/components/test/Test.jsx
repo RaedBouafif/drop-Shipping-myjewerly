@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import Panier from "./Panier"
 import "./Nav.scss"
 import { useSelector } from 'react-redux'
+import Favorite from './Favorite'
 const Test = () => {
     const isLogged = useSelector(element => element.isLogged)
     const clid = useSelector(element => element.clid)
@@ -58,25 +59,28 @@ const Test = () => {
             window.removeEventListener("scroll", handleScroll)
         }
     })
+    const scrollToTop = () => {
+        document.scrollX = 0
+    }
     return (
-        <>
+        <div id="top">
             <div style={{ zIndex: 5000000 }} className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
-                <div ref={toHide} class="header_middle t-bg-white">
-                    <div class="container">
-                        <div class="row t-flex t-items-center">
-                            <div class="col-lg-1">
-                                <div class="t-flex t-items-center t-w-full">
+                <div ref={toHide} className="header_middle t-bg-white">
+                    <div className="container">
+                        <div className="row t-flex t-items-center">
+                            <div className="col-lg-1 t-z-50">
+                                <div className="t-flex t-items-center t-w-full ">
                                     <Link to="/" className='t-text-[35px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
                                     <div onClick={(e) => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("notactive", "active"); document.querySelector("#burger").style.display = "none" }} className="t-z-40" id="burger"><div className="burger t-h-12 t-w-12 t-flex t-flex-col t-justify-center lg:t-hidden t-items-center"></div></div>
                                 </div>
                             </div>
-                            <div class="col-lg-10 col-md-6 t-ml-auto">
-                                <div class="middel_right">
-                                    <div class="search_container">
+                            <div className="col-lg-11 col-md-6 t-ml-auto">
+                                <div className="middel_right">
+                                    <div className="search_container">
                                         <form action="#">
-                                            <div class="hover_category">
-                                                <select class="select_option" name="select" id="categori1">
-                                                    <option selected value="1">All Categories</option>
+                                            <div className="hover_category">
+                                                <select className="select_option t-w-40" name="select" id="categori1">
+                                                    <option value="1">All Categories</option>
                                                     <option value="2">Accessories</option>
                                                     <option value="3">Accessories & More</option>
                                                     <option value="4">Butters & Eggs</option>
@@ -94,16 +98,18 @@ const Test = () => {
                                                     <option value="16">Electronic</option>
                                                 </select>
                                             </div>
-                                            <div class="search_box">
+                                            <div className="search_box">
                                                 <input placeholder="Search product..." type="text" />
                                                 <button type="submit">Search</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div className="middel_right_info t-font-body mt-0">
+                                    <div className="middel_right_info t-font-body t-mt-0">
+                                        <Favorite />
                                         <Panier />
-                                        {!isLogged && (<><Link to="/login" className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
-                                            <Link to="/sign" className='mr t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link></>) ||
+                                        {!isLogged && (<><Link to="/login" className='t-mr-4 t-ml-4 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
+                                            <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link></>)
+                                            ||
                                             <Link to={"/Account/" + clid} className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-text-blue-600'>My Account</Link>}
 
                                     </div>
@@ -119,7 +125,7 @@ const Test = () => {
                             <div className="col-lg-3 col-md-12 t-z-50">
                                 {scroll && <p className='col-lg-1 t-text-white t-text-2xl t-font-bold' >MyJewelry</p>}
                                 {!scroll && <div className="categories_menu t-select-none t-bg-white">
-                                    <div onClick={() => { setToggleMenu(!toggleMenu) }} class="categories_title">
+                                    <div onClick={() => { setToggleMenu(!toggleMenu) }} className="categories_title">
                                         <h2 className="">ALL CATEGORIES</h2>
                                     </div>
                                     <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
@@ -145,7 +151,7 @@ const Test = () => {
                                 <div className="main_menu menu_position">
                                     <nav>
                                         <ul>
-                                            <li><Link className="active" to="/">home<i className="fa"></i></Link>
+                                            <li><Link to="/">home<i className="fa"></i></Link>
                                             </li>
                                             <li className="mega_items"><Link to="/shop">shop</Link>
                                             </li>
@@ -172,13 +178,13 @@ const Test = () => {
                         </div>
                     </form>
                 </div>
-
-                <div className="middel_right_info">
+                <div className="middel_right_info t-flex t-items-center t-justify-center t-space-x-3">
+                    <Favorite />
                     <Panier />
                 </div>
                 <div id="menu" className="text-left ">
                     <ul className="offcanvas_main_menu">
-                        <li className="menu-item-has-children active"><span className="menu-expand"></span>
+                        <li className="menu-item-has-children"><span className="menu-expand"></span>
                             <Link to="/">Home</Link>
 
                         </li>
@@ -200,19 +206,23 @@ const Test = () => {
                     <Link to="/login" className=' t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700'>Login</Link>
                     <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-700 t-border-2 t-border-blue-700 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-700 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
                 </div>)}
-                <div class="modal_social t-mt-20">
+                <div className="modal_social t-mt-20">
                     <h2>Share this product</h2>
                     <ul>
-                        <li className="facebook"><a href="#"><i className="fa fa-facebook"></i></a></li>
-                        <li className="twitter"><a href="#"><i className="fa fa-twitter"></i></a></li>
-                        <li className="pinterest"><a href="#"><i className="fa fa-pinterest"></i></a></li>
-                        <li className="google-plus"><a href="#"><i className="fa fa-google-plus"></i></a>
+                        <li className="facebook"><Link to="#"><i className="fa fa-facebook"></i></Link></li>
+                        <li className="twitter"><Link to="#"><i className="fa fa-twitter"></i></Link></li>
+                        <li className="pinterest"><Link to="#"><i className="fa fa-pinterest"></i></Link></li>
+                        <li className="google-plus"><Link to="#"><i className="fa fa-google-plus"></i></Link>
                         </li>
-                        <li className="linkedin"><a href="#"><i className="fa fa-linkedin"></i></a></li>
+                        <li className="linkedin"><Link to="#"><i className="fa fa-linkedin"></i></Link></li>
                     </ul>
                 </div>
             </div >
-        </>
+            {scroll && <a href='#top' className='t-fixed t-bottom-7 t-right-5 t-cursor-pointer hover:t-bg-blue-600 t-rounded-full t-p-2.5 border-0 t-bg-blue-500 t-items-center t-justify-center t-flex'>
+                <img src="/assets/icons/top-arrow.png" className='t-relative t-bottom-px t-h-8 t-w-8' />
+            </a>}
+            <Outlet />
+        </div>
     )
 }
 

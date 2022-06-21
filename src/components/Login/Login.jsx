@@ -69,10 +69,14 @@ const Login = () => {
             <div className='t-w-full lg:t-fixed t-lg:inset-0 t-min-h-full t-flex t-items-center t-justify-center'>
                 <div className='t-min-h-screen lg:t-flex t-hidden t-w-7/12 t-bg-neutral-900 selection:t-bg-white selection:t-text-blue-300'>
                     <div className='t-mx-auto t-relative t-right-10 t-flex t-flex-col t-items-center t-justify-center'>
-                        <img className='t-h-[450px] t-w-[600px]' src="/assets/images/online-shopping.png" alt="" />
+                        <img className='t-h-[200px] t-mb-20 t-w-[300px]' src="/assets/images/final.png" alt="" />
                         <h1 className='t-text-lg t-text-white t-w-7/12 t-text-center t-mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</h1>
                     </div>
                 </div>
+                <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-7 t-top-7 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
+                    <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5' />
+                    <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800'>Home</p>
+                </Link>
                 <div className='selection:t-bg-blue-300 selection:t-text-white t-py-8 lg:t-w-5/12 t-w-full t-shadow-lg t-shadow-black/20 lg:t-relative t-bottom-5 t-rounded-lg t-right-24 t-bg-white  t-min-h-screen lg:t-min-h-min t-flex t-flex-col t-items-center t-justify-center'>
                     <h2 className='t-text-neutral-600 t-text-md t-mb-5 t-font-semibold'>Don't Have An Account ?<Link to="/sign" className="t-text-blue-500 hover:t-underline t-decoration-blue-500"> Sign Up</Link> </h2>
                     <div className='lg:t-w-6/12 t-w-9/12 t-flex t-items-center t-space-x-6 t-justify-center'>
@@ -99,7 +103,7 @@ const Login = () => {
                             })}
                         </div>
                         <div className='t-flex t-space-y-1 t-flex-col t-w-full'>
-                            <label onClick={() => { passwordInput.current.focus() }} className='t-relative t-h-0 duration-150  t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>password</label>
+                            <label onClick={() => { passwordInput.current.focus() }} className='t-relative t-h-0 t-duration-150 t-left-2 t-cursor-text t-select-none t-text-stone-700 t-translate-y-[21px] t-text-sm'>password</label>
                             <input type="password" ref={passwordInput} className="t-bg-white t-duration-150 t-rounded-md t-outline-none t-h-10 t-px-2 t-py-[25px] t-border-2 t-border-stone-200  before:t-z-50 before:t-left-0" />
                         </div>
                     </div>

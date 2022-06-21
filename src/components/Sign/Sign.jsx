@@ -136,27 +136,17 @@ const Sign = () => {
     }
     return (
         <div className='t-w-full t-min-h-screen t-flex t-items-center t-font-body'>
-            <div className='t-w-6/12 t-h-screen t-order-2 lg:t-flex t-hidden t-fixed t-top-0 t-right-0 t-items-center t-justify-end'>
-                <Image src="/assets/images/littleGril.jpg" className="t-h-full t-w-full" alt="image for sign up" />
-                <div className='t-absolute t-mr-5'>
-                    <h1 className='t-text-pink-500 t-text-[27px] t-font-bold'>Why <span className='t-text-[35px] t-text-neutral-700 t-tracking-widest t-font-title'>MyJewelry</span></h1>
-                    <ul className='t-pr-2 t-mt-5 t-space-y-2 t-text-neutral-600 t-text-[18px]'>
-                        <li>
-                            <p className='t-font-bold t-w-60 t-text-right'>Express delivery</p>
-                        </li>
-                        <li>
-                            <p className='t-font-bold t-w-60 t-text-right'>Top Branded Jewelry & Watches</p>
-                        </li>
-                        <li>
-                            <p className='t-font-bold w-60 t-text-right'>Cheapest prices</p>
-                        </li>
-                        <li>
-                            <p className='t-font-bold w-60 t-text-right'>Security</p>
-                        </li>
-                    </ul>
+            <div className='t-w-6/12 t-min-h-screen t-bg-neutral-900 selection:t-bg-white selection:t-text-blue-300 lg:t-flex t-hidden t-fixed t-top-0 t-left-0 t-items-center t-justify-end'>
+                <div className='t-mx-auto t-flex t-flex-col t-h-full t-items-center t-justify-center'>
+                    <img className='t-h-[200px] t-mb-20 t-w-[300px]' src="/assets/images/final.png" alt="" />
+                    <h1 className='t-text-lg t-text-white t-w-7/12 t-text-center t-mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</h1>
                 </div>
             </div>
-            <div className='t-order-1 selection:t-bg-blue-300 selection:t-text-white t-py-8 lg:t-py-12 lg:t-w-6/12 t-w-full t-shadow-lg t-shadow-black/20 t-rounded-lg t-bg-white t-min-h-screen t-flex t-flex-col t-items-center t-justify-center'>
+            <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-7 t-top-7 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
+                <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5' />
+                <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800'>Home</p>
+            </Link>
+            <div className=' selection:t-bg-blue-300 selection:t-text-white t-py-14 lg:t-py-12 lg:t-w-6/12 t-ml-auto t-w-full t-shadow-lg t-shadow-black/20 t-rounded-lg t-bg-white t-min-h-screen t-flex t-flex-col t-items-center t-justify-center'>
                 <h2 className='t-text-neutral-600 t-text-md t-mb-5 t-font-semibold'>You Have An Account ?<Link to="/login" className="t-text-blue-500 hover:t-underline decoration-blue-500"> Log in</Link> </h2>
                 <div className='lg:t-w-6/12 t-w-9/12 t-flex t-items-center t-space-x-6 t-justify-center'>
                     <div className='t-h-1 t-bg-neutral-700 t-w-1/3'></div>

@@ -25,41 +25,41 @@ const Panier = () => {
 
     if (window.innerWidth > 991) {
         return (
-            <div class="mini_cart_wrapper">
-                <a href="javascript:void(0)"><i class="fa fa-shopping-bag"
-                    aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
-                <span class="cart_quantity">2</span>
-                <div class="mini_cart">
+            <div className="mini_cart_wrapper">
+                <a href="#"><i className="fa fa-shopping-bag"
+                    aria-hidden="true"></i>$147.00 <i className="fa fa-angle-down"></i></a>
+                <span className="cart_quantity">2</span>
+                <div className="mini_cart">
                     {panier.map((element, index) => {
-                        return (<div key={index} class="cart_item">
-                            <div class="cart_img">
+                        return (<div key={index} className="cart_item">
+                            <div className="cart_img">
                                 <Link to="#"><img src={element.image} alt="" /></Link>
                             </div>
-                            <div class="cart_info">
+                            <div className="cart_info">
                                 <Link to={"/product/" + element.id}>{element.title}</Link>
                                 <p>Qty: {element.qte} X <span> {"$" + element.price} </span></p>
                             </div>
-                            <div class="cart_remove">
-                                <div className='t-cursor-pointer' onClick={() => { removeCart(element.id) }} href="#"><i class="ion-android-close"></i></div>
+                            <div className="cart_remove">
+                                <div className='t-cursor-pointer' onClick={() => { removeCart(element.id) }} href="#"><i className="ion-android-close"></i></div>
                             </div>
                         </div>)
                     })}
-                    <div class="mini_cart_table">
-                        <div class="cart_total">
+                    <div className="mini_cart_table">
+                        <div className="cart_total">
                             <span>Sub total:</span>
-                            <span class="price">$138.00</span>
+                            <span className="price">$138.00</span>
                         </div>
-                        <div class="cart_total mt-10">
+                        <div className="cart_total mt-10">
                             <span>total:</span>
-                            <span class="price">$138.00</span>
+                            <span className="price">$138.00</span>
                         </div>
                     </div>
 
-                    <div class="mini_cart_footer">
-                        <div class="cart_button">
+                    <div className="mini_cart_footer">
+                        <div className="cart_button">
                             <Link to="/cart">View cart</Link>
                         </div>
-                        <div class="cart_button">
+                        <div className="cart_button">
                             <Link to="/Checkout">Checkout</Link>
                         </div>
                     </div>
@@ -71,42 +71,42 @@ const Panier = () => {
         return (
             <div className="middel_right_info">
                 <div className="mini_cart_wrapper t-flex t-items-center t-flex-col" onClick={() => { setShowMobileNav(!showMobileNav) }}>
-                    <div className='t-mb-2 t-w-full t-flex t-items-center t-justify-center'>
+                    <div className='t-w-full t-relative t-top-1 t-flex t-items-center t-justify-center'>
                         <span className="t-border-0 t-w-4 t-h-4 t-p-1 t-relative t-bottom-1.5 t-left-1 t-rounded-full t-text-white t-flex t-items-center t-justify-center t-bg-blue-700" >2</span>
                         <i className="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i className="fa fa-angle-down"></i>
                     </div>
                     <div className="mini_cart" style={{ display: showMobileNav ? "block" : "none", position: "relative", right: 0 }}>
                         <div className="cart_item t-flex t-flex-col">
                             {panier.map((element, index) => {
-                                return (<div key={index} class="cart_item">
-                                    <div class="cart_img">
+                                return (<div key={index} className="cart_item">
+                                    <div className="cart_img">
                                         <Link to="#"><img src={element.image} alt="" /></Link>
                                     </div>
-                                    <div class="cart_info">
+                                    <div className="cart_info">
                                         <Link to={"/product/" + element.id}>{element.title}</Link>
                                         <p>Qty: {element.qte} X <span> {"$" + element.price} </span></p>
                                     </div>
-                                    <div class="cart_remove">
-                                        <div className='t-cursor-pointer' onClick={() => { removeCart(element.id) }} href="#"><i class="ion-android-close"></i></div>
+                                    <div className="cart_remove">
+                                        <div className='t-cursor-pointer' onClick={() => { removeCart(element.id) }} href="#"><i className="ion-android-close"></i></div>
                                     </div>
                                 </div>)
                             })}
-                            <div class="mini_cart_table">
-                                <div class="cart_total">
+                            <div className="mini_cart_table">
+                                <div className="cart_total">
                                     <span>Sub total:</span>
-                                    <span class="price">$138.00</span>
+                                    <span className="price">$138.00</span>
                                 </div>
-                                <div class="cart_total mt-10">
+                                <div className="cart_total mt-10">
                                     <span>total:</span>
-                                    <span class="price">$138.00</span>
+                                    <span className="price">$138.00</span>
                                 </div>
                             </div>
 
-                            <div class="mini_cart_footer">
-                                <div class="cart_button">
+                            <div className="mini_cart_footer">
+                                <div className="cart_button">
                                     <Link to="/cart">View cart</Link>
                                 </div>
-                                <div class="cart_button">
+                                <div className="cart_button">
                                     <Link to="/Checkout">Checkout</Link>
                                 </div>
                             </div>
