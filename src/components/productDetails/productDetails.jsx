@@ -5,6 +5,7 @@ import Image from "../../customElement/Image"
 const ProductDetails = () => {
     const scrollContainer = useRef(null)
     const [selectedImage, setSelectedImage] = useState(null)
+    const [size, setSize] = useState(null)
     const handleScrollLeft = () => {
         scrollContainer.current.scrollLeft -= 144
     }
@@ -15,6 +16,15 @@ const ProductDetails = () => {
     useEffect(() => {
         setSelectedImage(images[0])
     }, [])
+    const changeSize = (size) => {
+        setSize(() => size)
+    }
+
+    const title = "qqsd"
+    const description = "sqsdqsdqsd qdsqssdq qsqqsdqsd qsdqsd qsdqsdq qsdqs"
+    const price = 20
+    const categorie = "qsd"
+    const sizes = [20, 45, 90]
     const images = ["/temp/assets/img/product/productbig5.jpg", "/assets/images/darius.jpg", "/assets/images/nice.png", "/assets/images/watch.png"]
     return (
         <div className="product_details t-mt-16 t-pb-20" >
@@ -46,18 +56,13 @@ const ProductDetails = () => {
                     <div className="col-lg-6 col-md-6">
                         <div className="product_d_right">
                             <form action="#">
-                                <h1>Nonstick Dishwasher PFOA</h1>
+                                <h1>{title}</h1>
 
                                 <div className="price_box">
-                                    <span className="current_price">$70.00</span>
-                                    <span className="old_price">$80.00</span>
-
+                                    <span className="current_price">{"$" + price}</span>
                                 </div>
                                 <div className="product_desc">
-                                    <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus
-                                        eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non
-                                        neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et
-                                        placerat vestibulum, metus nisi posuere nisl, in </p>
+                                    <p>{description}</p>
                                 </div>
                                 <div className="product_variant color">
                                     <h3>Available Options</h3>
@@ -69,9 +74,16 @@ const ProductDetails = () => {
                                         <li className="color4"><Link to="#"></Link></li>
                                     </ul>
                                 </div>
+                                <div className='t-flex t-items-center t-space-x-6 t-mb-8 t-select-none'>
+                                    {sizes.map((element, index) => {
+                                        return <div onClick={() => { changeSize(element) }} key={index} className={` ${(!size && !index) || element === size ? "t-border-2" : "t-border-0"} t-shadow-neutral-400 t-shadow-md t-border-neutral-700  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                            <p className='t-text-neutral-800'>{element}</p>
+                                        </div>
+                                    })}
+                                </div>
                                 <div className="product_variant quantity">
                                     <label>quantity</label>
-                                    <input min="1" max="100" value="1" type="number" />
+                                    <input min="1" max="10" defaultValue={1} type="number" />
                                     <button className="button" type="submit">add to cart</button>
                                 </div>
                                 <div className=" product_d_action">
@@ -80,7 +92,7 @@ const ProductDetails = () => {
                                     </ul>
                                 </div>
                                 <div className="product_meta">
-                                    <span>Category: <Link to="#">Clothing</Link></span>
+                                    <span>Category: <Link to={"/shop" + categorie}>Clothing</Link></span>
                                 </div>
                             </form>
                         </div>

@@ -42,6 +42,10 @@ const App = () => {
 
             <Route path=":categorieName" >
               <Route index element={<div>only products with this categorie</div>} />
+              <Route path=":categoireName2">
+                <Route index element={<div>under categorie</div>} />
+                <Route path=":name" element={<div>only products with this categorie and this name</div>} />
+              </Route>
               <Route path=":name" element={<div>only products with this categorie and this name</div>} />
             </Route>
 

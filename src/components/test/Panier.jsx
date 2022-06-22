@@ -68,7 +68,7 @@ const Panier = () => {
         return (
             <div className="middel_right_info">
                 <div className="mini_cart_wrapper t-flex t-items-center t-flex-col" onClick={() => { setShowMobileNav(!showMobileNav) }}>
-                    <div className='t-w-full t-relative t-top-1 t-flex t-items-center t-justify-center'>
+                    <div className='t-w-full t-ml-14 t-mb-5 t-flex t-items-center t-justify-center'>
                         <span className="t-border-0 t-w-4 t-h-4 t-p-1 t-relative t-bottom-1.5 t-left-1 t-rounded-full t-text-white t-flex t-items-center t-justify-center t-bg-blue-700" >2</span>
                         <i className="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i className="fa fa-angle-down"></i>
                     </div>

@@ -180,15 +180,14 @@ const Test = () => {
                         </div>
                     </form>
                 </div>
-                <div className="middel_right_info t-flex t-items-center t-justify-center t-space-x-3">
-                    <Favorite />
+                <div className="middel_right_info t-flex t-items-start ">
                     <Panier />
+                    <Favorite />
                 </div>
                 <div id="menu" className="text-left ">
                     <ul className="offcanvas_main_menu">
                         <li className="menu-item-has-children"><span className="menu-expand"></span>
                             <Link to="/">Home</Link>
-
                         </li>
                         <li className="menu-item-has-children"><span className="menu-expand"></span>
                             <Link to="/shop">Shop</Link>
