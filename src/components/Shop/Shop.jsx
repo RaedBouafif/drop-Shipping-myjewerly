@@ -1,8 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import Product from './Product/Product'
+<<<<<<< HEAD
+import NavBonde from "../NavBonde/NavBonde"
+=======
 import NavBonde from "../navBonde/NavBonde"
 import { context } from "../../index"
 import axios from 'axios'
+>>>>>>> 15d91dbdc9ee89e0e9bab374289ca09453510fc5
 const Shop = () => {
     const handleShowChilds = (e) => {
         const thchild = e.target.parentNode.childNodes[2]
