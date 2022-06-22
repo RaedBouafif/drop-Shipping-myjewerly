@@ -1,12 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UseTrueString } from "../../hooks/strings"
 import { useCookies } from 'react-cookie'
-import { useDispatch, useSelector } from 'react-redux'
-import { loginReducer } from "../../reducer/loginReducer"
 import axios from "axios"
 import Loader from "../Loader/Loader"
 import { UseLogged } from "../../hooks/UseLogged"
+import { context } from "../../index"
 const Verify = () => {
 
     const [cookie, setCookie] = useCookies()
@@ -15,7 +14,7 @@ const Verify = () => {
     const data = location.state
 
     useEffect(() => {
-        if (data) {/* !data */
+        if (!data) {
             navigate("/sign")
         }
     }, [])
@@ -25,10 +24,8 @@ const Verify = () => {
 
 
     /*backend url*/
-    const url = useSelector(element => element.url)
+    const { url } = useContext(context)
 
-
-    const dispatcher = useDispatch()
 
     const codeInput = useRef("")
     const [code, setCode] = useState("")
@@ -48,7 +45,6 @@ const Verify = () => {
             finalData.append("password", data.password)
             finalData.append("email", data.email)
             axios.post(url + "/signUp.php", finalData).then((res) => {
-                dispatcher(loginReducer(res.id))
                 setCookie("clid", res.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
                 navigate("/")
             }).catch((err) => {

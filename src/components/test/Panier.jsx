@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeFromPanier } from '../../reducer/removeFromPanier'
 const Panier = () => {
     const [resize, setResize] = useState(true)
     const [showMobileNav, setShowMobileNav] = useState(false)
-    const dispacher = useDispatch()
     const [increment, setIncrement] = useState(0)
-    const panier = useSelector(element => element.panier.products)
+    const panier = []
     const removeCart = (id) => {
-        dispacher(removeFromPanier(id));
+        /*remove item*/
         setIncrement(increment + 1)
     }
     const handleResize = () => {

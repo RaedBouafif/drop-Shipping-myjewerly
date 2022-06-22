@@ -2,11 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link, Outlet } from "react-router-dom"
 import Panier from "./Panier"
 import "./Nav.scss"
-import { useSelector } from 'react-redux'
 import Favorite from './Favorite'
+import { useCookies } from 'react-cookie'
+
+
 const Test = () => {
-    const isLogged = useSelector(element => element.isLogged)
-    const clid = useSelector(element => element.clid)
+    const [cookie, setCookies] = useCookies()
+
+    const isLogged = cookie.clid != undefined
+    const clid = cookie.clid != undefined ? cookie.clid : null
     useEffect(() => {
         if (window.innerWidth > 991) {
             document.querySelector(".Offcanvas_menu_wrapper").style.display = "none"
@@ -43,9 +47,6 @@ const Test = () => {
                 setScroll(false)
             }
         }
-        else {
-
-        }
     }
     const [count, setCount] = useState(true)
     const handleResize = () => {
@@ -59,8 +60,9 @@ const Test = () => {
             window.removeEventListener("scroll", handleScroll)
         }
     })
-    const scrollToTop = () => {
-        document.scrollX = 0
+    const logout = () => {
+        setCookies("clid", "", { maxAge: 0 })
+        window.location.reload()
     }
     return (
         <div id="top">
@@ -110,7 +112,7 @@ const Test = () => {
                                         {!isLogged && (<><Link to="/login" className='t-mr-4 t-ml-4 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-600'>Login</Link>
                                             <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-600 t-border-2 t-border-blue-600 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-600 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link></>)
                                             ||
-                                            <Link to={"/Account/" + clid} className='t-ml-8 t-mr-8 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-text-blue-600'>My Account</Link>}
+                                            (<><Link to={"/Account/" + clid} className='lg:t-text-sm t-ml-4 t-mr-4 t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-text-blue-600'>My Account</Link><div className='lg:t-text-sm t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold lg:t-font-normal t-text-blue-600 t-cursor-pointer' onClick={logout}>Log Out</div> </>)}
 
                                     </div>
                                 </div>
@@ -205,7 +207,9 @@ const Test = () => {
                 {!isLogged && (<div className='t-flex t-items-center t-justify-center t-space-x-7 t-mt-7 t-w-full'>
                     <Link to="/login" className=' t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700'>Login</Link>
                     <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-700 t-border-2 t-border-blue-700 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-700 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
-                </div>)}
+                </div>) ||
+                    (<div className='t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700' onClick={logout}>Log Out</div>)
+                }
                 <div className="modal_social t-mt-20">
                     <h2>Share this product</h2>
                     <ul>
