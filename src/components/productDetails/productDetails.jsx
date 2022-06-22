@@ -19,12 +19,12 @@ const ProductDetails = () => {
     const changeSize = (size) => {
         setSize(() => size)
     }
-
+    console.log(size)
     const title = "qqsd"
     const description = "sqsdqsdqsd qdsqssdq qsqqsdqsd qsdqsd qsdqsdq qsdqs"
     const price = 20
     const categorie = "qsd"
-    const sizes = [20, 45, 90]
+    const sizes = ["xl", "lg"]
     const images = ["/temp/assets/img/product/productbig5.jpg", "/assets/images/darius.jpg", "/assets/images/nice.png", "/assets/images/watch.png"]
     return (
         <div className="product_details t-mt-16 t-pb-20" >
@@ -74,9 +74,13 @@ const ProductDetails = () => {
                                         <li className="color4"><Link to="#"></Link></li>
                                     </ul>
                                 </div>
+                                {sizes.length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Sizes</h2>)}
                                 <div className='t-flex t-items-center t-space-x-6 t-mb-8 t-select-none'>
                                     {sizes.map((element, index) => {
-                                        return <div onClick={() => { changeSize(element) }} key={index} className={` ${(!size && !index) || element === size ? "t-border-2" : "t-border-0"} t-shadow-neutral-400 t-shadow-md t-border-neutral-700  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                        if (!size && !index) {
+                                            setSize(element)
+                                        }
+                                        return <div onClick={() => { changeSize(element) }} key={index} className={` ${(!size && !index) || element === size ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
                                             <p className='t-text-neutral-800'>{element}</p>
                                         </div>
                                     })}
