@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { UseDynamicInput } from '../../hooks/UseDyInp'
 import { UseTrueEmail, UseTrueString } from "../../hooks/strings"
-import { useSelector, useDispatch } from 'react-redux'
+import { context } from "../../index"
 import axios from 'axios'
-import { loginReducer } from '../../reducer/loginReducer'
 import { useCookies } from "react-cookie"
 import Loader from '../Loader/Loader'
 import { UseLogged } from "../../hooks/UseLogged"
@@ -17,9 +16,7 @@ const Login = () => {
     /*cookie */
     const [cookies, setCookies] = useCookies()
     const [isLoading, setIsLoading] = useState(false)
-
-    const dispatcher = useDispatch()
-    const url = useSelector(element => element.url)
+    const { url } = useContext(context)
 
     const emailInput = useRef(null)
     const passwordInput = useRef(null)
@@ -50,7 +47,6 @@ const Login = () => {
             data.append("password", password)
             axios.post(url + "/login.php", data).then((res) => {
                 if (res.success) {
-                    dispatcher(loginReducer(res.id))
                     setCookies("clid", res.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
                     navigate("/")
                 }

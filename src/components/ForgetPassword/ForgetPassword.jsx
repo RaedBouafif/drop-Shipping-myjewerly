@@ -1,16 +1,16 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import { Link } from "react-router-dom"
 import { UseDynamicInput } from '../../hooks/UseDyInp'
 import { UseTrueEmail, UseTrueString } from "../../hooks/strings"
-import { useSelector } from 'react-redux'
 import axios from 'axios'
 import Loader from '../Loader/Loader'
 import "./ForgetPassword.scss"
+import { context } from "../../index"
 
 const ForgetPassword = () => {
     /*cookie */
     const [isLoading, setIsLoading] = useState(false)
-    const url = useSelector(element => element.url)
+    const { url } = useContext(context)
     const [success, setSuccess] = useState(false)
 
     const emailInput = useRef(null)

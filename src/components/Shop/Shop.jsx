@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Product from './Product/Product'
+<<<<<<< HEAD
 import NavBonde from "../NavBonde/NavBonde"
+=======
+import NavBonde from "../navBonde/NavBonde"
+import { context } from "../../index"
+import axios from 'axios'
+>>>>>>> 15d91dbdc9ee89e0e9bab374289ca09453510fc5
 const Shop = () => {
     const handleShowChilds = (e) => {
         const thchild = e.target.parentNode.childNodes[2]
@@ -16,6 +22,14 @@ const Shop = () => {
             thchild.style.display = "flex"
         }
     }
+    const { url } = useContext(context)
+    useEffect(() => {
+        axios.get(url + "/myjewery/backend/Knawat/getCategories.php").then((res) => {
+            console.log(res.data)
+        })
+    })
+
+
     return (
         <>
             <NavBonde paths={["Shop"]}></NavBonde>
@@ -66,13 +80,12 @@ const Shop = () => {
                     </div>
 
 
-                    <div className='t-flex t-justify-around t-flex-wrap t-mb-16 t-w-full'>
+                    <div className='t-flex t-justify-around t-flex-wrap t-space-y-14 lg:t-space-y-0 t-mb-16 t-w-full'>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
                         <Product price="$50" title="baligh smartphone is amazing" image1="/assets/images/darius.jpg" image2="/assets/images/subscribe.png" description="nice proudm really is amazing with this qsqs qdsqsd qsdqsd qsqdqs sdqsd qqsdqs dqsdqs dqsddqsdqs qsdq sqsdsdqsdsq"></Product>
-
                     </div>
                 </div>
             </div>

@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { UseDynamicInput } from '../../hooks/UseDyInp'
 import { UseTrueEmail, UseTrueString } from "../../hooks/strings"
-import { useSelector } from 'react-redux'
 import axios from 'axios'
 import Loader from '../Loader/Loader'
-import Image from "../../customElement/Image"
 import Options from "./Options"
 import "./Sign.scss"
 import { UseLogged } from "../../hooks/UseLogged"
+import { context } from "../../index"
 const Sign = () => {
     /* check if user connected*/
     UseLogged("/");
@@ -24,7 +23,7 @@ const Sign = () => {
 
 
     /*Backend url*/
-    const url = useSelector(element => element.url)
+    const { url } = useContext(context)
     /* navigate instance*/
     const navigate = useNavigate()
 
@@ -143,8 +142,8 @@ const Sign = () => {
                 </div>
             </div>
             <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-7 t-top-7 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
-                <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5' />
-                <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800'>Home</p>
+                <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5 lg:t-hidden' />
+                <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800 lg:t-text-white'>Home</p>
             </Link>
             <div className=' selection:t-bg-blue-300 selection:t-text-white t-py-14 lg:t-py-12 lg:t-w-6/12 t-ml-auto t-w-full t-shadow-lg t-shadow-black/20 t-rounded-lg t-bg-white t-min-h-screen t-flex t-flex-col t-items-center t-justify-center'>
                 <h2 className='t-text-neutral-600 t-text-md t-mb-5 t-font-semibold'>You Have An Account ?<Link to="/login" className="t-text-blue-500 hover:t-underline decoration-blue-500"> Log in</Link> </h2>

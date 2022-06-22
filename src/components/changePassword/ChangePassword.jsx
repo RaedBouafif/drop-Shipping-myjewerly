@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import "./ChangePassword.scss"
 import Loader from "../Loader/Loader"
 import axios from "axios"
 import { UseDynamicInput } from '../../hooks/UseDyInp'
-import { useSelector } from 'react-redux'
+import { context } from "../../index"
 
 
 const ChangePassword = () => {
@@ -21,7 +21,7 @@ const ChangePassword = () => {
     const { accountName, operationId } = useParams()
 
     const navigate = useNavigate()
-    const url = useSelector(element => element.url)
+    const url = useContext(context)
 
 
     const checkValidOperation = () => {
