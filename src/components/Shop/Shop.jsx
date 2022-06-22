@@ -1,6 +1,6 @@
 import React from 'react'
 import Product from './Product/Product'
-import NavBonde from "../navBonde/NavBonde"
+import NavBonde from "../NavBonde/NavBonde"
 const Shop = () => {
     const handleShowChilds = (e) => {
         const thchild = e.target.parentNode.childNodes[2]
