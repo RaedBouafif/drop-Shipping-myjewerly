@@ -19,6 +19,7 @@
             $prod_sku->{'categories'}[0] = $prod_sku->{'categories'}[1];
             $prod_sku->{'categories'}[1] = $temp;
         }
+        $prix = $prod_sku->{'variations'}[0]->{'sale_price_scy'};
         print_r(json_encode($prod_sku));
     }
 ?>  
