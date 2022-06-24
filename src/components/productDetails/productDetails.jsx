@@ -1,9 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useEffect, useState, useContext } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import "./ProductDetails.scss"
 import Image from "../../customElement/Image"
+import { context } from "../../index"
+import axios from "axios"
 const ProductDetails = () => {
     const scrollContainer = useRef(null)
+    const [productData, setProductData] = useState()
     const [selectedImage, setSelectedImage] = useState(null)
     const [size, setSize] = useState(null)
     const handleScrollLeft = () => {
@@ -13,22 +16,26 @@ const ProductDetails = () => {
         scrollContainer.current.scrollLeft += 144
     }
 
+    const { url } = useContext(context)
+    const { id } = useParams()
     useEffect(() => {
-        setSelectedImage(images[0])
+        axios.get(`${url}/knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
+            if (res.data) {
+                setProductData(res.data)
+                setSelectedImage(res.data.images[0])
+                console.log(res.data)
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
     }, [])
     const changeSize = (size) => {
         setSize(() => size)
     }
-    console.log(size)
-    const title = "qqsd"
-    const description = "sqsdqsdqsd qdsqssdq qsqqsdqsd qsdqsd qsdqsdq qsdqs"
-    const price = 20
-    const categorie = "qsd"
-    const sizes = ["xl", "lg"]
-    const images = ["/temp/assets/img/product/productbig5.jpg", "/assets/images/darius.jpg", "/assets/images/nice.png", "/assets/images/watch.png"]
+
     return (
         <div className="product_details t-mt-16 t-pb-20" >
-            <div className="container">
+            {/* <div className="container">
                 <div className="row">
                     <div className="col-lg-6 col-md-6">
                         <div className="product-details-tab">
@@ -37,12 +44,12 @@ const ProductDetails = () => {
                                     {selectedImage && <Image className='t-h-full t-w-full t-mx-auto' src={selectedImage} />}
                                 </div>
                             </div>
-                            {images.length > 1 && <div className='t-select-none t-flex t-items-center t-justify-center'>
+                            {productData.images.length > 1 && <div className='t-select-none t-flex t-items-center t-justify-center'>
                                 <div onClick={handleScrollLeft} className='t-flex-none t-relative t-top-2.5 t-left-4  t-rounded-full t-border-0 t-p-1.5 t-box-content t-z-50 t-bg-stone-300/70 hover:t-bg-stone-300 t-cursor-pointer'>
                                     <img src="/assets/icons/left-arrow.png" className='t-h-8 t-relative t-right-0.5 t-w-9' />
                                 </div>
                                 <div ref={scrollContainer} className="photos_details t-scroll-smooth t-snap-x t-mt-5 t-flex t-items-center t-space-x-5 t-overflow-x-scroll">
-                                    {images.map((element, index) => {
+                                    {productData.images.map((element, index) => {
                                         return (
                                             <div onClick={() => { setSelectedImage(() => element) }}><Image key={index} src={element} className='lg:t-h-28 lg:t-w-36 t-w-32 t-h-24 t-flex-none t-snap-center t-cursor-pointer' /></div>)
                                     })}
@@ -56,13 +63,13 @@ const ProductDetails = () => {
                     <div className="col-lg-6 col-md-6">
                         <div className="product_d_right">
                             <form action="#">
-                                <h1>{title}</h1>
+                                <h1>{productData.name.en}</h1>
 
                                 <div className="price_box">
                                     <span className="current_price">{"$" + price}</span>
                                 </div>
                                 <div className="product_desc">
-                                    <p>{description}</p>
+                                    <p>{productData.description.tr}</p>
                                 </div>
                                 <div className="product_variant color">
                                     <h3>Available Options</h3>
@@ -102,7 +109,7 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div >
 
 

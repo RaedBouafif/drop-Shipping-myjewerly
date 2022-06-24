@@ -7,4 +7,7 @@
     $n = $nbr->{'total'};
     $nbl = ceil($n/10);
     print_r(json_encode($nbl));
+
+
+// ki tebda m3edi filtre bel categories el nbr totale bech yetbadel
 ?>

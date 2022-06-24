@@ -331,7 +331,7 @@ class MP
      * @param string $last_update UTC Timestamp
      * @return object Knawat Products
      */
-    public function getProducts($limit , $page  , $last_update = '', $args = array())
+    public function getProducts($limit , $page , $last_update = '', $args = array())
     {
         $path = '/catalog/products?limit=' . $limit . '&page=' . $page;
         if (!empty($last_update)) {

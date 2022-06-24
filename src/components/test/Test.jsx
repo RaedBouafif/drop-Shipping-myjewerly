@@ -1,16 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import { Link, Outlet } from "react-router-dom"
 import Panier from "./Panier"
 import "./Nav.scss"
 import Favorite from './Favorite'
 import { useCookies } from 'react-cookie'
-
-
+import axios from "axios"
+import { context } from '../../index'
 const Test = () => {
     const [cookie, setCookies] = useCookies()
-
+    const [categories, setCategories] = useState({})
+    const [search, setSearch] = useState("")
     const isLogged = cookie.clid != undefined
     const clid = cookie.clid != undefined ? cookie.clid : null
+    const [selectedCategorieSearch, setSelectedCategorieSearch] = useState("all")
+
+    const { url } = useContext(context)
     useEffect(() => {
         if (window.innerWidth > 991) {
             document.querySelector(".Offcanvas_menu_wrapper").style.display = "none"
@@ -47,6 +51,14 @@ const Test = () => {
                 setScroll(false)
             }
         }
+        else {
+            if (window.scrollY > toHide.current.clientHeight) {
+                setScroll(true)
+            }
+            else {
+                setScroll(false)
+            }
+        }
     }
     const [count, setCount] = useState(true)
     const handleResize = () => {
@@ -64,6 +76,24 @@ const Test = () => {
         setCookies("clid", "", { maxAge: 0 })
         window.location.reload()
     }
+
+    useEffect(() => {
+        axios.get(url + "/Knawat/getCategories.php").then((res) => {
+            var result = {};
+            res.data.forEach((element) => {
+                if (element[1]) {
+                    if (!result[element[0]]) result[element[0]] = Array.of(element[1])
+                    else result[element[0]] = [...result[element[0]], element[1]]
+                }
+                else {
+                    result[element[0]] = []
+                }
+            })
+            setCategories(result)
+        }).catch((err) => {
+            console.log(err)
+        })
+    })
     return (
         <div id="top">
             <div style={{ zIndex: 5000000 }} className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
@@ -81,28 +111,18 @@ const Test = () => {
                                     <div className="search_container">
                                         <form action="#">
                                             <div className="hover_category">
-                                                <select className="select_option t-w-40" name="select" id="categori1">
-                                                    <option value="1">All Categories</option>
-                                                    <option value="2">Accessories</option>
-                                                    <option value="3">Accessories & More</option>
-                                                    <option value="4">Butters & Eggs</option>
-                                                    <option value="5">Camera & Video </option>
-                                                    <option value="6">Mornitors</option>
-                                                    <option value="7">Tablets</option>
-                                                    <option value="8">Laptops</option>
-                                                    <option value="9">Handbags</option>
-                                                    <option value="10">Headphone & Speaker</option>
-                                                    <option value="11">Herbs & botanicals</option>
-                                                    <option value="12">Vegetables</option>
-                                                    <option value="13">Shop</option>
-                                                    <option value="14">Laptops & Desktops</option>
-                                                    <option value="15">Watchs</option>
-                                                    <option value="16">Electronic</option>
+
+                                                <select className="select_option t-w-40" onChange={(e) => setSelectedCategorieSearch(e.target.value)} name="select" id="categori1">
+                                                    <option value="all">All Categories</option>
+                                                    {Object.keys(categories).map((element, index) => {
+                                                        return <option key={index} value={element}>{element}</option>
+                                                    })}
                                                 </select>
+
                                             </div>
                                             <div className="search_box">
-                                                <input placeholder="Search product..." type="text" />
-                                                <button type="submit">Search</button>
+                                                <input onInput={(e) => { setSearch(() => e.target.value) }} placeholder="Search product..." type="text" />
+                                                {search && <Link to={`/${selectedCategorieSearch}/${search}`}><button type="button">Search</button></Link> || <button type="button">Search</button>}
                                             </div>
                                         </form>
                                     </div>
@@ -131,21 +151,19 @@ const Test = () => {
                                         <h2 className="">ALL CATEGORIES</h2>
                                     </div>
                                     <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
-                                        <div className='t-flex t-w-full flex-wrap items-center'>
-                                            <div className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue' >Video Games</div>
-                                            <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
-                                            <div className='t-hidden t-flex-col t-ml-10 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
-                                                <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
-                                                    <div className='hover:t-scale-105'>Video Games</div>
-                                                </div>
-                                                <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
-                                                    <div className='hover:t-scale-105'>Video Games</div>
-                                                </div>
-                                                <div className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
-                                                    <div className='hover:t-scale-105'>Video Games</div>
+                                        {Object.keys(categories).map((element, index) => {
+                                            return <div key={index} className='t-flex t-w-full t-flex-wrap t-items-center'>
+                                                <Link to={"/shop/" + element} className='t-cursor-pointer hover:t-text-blue-500 t-font-semibold hover:t-scale-105 t-text-[13px] hover:t-text-blue' >{element}</Link>
+                                                <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
+                                                <div className='t-hidden t-flex-col t-ml-10 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
+                                                    {categories[element].map((element2, index2) => {
+                                                        return <Link to={`/shop/${element}/${element2}`} key={index2} className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
+                                                            <div className='hover:t-scale-105'>{element2}</div>
+                                                        </Link>
+                                                    })}
                                                 </div>
                                             </div>
-                                        </div>
+                                        })}
                                     </div>
                                 </div>}
                             </div>
@@ -175,8 +193,8 @@ const Test = () => {
                 <div className="search_container">
                     <form action="#">
                         <div className="search_box">
-                            <input placeholder="Search product..." type="text" />
-                            <button type="submit">Search</button>
+                            <input onInput={(e) => { setSearch(() => e.target.value) }} placeholder="Search product..." type="text" />
+                            {search && <Link to={`/${selectedCategorieSearch}/${search}`}><button type="button">Search</button></Link> || <button type="button">Search</button>}
                         </div>
                     </form>
                 </div>
@@ -221,7 +239,7 @@ const Test = () => {
                     </ul>
                 </div>
             </div >
-            {scroll && <a href='#top' className='t-fixed t-bottom-7 t-right-5 t-cursor-pointer hover:t-bg-blue-600 t-rounded-full t-p-2.5 border-0 t-bg-blue-500 t-items-center t-justify-center t-flex'>
+            {scroll && <a href='#top' className='t-fixed t-z-50 t-bottom-7 t-right-5 t-cursor-pointer hover:t-bg-blue-600 t-rounded-full t-p-2.5 border-0 t-bg-blue-500 t-items-center t-justify-center t-flex'>
                 <img src="/assets/icons/top-arrow.png" className='t-relative t-bottom-px t-h-8 t-w-8' />
             </a>}
             <Outlet />

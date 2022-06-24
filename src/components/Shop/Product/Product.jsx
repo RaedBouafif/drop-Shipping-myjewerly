@@ -1,21 +1,52 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Product.scss"
 import Image from "../../../customElement/Image"
 import { Link, useNavigate } from "react-router-dom"
-const Product = ({ image1, image2, title, price, id }) => {
+import { useCookies } from 'react-cookie'
+import { useRecoilState } from "recoil"
+import { wishNumberState } from "../../SharedState/wishListAtom"
+const Product = ({ image1, image2, title, price, sku }) => {
+
     const navigateTo = useNavigate()
     const navigate = () => {
-        navigateTo("/product/" + id)
+        navigateTo("/product/" + sku)
+    }
+    const [cookie, setCookie] = useCookies()
+    const [addedWish, setAddedWish] = useState()
+    useEffect(() => {
+        if (Array.isArray(cookie.W_L) && cookie.W_L.indexOf(sku) != -1) {
+            setAddedWish(true)
+        }
+        else {
+            setAddedWish(false)
+        }
+        setNumber(() => {
+            return Array.isArray(cookie.W_L) ? cookie.W_L.length : 0
+        })
+    })
+
+    const [number, setNumber] = useRecoilState(wishNumberState)
+    const addToWishList = (e) => {
+        e.preventDefault()
+        if (Array.isArray(cookie.W_L)) {
+            setCookie("W_L", [...cookie.W_L, sku])
+        }
+        else {
+            setCookie("W_L", Array.of(sku))
+        }
+    }
+    const deleteWish = () => {
+        setCookie("W_L", cookie.W_L.pop(cookie.W_L?.indexOf(sku)))
     }
     return (
         <div className='firstContainer t-px-2 t-pt-2 t-box-content t-pb-3 md:t-w-5/12 lg:t-w-60 t-font-body t-rounded-sm t-min-h-[370px] t-border-2 hover:t-border-stone-200 t-border-transparent t-flex t-flex-col'>
 
             <div className='secondContainer t-flex t-items-start t-justify-center'>
                 <div class="action_links t-z-20 t-justify-self-start lg:t-mr-52 t-mr-60 md:t-mr-72">
-                    <ul>
-                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i
+                    {(!addedWish) && (<ul onClick={addToWishList} >
+                        <li class="wishlist"><a href="/" title="Add to Wishlist"><i
                             class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                    </ul>
+                    </ul>) || (<div onClick={deleteWish} className='t-p-1.5 t-bg-blue-700 t-items-center t-flex t-justify-center t-rounded-full'><img src="/assets/icons/check.png" className='t-h-5 t-w-5' /></div>)}
                 </div>
                 <Image click={navigate} src={image1} className="img1 t-mb-0 lg:t-h-48 lg:t-w-60 t-w-72 t-h-56" />
                 <Image click={navigate} src={`${image2 != undefined ? image2 : image1}`} className="img2 t-absolute t-mb-0 lg:t-h-48 lg:t-w-60 t-w-72 t-h-56" />
@@ -24,7 +55,7 @@ const Product = ({ image1, image2, title, price, id }) => {
                     <img src="/assets/icons/shopping-cart.png" className='t-h-5 t-w-5' />
                 </button>
             </div>
-            <Link to={"/product/" + id} className='t-max-w-full t-overflow-hidden t-break-words'>
+            <Link to={"/product/" + sku} className='t-max-w-full t-overflow-hidden t-break-words'>
                 <p className='t-text-blue-600 t-font-bold t-text-xl t-text-center t-mt-10'>{price}</p>
                 <p className='t-text-md t-neutral-700 t-tracking-wider t-break-words t-overflow-x-hidden hover:t-text-blue-500 t-delay-75 t-duration-100 t-mt-5 t-text-center t-w-full'>{title}</p>
             </Link>

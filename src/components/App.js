@@ -10,7 +10,8 @@ import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
-import ProductDetails from './ProductDetails/productDetails'
+import ProductDetails from './productDetails/ProductDetails'
+import WishList from './wishList/WishList'
 const App = () => {
 
   return (
@@ -36,6 +37,7 @@ const App = () => {
         </Route>
 
         <Route path="/" element={<Test />}>
+          <Route element={<WishList />} path="wishList" />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="shop" >
             <Route index element={<Shop />} />
@@ -51,6 +53,7 @@ const App = () => {
 
           </Route>
         </Route>
+
 
         <Route element={<ErrorPage />} path="*"></Route>
 
