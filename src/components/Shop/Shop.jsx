@@ -1,19 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Product from './Product/Product'
-<<<<<<< HEAD
-import NavBonde from "../NavBonde/NavBonde"
-=======
 import NavBonde from "../navBonde/NavBonde"
->>>>>>> f0eb076f0bdaf96663745c88accb38f8d55213cf
 import { context } from "../../index"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-<<<<<<< HEAD
-=======
 import Loader from "../Loader/Loader"
 
 
->>>>>>> f0eb076f0bdaf96663745c88accb38f8d55213cf
 const Shop = () => {
     const [categories, setCategories] = useState({})
     const handleShowChilds = (e) => {
@@ -86,13 +79,6 @@ const Shop = () => {
             }
         }).catch((err) => { console.log(err) })
     }, [])
-    useEffect(() => {
-        axios.get(url + "/Knawat/getProducts.php").then((res) => {
-            if (Array.isArray(res.data)) setProducts(() => {
-                return res.data.sort((a, b) => a.variations[0].sale_price - b.variations[0].sale_price)
-            })
-        }).catch((err) => { console.log(err) })
-    }, [])
 
 
     const roundPrice = (price) => {
@@ -102,7 +88,33 @@ const Shop = () => {
         }
         return price
     }
+    const [page, setPage] = useState({})
+    const getTableOfNumber = (number) => {
+        var table = []
+        for (let index = 1; index <= number; index++) {
+            table.push(index)
+        }
+        return table
+    }
+    useEffect(() => {
+        axios.get(url + "/Knawat/countProducts.php").then((res) => {
+            setPage({ page: 1, allPage: getTableOfNumber(res.data.nbrPage), allProducts: res.data.nbrProducts })
+        })
 
+    }, [])
+    const changePage = (p) => {
+        setPage(() => { return { ...page, page: p } })
+    }
+    useEffect(() => {
+        if (page) {
+            axios.get(url + "/Knawat/getProducts.php?page=" + page.page).then((res) => {
+                console.log(res.data)
+                if (Array.isArray(res.data)) setProducts(() => {
+                    return res.data.sort((a, b) => a.variations[0].sale_price - b.variations[0].sale_price)
+                })
+            }).catch((err) => { console.log(err) })
+        }
+    }, [page.page])
     return (
         <>
             <NavBonde paths={["Shop"]}></NavBonde>
@@ -146,7 +158,7 @@ const Shop = () => {
                             </form>
                         </div>
                         <div class="page_amount">
-                            <p>Showing 1–9 of {products.length} results</p>
+                            <p>Showing {page.page * 10 - 9 + "-" + (page.page * 10 - 10 + products.length)} of {page.allProducts} results</p>
                         </div>
                     </div>
 
@@ -155,8 +167,15 @@ const Shop = () => {
                         {products.map((element, index) => { return <Product key={index} sku={element.sku} price={"$" + roundPrice(element.variations[0].sale_price)} title={element.name.en} image1={element.images[0]} image2={element.images[1] ? element.images[1] : element.images[0]}></Product> })}
 
                     </div>
+                    <div className='t-w-full t-space-x-2 t-items-center t-justify-center t-flex t-mb-20'>
+                        {page.allPage?.map((element, index) => <div onClick={() => { changePage(element) }} key={index} className={`${element === page.page ? "t-border-2 t-border-neutral-900" : "t-border"}  t-cursor-pointer t-items-center t-justify-center t-flex t-w-10 t-h-10`}>
+                            <p className='t-text-neutral-700 t-text-lg'>{element}</p>
+                        </div>)}
+                    </div>
                 </div>
-            </div>) || (<Loader className="t-mx-auto t-mt-32" height="80px" size="50px" border="5px" color="#60a5fa" />)}
+            </div>) || (<Loader className="t-mx-auto t-mt-32" height="80px" size="50px" border="5px" color="#60a5fa" />)
+            }
+
         </>
     )
 }

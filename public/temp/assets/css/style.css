@@ -2960,8 +2960,7 @@ textarea:-ms-input-placeholder {
 .action_links {
   transition: all 0.5s ease;
   position: absolute;
-  opacity: 0;
-  visibility: hidden;
+
 }
 .action_links ul li {
   margin-bottom: 5px;
