@@ -4,12 +4,14 @@ import { useCookies } from 'react-cookie'
 import { context } from '../../index'
 import { useRecoilState } from "recoil"
 import { wishNumberState } from "../SharedState/wishListAtom"
+import { NotificationAtom } from '../SharedState/NotificationAtom'
+
 const WishList = () => {
     const [cookie, setCookie] = useCookies()
     const [products, setProducts] = useState([])
     const { url } = useContext(context)
     const [isLoading, setIsLoading] = useState(true)
-
+    const [notification, setNotification] = useRecoilState(NotificationAtom)
     const [number, setNumber] = useRecoilState(wishNumberState)
     useEffect(() => {
         if (Array.isArray(cookie.W_L)) {
@@ -18,7 +20,9 @@ const WishList = () => {
                 setProducts(() => res.map((res) => res.data))
                 setNumber(res.map((res) => res.data).length)
             }).catch((err) => {
-                console.log(err)
+                setNotification({
+                    ...notification, message: "please check you network", type: "error", visible: true
+                })
             })
         }
         else if (cookie.W_L) {
@@ -29,7 +33,9 @@ const WishList = () => {
                     setNumber(1)
                 }
             }).catch((err) => {
-                console.log(err)
+                setNotification({
+                    ...notification, message: "please check you network", type: "error", visible: true
+                })
             })
         }
     }, [])
@@ -46,7 +52,12 @@ const WishList = () => {
         setNumber(number - 1)
         setProducts(() => products.filter((element) => element.sku != sku))
         setCookie("W_L", cookie.W_L ? cookie.W_L.filter((element) => element != sku) : [], { maxAge: 14 * 24 * 60 * 60 })
-
+        setNotification({
+            ...notification,
+            visible: true,
+            message: "Product remove from WishList successfully",
+            type: "success"
+        })
     }
     if (products.length && isLoading) return (
         <div className="wishlist_area mt-60">

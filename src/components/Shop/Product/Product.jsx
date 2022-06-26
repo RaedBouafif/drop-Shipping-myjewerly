@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useCookies } from 'react-cookie'
 import { useRecoilState } from "recoil"
 import { wishNumberState } from "../../SharedState/wishListAtom"
+import { NotificationAtom } from "../../SharedState/NotificationAtom"
 const Product = ({ image1, image2, title, price, sku }) => {
 
     const navigateTo = useNavigate()
@@ -27,6 +28,12 @@ const Product = ({ image1, image2, title, price, sku }) => {
 
     const [number, setNumber] = useRecoilState(wishNumberState)
     const addToWishList = (e) => {
+        setNotification({
+            ...notification,
+            visible: true,
+            message: "Product Added to WishList successfully",
+            type: "success"
+        })
         e.preventDefault()
         if (Array.isArray(cookie.W_L)) {
             setCookie("W_L", [...cookie.W_L, sku], { maxAge: 14 * 24 * 60 * 60 })
@@ -36,8 +43,17 @@ const Product = ({ image1, image2, title, price, sku }) => {
         }
     }
     const deleteWish = () => {
+        setNotification({
+            ...notification,
+            visible: true,
+            message: "Product remove from WishList successfully",
+            type: "success"
+        })
         setCookie("W_L", cookie.W_L ? cookie.W_L.filter((element) => element != sku) : [], { maxAge: 14 * 24 * 60 * 60 })
     }
+
+
+    const [notification, setNotification] = useRecoilState(NotificationAtom)
     return (
         <div className='firstContainer t-px-2 t-pt-2 t-box-content t-pb-3 md:t-w-5/12 lg:t-w-60 t-font-body t-rounded-sm t-min-h-[370px] t-border-2 hover:t-border-stone-200 t-border-transparent t-flex t-flex-col'>
 

@@ -12,46 +12,47 @@ import Test from './test/Test'
 import Shop from "./Shop/Shop"
 import ProductDetails from './productDetails/ProductDetails'
 import WishList from './wishList/WishList'
-import Product from './Shop/Product/Product'
+import Notification from './Notification/Notification'
 const App = () => {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Notification />}>
+          <Route path="login" >
+            <Route element={<Login />} index />
+            <Route path="ForgetPassword" element={<ForgetPassword />} />
+            <Route element={<Login />} path="*"></Route>
+          </Route>
 
-        <Route path="/login" >
-          <Route element={<Login />} index />
-          <Route path="ForgetPassword" element={<ForgetPassword />} />
-          <Route element={<Login />} path="*"></Route>
-        </Route>
+          <Route path="sign">
+            <Route element={<Sign />} index />
+            <Route element={<Verify />} path="emailVerify" />
+            <Route element={<Sign />} path="*"></Route>
+          </Route>
 
-        <Route path="/sign">
-          <Route element={<Sign />} index />
-          <Route element={<Verify />} path="emailVerify" />
-          <Route element={<Sign />} path="*"></Route>
-        </Route>
+          <Route path="account">
+            <Route path="favorite" element={<div></div>} />
+            <Route path=":idAccount" element={<div>My account </div>} ></Route>
+            <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
+          </Route>
 
-        <Route path="/account">
-          <Route path="favorite" element={<div></div>} />
-          <Route path=":idAccount" element={<div>My account </div>} ></Route>
-          <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
-        </Route>
-
-        <Route path="/" element={<Test />}>
-          <Route element={<WishList />} path="wishList" />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="shop" >
-            <Route index element={<Shop />} />
-
-            <Route path=":categorie" >
+          <Route path='' element={<Test />}>
+            <Route element={<WishList />} path="wishList" />
+            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="shop" >
               <Route index element={<Shop />} />
-              <Route path=":categoireChild">
+
+              <Route path=":categorie" >
                 <Route index element={<Shop />} />
+                <Route path=":categoireChild">
+                  <Route index element={<Shop />} />
+                </Route>
+                <Route path="search/:name" element={<Shop />} />
               </Route>
-              <Route path="search/:name" element={<Shop />} />
+
+
             </Route>
-
-
           </Route>
         </Route>
 
