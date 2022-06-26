@@ -6,7 +6,10 @@ import Favorite from './Favorite'
 import { useCookies } from 'react-cookie'
 import axios from "axios"
 import { context } from '../../index'
+import { useRecoilState } from "recoil"
+import { NotificationAtom } from '../SharedState/NotificationAtom'
 const Test = () => {
+    const [notification, setNotification] = useRecoilState(NotificationAtom)
     const [cookie, setCookies] = useCookies()
     const [categories, setCategories] = useState({})
     const [search, setSearch] = useState("")
@@ -80,20 +83,29 @@ const Test = () => {
     useEffect(() => {
         axios.get(url + "/Knawat/getCategories.php").then((res) => {
             var result = {};
-            res.data.forEach((element) => {
-                if (element[1]) {
-                    if (!result[element[0]]) result[element[0]] = Array.of(element[1])
-                    else result[element[0]] = [...result[element[0]], element[1]]
-                }
-                else {
-                    result[element[0]] = []
-                }
-            })
-            setCategories(result)
+            if (Array.isArray(res.data)) {
+                res.data.forEach((element) => {
+                    if (element[1]) {
+                        if (!result[element[0].name.en]) result[element[0].name.en] = { id: element[0].id, childs: [element[1]] }
+                        else result[element[0].name.en]["childs"] = [...result[element[0].name.en]["childs"], element[1]]
+                    }
+                    else {
+                        result[element[0].name.en] = { id: element[0].id, childs: [] }
+                    }
+                })
+                setCategories(() => result)
+            }
+            else {
+                setNotification({
+                    ...notification, message: "please check you network", type: "error", visible: true
+                })
+            }
         }).catch((err) => {
-            console.log(err)
+            setNotification({
+                ...notification, message: "please check you network", type: "error", visible: true
+            })
         })
-    })
+    }, [])
     const navigate = useNavigate()
     const handleSubmitSearch = (e) => {
         e.preventDefault()
@@ -157,13 +169,13 @@ const Test = () => {
                                     </div>
                                     <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
                                         {Object.keys(categories).map((element, index) => {
-                                            return <div key={index} className='t-flex t-w-full t-flex-wrap t-items-center'>
-                                                <Link to={"/shop/" + element} className='t-cursor-pointer hover:t-text-blue-500 t-font-semibold hover:t-scale-105 t-text-[13px] hover:t-text-blue' >{element}</Link>
+                                            return <div key={index} className='t-flex t-w-full t-border-b py-2 t-flex-wrap t-items-center'>
+                                                <Link to={"/shop/" + element} className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue t-font-semibold' >{element}</Link>
                                                 <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
-                                                <div className='t-hidden t-flex-col t-ml-10 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
-                                                    {categories[element].map((element2, index2) => {
-                                                        return <Link to={`/shop/${element}/${element2}`} key={index2} className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
-                                                            <div className='hover:t-scale-105'>{element2}</div>
+                                                <div className='t-hidden t-flex-col t-ml-2 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
+                                                    {categories[element].childs.map((element2, index2) => {
+                                                        return <Link to={`/shop/${element}/${element2.name.en}`} key={index2} className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
+                                                            <div className='hover:t-scale-105'>{element2.name.en}</div>
                                                         </Link>
                                                     })}
                                                 </div>
