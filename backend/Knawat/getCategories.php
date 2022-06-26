@@ -23,13 +23,14 @@ foreach ($product as $key => $value) {
         array_push($table, $treelvl);
     }
 }
-$tazo = array();
-for ($j = 0; $j < count($table); $j++) {
-    $tr = array();
-    for ($k = 0; $k < count($table[$j]); $k++) {
-        $x = $table[$j][$k]->{'name'}->{'en'};
-        array_push($tr, $x);
-    }
-    array_push($tazo, $tr);
-}
-print_r(json_encode($tazo));
+//hedhi l partie ken theb tarja3 bel esm
+// $tazo = array();
+// for ($j = 0; $j < count($table); $j++) {
+//     $tr = array();
+//     for ($k = 0; $k < count($table[$j]); $k++) {
+//         $x = $table[$j][$k]->{'name'}->{'en'};
+//         array_push($tr, $x);
+//     }
+//     array_push($tazo, $tr);
+// }
+print_r(json_encode($table));
