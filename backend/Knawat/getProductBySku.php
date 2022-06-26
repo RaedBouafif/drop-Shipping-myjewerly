@@ -1,12 +1,8 @@
 <?php
-
 namespace Knawat;
-
-include './MP.php';
-include "../infoServer.php";
+include './createInstance.php';
 include './checkNodeLevel.php';
 if (isset($_GET["sku"])) {
-    $mp = new MP("8afc2a10-ec3b-11ec-96bc-7d52ad4edc25", "c000646b-fbd9-46e5-9329-937e8385926d", []);
     $prod_sku = $mp->getProductBySku($_GET["sku"]);
     $cat = $prod_sku->{'categories'};
     $n = count($prod_sku->{'categories'}); //4
