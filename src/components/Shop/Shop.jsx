@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import Product from './Product/Product'
 import NavBonde from "../navBonde/NavBonde"
 import { context } from "../../index"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Loader from "../Loader/Loader"
 
 
 const Shop = () => {
+    /*know method search*/
+    const { categorie, categoireChild, name } = useParams()
+    const [isLoading, setIsLoading] = useState(true)
+
     const [categories, setCategories] = useState({})
     const handleShowChilds = (e) => {
         const thchild = e.target.parentNode.childNodes[2]
@@ -101,27 +105,34 @@ const Shop = () => {
             setPage({ page: 1, allPage: getTableOfNumber(res.data.nbrPage), allProducts: res.data.nbrProducts })
         })
 
-    }, [])
+    }, [window.location.pathname])
     const changePage = (p) => {
         setPage(() => { return { ...page, page: p } })
     }
     useEffect(() => {
+        setProducts([])
+        var completPath = ""
+        if (categorie != "all" && categorie != undefined) completPath += "&categorie=" + encodeURIComponent(categorie)
+        if (categoireChild) completPath += "&categorieChild=" + encodeURIComponent(categoireChild)
         if (page) {
-            axios.get(url + "/Knawat/getProducts.php?page=" + page.page).then((res) => {
-                console.log(res.data)
+            axios.get(url + "/Knawat/getProducts.php?page=" + page.page + completPath).then((res) => {
+                setIsLoading(false)
                 if (Array.isArray(res.data)) setProducts(() => {
-                    return res.data.sort((a, b) => a.variations[0].sale_price - b.variations[0].sale_price)
+                    if (name) var table = res.data.filter((element) => (element.name.en?.toUpperCase().indexOf(name.toUpperCase()) != -1))
+                    else var table = res.data
+                    return table.sort((a, b) => a.variations[0].sale_price - b.variations[0].sale_price)
                 })
             }).catch((err) => { console.log(err) })
         }
-    }, [page.page])
+    }, [page.page, window.location.pathname])
+
     return (
         <>
             <NavBonde paths={["Shop"]}></NavBonde>
-            {(products.length > 0 && categories.length != {}) && (<div className='t-flex t-items-start'>
-                <aside class="sidebar_widget t-static lg:t-flex t-hidden t-ml-14 t-mt-14">
-                    <div class="widget_inner">
-                        <div class="widget_list widget_categories t-w-72">
+            {!isLoading && (<div className='t-flex t-items-start'>
+                <aside className="sidebar_widget t-static lg:t-flex t-hidden t-ml-14 t-mt-14">
+                    <div className="widget_inner">
+                        <div className="widget_list widget_categories t-w-72">
                             <h2>Product categories</h2>
                             <ul>
                                 {Object.keys(categories).map((element, index) => {
@@ -142,13 +153,13 @@ const Shop = () => {
                     </div >
                 </aside >
                 <div className='t-z-0 t-relative t-top-14 t-mx-auto t-w-11/12 lg:t-w-7/12'>
-                    <div style={{ zIndex: 0 }} class="shop_toolbar_wrapper">
-                        <div class="shop_toolbar_btn">
+                    <div style={{ zIndex: 0 }} className="shop_toolbar_wrapper">
+                        <div className="shop_toolbar_btn">
 
 
                         </div>
-                        <div class="niceselect_option">
-                            <form class="t-border t-p-2 t-rounded-md">
+                        <div className="niceselect_option">
+                            <form className="t-border t-p-2 t-rounded-md">
                                 <select onChange={(e) => { handleChangeSelectFilter(e.target.value) }}>
                                     <option value="lh">Sort by price: low to high</option>
                                     <option value="hl">Sort by price: high to low</option>
@@ -157,7 +168,7 @@ const Shop = () => {
                                 </select>
                             </form>
                         </div>
-                        <div class="page_amount">
+                        <div className="page_amount">
                             <p>Showing {page.page * 10 - 9 + "-" + (page.page * 10 - 10 + products.length)} of {page.allProducts} results</p>
                         </div>
                     </div>
@@ -175,7 +186,6 @@ const Shop = () => {
                 </div>
             </div>) || (<Loader className="t-mx-auto t-mt-32" height="80px" size="50px" border="5px" color="#60a5fa" />)
             }
-
         </>
     )
 }
