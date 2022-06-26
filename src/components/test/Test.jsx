@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from 'react'
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import Panier from "./Panier"
 import "./Nav.scss"
 import Favorite from './Favorite'
@@ -94,6 +94,11 @@ const Test = () => {
             console.log(err)
         })
     })
+    const navigate = useNavigate()
+    const handleSubmitSearch = (e) => {
+        e.preventDefault()
+        navigate(`/shop/${selectedCategorieSearch}/search/${search}`)
+    }
     return (
         <div id="top">
             <div style={{ zIndex: 5000000 }} className={`${window.innerWidth > 991 ? "t-sticky t-top-0 t-left-0" : ""} t-z-50`}>
@@ -109,7 +114,7 @@ const Test = () => {
                             <div className="col-lg-11 col-md-6 t-ml-auto">
                                 <div className="middel_right">
                                     <div className="search_container">
-                                        <form action="#">
+                                        <div>
                                             <div className="hover_category">
 
                                                 <select className="select_option t-w-40" onChange={(e) => setSelectedCategorieSearch(e.target.value)} name="select" id="categori1">
@@ -121,10 +126,10 @@ const Test = () => {
 
                                             </div>
                                             <div className="search_box">
-                                                <input onInput={(e) => { setSearch(() => e.target.value) }} placeholder="Search product..." type="text" />
-                                                {search && <Link to={`/${selectedCategorieSearch}/${search}`}><button type="button">Search</button></Link> || <button type="button">Search</button>}
+                                                <input onInput={(e) => { setSearch(() => e.target.value); }} placeholder="Search product..." type="text" />
+                                                <button onClick={handleSubmitSearch} type="button">Search</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                     <div className="middel_right_info t-font-body t-mt-0">
                                         <Favorite />
@@ -186,17 +191,17 @@ const Test = () => {
                 </div >
             </div >
             {/*mobile */}
-            <div className="Offcanvas_menu_wrapper notactive">
+            < div className="Offcanvas_menu_wrapper notactive" >
                 <div className="canvas_close" onClick={() => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("active", "notactive"); document.querySelector("#burger").style.display = "" }}>
                     <i className="ion-android-close"></i>
                 </div>
                 <div className="search_container">
-                    <form action="#">
+                    <div>
                         <div className="search_box">
-                            <input onInput={(e) => { setSearch(() => e.target.value) }} placeholder="Search product..." type="text" />
-                            {search && <Link to={`/${selectedCategorieSearch}/${search}`}><button type="button">Search</button></Link> || <button type="button">Search</button>}
+                            <input onInput={(e) => { setSearch(() => e.target.value); }} placeholder="Search product..." type="text" />
+                            <button onClick={handleSubmitSearch} type="button">Search</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div className="middel_right_info t-flex t-items-start ">
                     <Panier />
@@ -221,10 +226,11 @@ const Test = () => {
                         </li>
                     </ul>
                 </div>
-                {!isLogged && (<div className='t-flex t-items-center t-justify-center t-space-x-7 t-mt-7 t-w-full'>
-                    <Link to="/login" className=' t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700'>Login</Link>
-                    <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-700 t-border-2 t-border-blue-700 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-700 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
-                </div>) ||
+                {
+                    !isLogged && (<div className='t-flex t-items-center t-justify-center t-space-x-7 t-mt-7 t-w-full'>
+                        <Link to="/login" className=' t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700'>Login</Link>
+                        <Link to="/sign" className='t-text-[17px] t-px-3 t-py-2 t-bg-blue-700 t-border-2 t-border-blue-700 t-duration-200 t-delay-75 hover:t-bg-white hover:t-text-blue-700 t-rounded-sm t-text-white t-font-semibold'>Sign Up</Link>
+                    </div>) ||
                     (<div className='t-text-[17px] hover:t-underline t-decoration-blue-600 t-underline-offset-1 t-font-semibold t-text-blue-700' onClick={logout}>Log Out</div>)
                 }
                 <div className="modal_social t-mt-20">
@@ -243,7 +249,7 @@ const Test = () => {
                 <img src="/assets/icons/top-arrow.png" className='t-relative t-bottom-px t-h-8 t-w-8' />
             </a>}
             <Outlet />
-        </div>
+        </div >
     )
 }
 

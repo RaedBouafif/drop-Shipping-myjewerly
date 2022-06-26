@@ -12,6 +12,7 @@ import Test from './test/Test'
 import Shop from "./Shop/Shop"
 import ProductDetails from './productDetails/ProductDetails'
 import WishList from './wishList/WishList'
+import Product from './Shop/Product/Product'
 const App = () => {
 
   return (
@@ -42,14 +43,14 @@ const App = () => {
           <Route path="shop" >
             <Route index element={<Shop />} />
 
-            <Route path=":categorieName" >
-              <Route index element={<div>only products with this categorie</div>} />
-              <Route path=":categoireName2">
-                <Route index element={<div>under categorie</div>} />
-                <Route path=":name" element={<div>only products with this categorie and this name</div>} />
+            <Route path=":categorie" >
+              <Route index element={<Shop />} />
+              <Route path=":categoireChild">
+                <Route index element={<Shop />} />
               </Route>
-              <Route path=":name" element={<div>only products with this categorie and this name</div>} />
+              <Route path="search/:name" element={<Shop />} />
             </Route>
+
 
           </Route>
         </Route>

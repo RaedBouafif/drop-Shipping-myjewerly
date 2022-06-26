@@ -1110,7 +1110,7 @@ textarea:-ms-input-placeholder {
     display: none;
   }
 }
-.search_container form {
+.search_container > div {
   display: flex;
   border-radius: 5px;
   border: 2px solid #ebebeb;
@@ -1118,12 +1118,12 @@ textarea:-ms-input-placeholder {
   width: 600px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .search_container form {
+  .search_container > div {
     width: 481px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .search_container form {
+  .search_container > div {
     flex-direction: column-reverse;
     border: 0;
     align-items: center;
@@ -1131,7 +1131,7 @@ textarea:-ms-input-placeholder {
   }
 }
 @media only screen and (max-width: 767px) {
-  .search_container form {
+  .search_container > div {
     flex-direction: column-reverse;
     border: 0;
     align-items: center;
@@ -2960,7 +2960,6 @@ textarea:-ms-input-placeholder {
 .action_links {
   transition: all 0.5s ease;
   position: absolute;
-
 }
 .action_links ul li {
   margin-bottom: 5px;
