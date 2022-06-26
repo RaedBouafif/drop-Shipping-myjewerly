@@ -42,7 +42,7 @@ if (isset($_GET["categorie"])){
 $nbl = ceil($n / 10);
 $result["nbrPage"] = $nbl;
 $result["nbrProducts"] = $n;
-print_r(json_enode($result));
+print_r(json_encode($result));
 
 
 // ki tebda m3edi filtre bel categories el nbr totale bech yetbadel
