@@ -16,7 +16,13 @@ const ProductDetails = () => {
     const [productData, setProductData] = useState({})
     const [selectedImage, setSelectedImage] = useState(null)
     const [size, setSize] = useState(null)
+    const [color, setColor] = useState(null)
+    const [len, setLen] = useState(null)
     const [wish, setWish] = useState()
+    const [instock, setInstock] = useState(true)
+
+
+
     const handleScrollLeft = () => {
         scrollContainer.current.scrollLeft -= 144
     }
@@ -46,8 +52,12 @@ const ProductDetails = () => {
     const changeSize = (size) => {
         setSize(() => size)
     }
-
-
+    const changeLength = (length) => {
+        setLen(() => length)
+    }
+    const changeColor = (color) => {
+        setColor(() => color)
+    }
     useEffect(() => {
         if (Array.isArray(cookie.W_L) && cookie.W_L.indexOf(id) != -1) {
             setWish(false)
@@ -87,6 +97,13 @@ const ProductDetails = () => {
         })
         setCookie("W_L", cookie.W_L ? cookie.W_L.filter((element) => element != id) : [], { maxAge: 14 * 24 * 60 * 60 })
     }
+    const roundPrice = (price) => {
+        price = price + ""
+        if (price.indexOf(".") != -1) {
+            price = price.slice(0, price.indexOf(".") + 3)
+        }
+        return price
+    }
     if (productData.images != undefined) return (
         <div className="product_details t-mt-16 t-pb-20" >
             <div className="container">
@@ -120,24 +137,46 @@ const ProductDetails = () => {
                                 <h1>{productData.name.en}</h1>
 
                                 <div className="price_box">
-                                    <span className="current_price">{"$" + productData.variations[0].sale_price_scy}</span>
+                                    <span className="current_price">{"$" + roundPrice(productData.variations[0].sale_price_scy)}</span>
                                 </div>
                                 <div className="product_desc" ref={desc}>
 
                                 </div>
-                                <div className="product_variant color">
-                                    <h3>Available Options</h3>
+                                <div className="product_variant color t-flex-nowrap">
+                                    <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-py-2 t-bg-red-400 t-rounded-md t-ml-10 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
 
 
                                 </div>
-                                {[].length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Sizes</h2>)}
-                                <div className='t-flex t-items-center t-space-x-6 t-mb-8 t-select-none'>
-                                    {[].map((element, index) => {
-                                        if (!size && !index) {
-                                            setSize(element)
+                                {productData.attributes.filter(element => element.name.en === "Color").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Color</h2>)}
+                                <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
+                                    {productData.attributes.filter(element => element.name.en === "Color")[0]?.options.map((element, index) => {
+                                        if (!color && !index) {
+                                            setColor(element.en)
                                         }
-                                        return <div onClick={() => { changeSize(element) }} key={index} className={` ${(!size && !index) || element === size ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
-                                            <p className='t-text-neutral-800'>{element}</p>
+                                        return <div onClick={() => { changeColor(element.en) }} key={index} className={` ${(!color && !index) || element.en === color ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                            <p className='t-text-neutral-800'>{element.en}</p>
+                                        </div>
+                                    })}
+                                </div>
+                                {productData.attributes.filter(element => element.name.en === "Size").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Sizes</h2>)}
+                                <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
+                                    {productData.attributes.filter(element => element.name.en === "Size")[0]?.options.map((element, index) => {
+                                        if (!size && !index) {
+                                            setSize(element.en)
+                                        }
+                                        return <div onClick={() => { changeSize(element.en) }} key={index} className={` ${(!size && !index) || element.en === size ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                            <p className='t-text-neutral-800'>{element.en}</p>
+                                        </div>
+                                    })}
+                                </div>
+                                {productData.attributes.filter(element => element.name.en === "Length").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Length</h2>)}
+                                <div className='t-flex t-items-center t-mb-6 t-select-none t-flex-wrap'>
+                                    {productData.attributes.filter(element => element.name.en === "Length")[0]?.options.map((element, index) => {
+                                        if (!len && !index) {
+                                            setLen(element.en)
+                                        }
+                                        return <div onClick={() => { changeLength(element.en) }} key={index} className={` ${(!len && !index) || element.en === len ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-16  t-py-2  t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                            <p className='t-text-neutral-800'>{element.en}</p>
                                         </div>
                                     })}
                                 </div>
