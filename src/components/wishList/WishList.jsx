@@ -80,16 +80,15 @@ const WishList = () => {
                                         </thead>
                                         <tbody>
 
-                                            {products.map((element) => {
+                                            {products.map((element, index) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={index}>
                                                         <td className="product_thumb"><img
                                                             src={element.images[0]} className="t-h-32 t-w-full" alt="" /></td>
                                                         <td className="product_name"><Link to={'/product/' + element.sku}>{element.name.en}</Link></td>
                                                         <td className="product-price">{"$" + roundPrice(element.variations[0].sale_price_scy)}</td>
-                                                        <td className="product_quantity">{element.variations.map((element) => { if (element.quantity) return element.quantity }) ? "in stock" : "sold out"}</td>
+                                                        <td className="product_quantity">{element.variations.map((element) => { if (element.quantity) return element.quantity }).filter(element => element).length ? "in stock" : "sold out"}</td>
                                                         <td className="product_total">
-
                                                             <div onClick={(e) => { deleteWish(e, element.sku) }} className='t-px-2 t-text-white t-w-8/12 t-mx-auto t-bg-red-600 t-rounded-sm t-py-1.5 t-cursor-pointer hover:t-bg-red-700'>Remove</div>
                                                         </td>
                                                     </tr>)

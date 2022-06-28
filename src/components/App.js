@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "../index.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ForgetPassword from './ForgetPassword/ForgetPassword'
@@ -13,7 +13,21 @@ import Shop from "./Shop/Shop"
 import ProductDetails from './ProductDetails/productDetails'
 import WishList from './wishList/WishList'
 import Notification from './Notification/Notification'
+import Cart from './Cart/Cart'
+import { useCookies } from 'react-cookie'
+import { useRecoilState } from 'recoil'
+import { cartAtom } from './SharedState/cartAtom'
 const App = () => {
+  const [cookie, setCookie] = useCookies()
+  const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
+  useEffect(() => {
+    if (cookie.c_r == undefined) {
+      setCookie("c_r", [], { maxAge: 7 * 24 * 60 * 60 })
+    }
+    else {
+      setCartNumber(cookie.c_r.length)
+    }
+  }, [cartNumber])
 
   return (
     <BrowserRouter>
@@ -32,7 +46,6 @@ const App = () => {
           </Route>
 
           <Route path="account">
-            <Route path="favorite" element={<div></div>} />
             <Route path=":idAccount" element={<div>My account </div>} ></Route>
             <Route element={<ChangePassword />} path="changePassword/:operationId"></Route>
           </Route>
@@ -40,6 +53,9 @@ const App = () => {
           <Route path='' element={<Test />}>
             <Route element={<WishList />} path="wishList" />
             <Route path="product/:id" element={<ProductDetails />} />
+            <Route path='cart'>
+              <Route path="" element={<Cart />} />
+            </Route>
             <Route path="shop" >
               <Route index element={<Shop />} />
 
