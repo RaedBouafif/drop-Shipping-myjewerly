@@ -167,12 +167,12 @@ const Test = () => {
                                     <div onClick={() => { setToggleMenu(!toggleMenu) }} className="categories_title">
                                         <h2 className="">ALL CATEGORIES</h2>
                                     </div>
-                                    <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-space-y-3 t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
+                                    <div className={` ${toggleMenu ? "t-py-3 t-h-auto" : "t-max-h-0 t-overflow-y-hidden"} t-w-full t-px-8 t-bg-white t-absolute t-border t-border-stone-200 t-text-neutral-900 `}>
                                         {Object.keys(categories).map((element, index) => {
                                             return <div key={index} className='t-flex t-w-full t-border-b py-2 t-flex-wrap t-items-center'>
-                                                <Link to={"/shop/" + element} className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue t-font-semibold' >{element}</Link>
+                                                <Link to={"/shop/" + element} className='t-cursor-pointer hover:t-text-blue-500 hover:t-scale-105 hover:t-text-blue t-font-semibold t-text-[12px]' >{element}</Link>
                                                 <p onClick={handleShowChilds} className='t-cursor-pointer t-duration-150 t-select-none t-ml-auto t-text-xl'>{">"}</p>
-                                                <div className='t-hidden t-flex-col t-ml-2 t-mt-1 t-space-y-2 t-flex-none t-w-full'>
+                                                <div className='t-hidden t-flex-col t-ml-2 t-mt-1 t-space-y-2 t-flex-none t-text-[12px] t-w-full'>
                                                     {categories[element].childs.map((element2, index2) => {
                                                         return <Link to={`/shop/${element}/${element2.name.en}`} key={index2} className='t-flex hover:t-text-blue-500 t-cursor-pointer t-w-full t-items-center'>
                                                             <div className='hover:t-scale-105'>{element2.name.en}</div>

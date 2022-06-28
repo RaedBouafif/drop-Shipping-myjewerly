@@ -115,7 +115,6 @@ const Shop = () => {
         if (categorie != "all" && categorie != undefined) path += "?categorie=" + categorie
         if (categoireChild) path += "&categoireChild=" + categoireChild
         axios.get(url + "/Knawat/countProducts.php" + path).then((res) => {
-            console.log(res.data)
             setPage({ page: 1, allPage: getTableOfNumber(res.data.nbrPage), allProducts: res.data.nbrProducts })
         }).catch((err) => {
 
