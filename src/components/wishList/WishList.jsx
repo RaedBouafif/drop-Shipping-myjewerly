@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil"
 import { wishNumberState } from "../SharedState/wishListAtom"
 import { NotificationAtom } from '../SharedState/NotificationAtom'
 import Loader from '../Loader/Loader'
+import { Link } from 'react-router-dom'
 const WishList = () => {
     const [cookie, setCookie] = useCookies()
     const [products, setProducts] = useState([])
@@ -84,11 +85,11 @@ const WishList = () => {
                                                     <tr>
                                                         <td className="product_thumb"><img
                                                             src={element.images[0]} className="t-h-32 t-w-full" alt="" /></td>
-                                                        <td className="product_name"><a href='/' onClick={(e) => { e.preventDefault() }}>{element.name.en}</a></td>
+                                                        <td className="product_name"><Link to={'/product/' + element.sku}>{element.name.en}</Link></td>
                                                         <td className="product-price">{"$" + roundPrice(element.variations[0].sale_price_scy)}</td>
-                                                        <td className="product_quantity">In Stock</td>
+                                                        <td className="product_quantity">{element.variations.map((element) => { if (element.quantity) return element.quantity }) ? "in stock" : "sold out"}</td>
                                                         <td className="product_total">
-                                                            <div className='t-px-2 t-text-white t-mb-2 t-w-8/12 t-mx-auto  t-bg-blue-600 t-rounded-sm t-py-1.5 t-cursor-pointer hover:t-bg-blue-700 t-text-[12px] lg:t-text-sm'>Add To Cart</div>
+
                                                             <div onClick={(e) => { deleteWish(e, element.sku) }} className='t-px-2 t-text-white t-w-8/12 t-mx-auto t-bg-red-600 t-rounded-sm t-py-1.5 t-cursor-pointer hover:t-bg-red-700'>Remove</div>
                                                         </td>
                                                     </tr>)

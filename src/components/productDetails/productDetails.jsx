@@ -18,8 +18,11 @@ const ProductDetails = () => {
     const [size, setSize] = useState(null)
     const [color, setColor] = useState(null)
     const [len, setLen] = useState(null)
+    const [ringSize, setRingSize] = useState(null)
     const [wish, setWish] = useState()
     const [instock, setInstock] = useState(true)
+    const quantity = useRef(null)
+    const [quantityValue, setQuantityValue] = useState(1)
 
 
 
@@ -35,7 +38,6 @@ const ProductDetails = () => {
     const desc = useRef("")
     useEffect(() => {
         axios.get(`${url}/knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
-            console.log(res.data)
             if (res.data.images) {
                 setProductData(() => res.data)
                 setSelectedImage(res.data.images[0])
@@ -57,6 +59,39 @@ const ProductDetails = () => {
     }
     const changeColor = (color) => {
         setColor(() => color)
+    }
+    const changeRingSize = (size) => {
+        setRingSize(size)
+
+    }
+    useEffect(() => {
+        if (productData.variations != undefined) checkDisponibilie()
+    }, [len, color, size, ringSize, productData, quantityValue])
+    const checkDisponibilie = () => {
+        var table = productData.variations.slice()
+        if (productData.variations.filter(element => element.attributes.filter(el => el.name.en == "Ring Size").length != 0).length != 0) {
+            table = table.filter(element => element.attributes.filter(el => el.name.en == "Ring Size")[0].option.en == ringSize)
+        }
+        else if (productData.variations.filter(element => element.attributes.filter(el => el.name.en == "Size").length != 0).length != 0) {
+            table = table.filter(element => element.attributes.filter(el => el.name.en == "Size")[0].option.en == size)
+        }
+
+
+        if (productData.variations.filter(element => element.attributes.filter(el => el.name.en == "Color").length != 0).length != 0) {
+            table = table.filter(element => element.attributes.filter(el => el.name.en == "Color")[0].option.en == color)
+        }
+
+        if (productData.variations.filter(element => element.attributes.filter(el => el.name.en == "Length").length != 0).length != 0) {
+            table = table.filter(element => element.attributes.filter(el => el.name.en == "Length")[0].option.en == len)
+        }
+        if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "") {
+            setInstock(false)
+            quantity.current.style.borderColor = "red"
+        }
+        else {
+            setInstock(true)
+            quantity.current.style.borderColor = "green"
+        }
     }
     useEffect(() => {
         if (Array.isArray(cookie.W_L) && cookie.W_L.indexOf(id) != -1) {
@@ -143,32 +178,43 @@ const ProductDetails = () => {
 
                                 </div>
                                 <div className="product_variant color t-flex-nowrap">
-                                    <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-py-2 t-bg-red-400 t-rounded-md t-ml-10 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
+                                    <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-text-sm t-py-2 t-bg-red-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
 
 
                                 </div>
-                                {productData.attributes.filter(element => element.name.en === "Color").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Color</h2>)}
+                                {productData.attributes.filter(element => element.name.en === "Color").length != 0 && (<><h2 className='t-text-[15px] t-font-bold'>Color</h2>
+                                    <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
+                                        {productData.attributes.filter(element => element.name.en === "Color")[0]?.options.map((element, index) => {
+                                            if (!color && !index) {
+                                                setColor(element.en)
+                                            }
+                                            return <div onClick={() => { changeColor(element.en) }} key={index} className={` ${(!color && !index) || element.en === color ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                                <p className='t-text-neutral-800'>{element.en}</p>
+                                            </div>
+                                        })}
+                                    </div></>)}
+                                {productData.attributes.filter(element => element.name.en === "Ring Size").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Ring Size</h2>)}
                                 <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
-                                    {productData.attributes.filter(element => element.name.en === "Color")[0]?.options.map((element, index) => {
-                                        if (!color && !index) {
-                                            setColor(element.en)
+                                    {productData.attributes.filter(element => element.name.en === "Ring Size")[0]?.options.map((element, index) => {
+                                        if (!ringSize && !index) {
+                                            setRingSize(element.en)
                                         }
-                                        return <div onClick={() => { changeColor(element.en) }} key={index} className={` ${(!color && !index) || element.en === color ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                        return <div onClick={() => { changeRingSize(element.en) }} key={index} className={` ${(!ringSize && !index) || element.en === ringSize ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
                                             <p className='t-text-neutral-800'>{element.en}</p>
                                         </div>
                                     })}
                                 </div>
-                                {productData.attributes.filter(element => element.name.en === "Size").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Sizes</h2>)}
-                                <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
-                                    {productData.attributes.filter(element => element.name.en === "Size")[0]?.options.map((element, index) => {
-                                        if (!size && !index) {
-                                            setSize(element.en)
-                                        }
-                                        return <div onClick={() => { changeSize(element.en) }} key={index} className={` ${(!size && !index) || element.en === size ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
-                                            <p className='t-text-neutral-800'>{element.en}</p>
-                                        </div>
-                                    })}
-                                </div>
+                                {(productData.attributes.filter(element => element.name.en === "Size").length != 0 && productData.attributes.filter(element => element.name.en === "Ring Size").length == 0) && (<><h2 className='t-text-[15px] t-font-bold'>Sizes</h2>
+                                    <div className='t-flex t-items-center t-mb-2 t-select-none t-flex-wrap'>
+                                        {productData.attributes.filter(element => element.name.en === "Size")[0]?.options.map((element, index) => {
+                                            if (!size && !index) {
+                                                setSize(element.en)
+                                            }
+                                            return <div onClick={() => { changeSize(element.en) }} key={index} className={` ${(!size && !index) || element.en === size ? "t-border-2 t-border-neutral-700" : "t-border t-border-neutral-300"}   t-w-12  t-py-2 t-px-3 t-cursor-pointer t-rounded-sm t-items-center t-justify-center t-flex`}>
+                                                <p className='t-text-neutral-800'>{element.en}</p>
+                                            </div>
+                                        })}
+                                    </div></>)}
                                 {productData.attributes.filter(element => element.name.en === "Length").length != 0 && (<h2 className='t-text-[15px] t-font-bold'>Length</h2>)}
                                 <div className='t-flex t-items-center t-mb-6 t-select-none t-flex-wrap'>
                                     {productData.attributes.filter(element => element.name.en === "Length")[0]?.options.map((element, index) => {
@@ -182,8 +228,8 @@ const ProductDetails = () => {
                                 </div>
                                 <div className="product_variant quantity">
                                     <label>quantity</label>
-                                    <input min="1" max="10" defaultValue={1} type="number" />
-                                    <button className="button" type="submit">add to cart</button>
+                                    <input ref={quantity} onInput={(e) => { setQuantityValue(() => e.target.value) }} defaultValue={1} type="number" />
+                                    <button onClick={() => { alert(size + " " + len + " " + color + " " + ringSize) }} className="button" type="submit">add to cart</button>
                                 </div>
                                 <div className=" product_d_action">
                                     <ul>
