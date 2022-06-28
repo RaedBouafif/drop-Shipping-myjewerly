@@ -6,7 +6,8 @@ import { useCookies } from 'react-cookie'
 import { useRecoilState } from "recoil"
 import { wishNumberState } from "../../SharedState/wishListAtom"
 import { NotificationAtom } from "../../SharedState/NotificationAtom"
-const Product = ({ image1, image2, title, price, sku }) => {
+import { cartAtom } from '../../SharedState/cartAtom'
+const Product = ({ image1, image2, title, price, sku, variations }) => {
 
     const navigateTo = useNavigate()
     const navigate = () => {
@@ -31,7 +32,7 @@ const Product = ({ image1, image2, title, price, sku }) => {
         setNotification({
             ...notification,
             visible: true,
-            message: "Product Added to WishList successfully",
+            message: "Product is Added to WishList successfully",
             type: "success"
         })
         e.preventDefault()
@@ -46,7 +47,7 @@ const Product = ({ image1, image2, title, price, sku }) => {
         setNotification({
             ...notification,
             visible: true,
-            message: "Product remove from WishList successfully",
+            message: "Product is removed from WishList successfully",
             type: "success"
         })
         setCookie("W_L", cookie.W_L ? cookie.W_L.filter((element) => element != sku) : [], { maxAge: 14 * 24 * 60 * 60 })
@@ -54,6 +55,69 @@ const Product = ({ image1, image2, title, price, sku }) => {
 
 
     const [notification, setNotification] = useRecoilState(NotificationAtom)
+
+    const [addToCartState, setAddToCartState] = useState()
+    const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
+    const roundPrice = (price) => {
+        price = price + ""
+        if (price.indexOf(".") != -1) {
+            price = price.slice(0, price.indexOf(".") + 3)
+        }
+        return price
+    }
+    useEffect(() => {
+        if (cookie.c_r?.filter(element => element.id === sku).length > 0) {
+            setAddToCartState(true)
+        }
+        else {
+            setAddToCartState(false)
+        }
+    })
+
+    const addItemToCart = () => {
+        if (!addToCartState && variations.map((element) => { if (element.quantity != 0) return element.quantity; }).filter(element => element).length) {
+            var productAttributs = {
+                id: sku,
+                price: roundPrice(variations[0].sale_price),
+                image: image1,
+                quantity: 1,
+                name: title
+            }
+
+            if (variations[0].attributes.filter(element => element.name.en == "Size")[0]?.option.en) productAttributs.size = variations[0].attributes.filter(element => element.name.en == "Size")[0].option.en
+            if (variations[0].attributes.filter(element => element.name.en == "Ring Size")[0]?.option.en) productAttributs.ringSize = variations[0].attributes.filter(element => element.name.en == "Ring Size")[0].option.en
+            if (variations[0].attributes.filter(element => element.name.en == "Color")[0]?.option.en) productAttributs.color = variations[0].attributes.filter(element => element.name.en == "Color")[0].option.en
+            if (variations[0].attributes.filter(element => element.name.en == "Length")[0]?.option.en) productAttributs.len = variations[0].attributes.filter(element => element.name.en == "Length")[0].option.en
+            setCookie("c_r", [...cookie.c_r, productAttributs], { maxAge: 7 * 24 * 60 * 60 })
+            setCartNumber(cartNumber + 1)
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "product is added to cart successfully",
+                type: "success"
+            })
+        }
+        else {
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "product out of stock",
+                type: "error"
+            })
+        }
+    }
+    const removeItemFromCart = () => {
+        if (addToCartState) {
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "product is removed from cart successfully",
+                type: "success"
+            })
+            setCartNumber(cartNumber - 1)
+            setCookie("c_r", cookie.c_r.filter(element => element.id != sku), { maxAge: 7 * 24 * 60 * 60 })
+        }
+    }
     return (
         <div className='firstContainer t-px-2 t-pt-2 t-box-content t-pb-3 md:t-w-5/12 lg:t-w-60 t-font-body t-rounded-sm t-min-h-[370px] t-border-2 hover:t-border-stone-200 t-border-transparent t-flex t-flex-col'>
 
@@ -66,10 +130,14 @@ const Product = ({ image1, image2, title, price, sku }) => {
                 </div>
                 <Image click={navigate} src={image1} className="img1 t-mb-0 lg:t-h-48 lg:t-w-60 t-w-72 t-h-56" />
                 <Image click={navigate} src={`${image2 != undefined ? image2 : image1}`} className="img2 t-absolute t-mb-0 lg:t-h-48 lg:t-w-60 t-w-72 t-h-56" />
-                <button className='butt t-space-x-1 t-flex t-items-center t-justify-center lg:t-opacity-0 lg:t-mt-44 t-mt-52  t-absolute t-px-4 t-py-3 t-bg-blue-600 t-text-white t-font-bold hover:t-bg-blue-700 t-rounded-md'>
+                {!addToCartState && <button onClick={addItemToCart} className='butt t-space-x-1 t-flex t-items-center t-justify-center lg:t-opacity-0 lg:t-mt-44 t-mt-52  t-absolute t-px-4 t-py-3 t-bg-blue-600 t-text-white t-font-bold hover:t-bg-blue-700 t-rounded-md'>
                     <p>Add To Cart</p>
                     <img src="/assets/icons/shopping-cart.png" className='t-h-5 t-w-5' />
-                </button>
+                </button> ||
+                    <button onClick={removeItemFromCart} className='butt t-text-[12px] t-space-x-1 t-flex t-items-center t-justify-center lg:t-opacity-0 lg:t-mt-44 t-mt-52  t-absolute t-px-4 t-py-3 t-bg-red-500 t-text-white t-font-bold hover:t-bg-red-500 t-rounded-md'>
+                        <p>Remove From Cart</p>
+                        <img src="/assets/icons/shopping-cart.png" className='t-h-5 t-w-5' />
+                    </button>}
             </div>
             <Link to={"/product/" + sku} className='t-max-w-full t-overflow-hidden t-break-words'>
                 <p className='t-text-blue-600 t-font-bold t-text-xl t-text-center lg:t-mt-10 t-mt-14'>{price}</p>

@@ -9,6 +9,7 @@ import { NotificationAtom } from '../SharedState/NotificationAtom'
 import { wishNumberState } from '../SharedState/wishListAtom'
 import { useRecoilState } from 'recoil'
 import { useCookies } from 'react-cookie'
+import { cartAtom } from '../SharedState/cartAtom'
 const ProductDetails = () => {
     const [cookie, setCookie] = useCookies()
     const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +24,9 @@ const ProductDetails = () => {
     const [instock, setInstock] = useState(true)
     const quantity = useRef(null)
     const [quantityValue, setQuantityValue] = useState(1)
-
+    const [addToCartState, setAddToCartState] = useState()
+    const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
+    const [priceItem, setPriceItem] = useState("")
 
 
     const handleScrollLeft = () => {
@@ -37,20 +40,17 @@ const ProductDetails = () => {
     const { id } = useParams()
     const desc = useRef("")
     useEffect(() => {
+        setIsLoading(true)
         axios.get(`${url}/knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
             if (res.data.images) {
                 setProductData(() => res.data)
                 setSelectedImage(res.data.images[0])
                 desc.current.innerHTML = res.data.description.tr
-                console.log(res.data)
-            }
-            else {
                 setIsLoading(false)
             }
         }).catch((err) => {
-            console.log(err)
         })
-    }, [])
+    }, [id])
     const changeSize = (size) => {
         setSize(() => size)
     }
@@ -65,7 +65,7 @@ const ProductDetails = () => {
 
     }
     useEffect(() => {
-        if (productData.variations != undefined) checkDisponibilie()
+        if (productData.variations != undefined && !isLoading) checkDisponibilie()
     }, [len, color, size, ringSize, productData, quantityValue])
     const checkDisponibilie = () => {
         var table = productData.variations.slice()
@@ -84,6 +84,7 @@ const ProductDetails = () => {
         if (productData.variations.filter(element => element.attributes.filter(el => el.name.en == "Length").length != 0).length != 0) {
             table = table.filter(element => element.attributes.filter(el => el.name.en == "Length")[0].option.en == len)
         }
+        setPriceItem(table[0].sale_price_scy)
         if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "") {
             setInstock(false)
             quantity.current.style.borderColor = "red"
@@ -100,7 +101,7 @@ const ProductDetails = () => {
         else {
             setWish(true)
         }
-    }, [])
+    }, [id])
 
     const [number, setNumber] = useRecoilState(wishNumberState)
     const [notification, setNotification] = useRecoilState(NotificationAtom)
@@ -139,6 +140,37 @@ const ProductDetails = () => {
         }
         return price
     }
+    useEffect(() => {
+        if (cookie.c_r?.filter(element => element.id === productData.sku).length > 0) {
+            setAddToCartState(true)
+        }
+        else {
+            setAddToCartState(false)
+        }
+    })
+    const addItemToCart = () => {
+        if (!addToCartState) {
+            var productAttributs = {
+                id: productData.sku,
+                price: roundPrice(priceItem),
+                image: productData.images[0],
+                quantity: quantity.current.value,
+                name: productData.name.en
+            }
+            if (size) productAttributs.size = size
+            if (ringSize) productAttributs.ringSize = ringSize
+            if (color) productAttributs.color = color
+            if (len) productAttributs.len = len
+            setCookie("c_r", [...cookie.c_r, productAttributs], { maxAge: 7 * 24 * 60 * 60 })
+            setCartNumber(cartNumber + 1)
+        }
+    }
+    const removeItemFromCart = () => {
+        if (addToCartState) {
+            setCartNumber(cartNumber - 1)
+            setCookie("c_r", cookie.c_r.filter(element => element.id != productData.sku), { maxAge: 7 * 24 * 60 * 60 })
+        }
+    }
     if (productData.images != undefined) return (
         <div className="product_details t-mt-16 t-pb-20" >
             <div className="container">
@@ -172,13 +204,13 @@ const ProductDetails = () => {
                                 <h1>{productData.name.en}</h1>
 
                                 <div className="price_box">
-                                    <span className="current_price">{"$" + roundPrice(productData.variations[0].sale_price_scy)}</span>
+                                    <span className="current_price">{"$" + roundPrice(priceItem)}</span>
                                 </div>
                                 <div className="product_desc" ref={desc}>
 
                                 </div>
                                 <div className="product_variant color t-flex-nowrap">
-                                    <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-text-sm t-py-2 t-bg-red-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
+                                    <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-whitespace-nowrap t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-whitespace-nowrap t-text-sm t-py-2 t-bg-red-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
 
 
                                 </div>
@@ -229,7 +261,8 @@ const ProductDetails = () => {
                                 <div className="product_variant quantity">
                                     <label>quantity</label>
                                     <input ref={quantity} onInput={(e) => { setQuantityValue(() => e.target.value) }} defaultValue={1} type="number" />
-                                    <button onClick={() => { alert(size + " " + len + " " + color + " " + ringSize) }} className="button" type="submit">add to cart</button>
+                                    {!addToCartState && (<button disabled={!instock} onClick={addItemToCart} className={`button ${instock ? "t-opacity-100" : "t-cursor-not-allowed t-opacity-40"}`} type="button">add to cart</button>)
+                                        || (<button onClick={removeItemFromCart} style={{ backgroundColor: "#FF3D3D", fontSize: "15px" }} className='button' type="button">Remove from cart</button>)}
                                 </div>
                                 <div className=" product_d_action">
                                     <ul>

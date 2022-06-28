@@ -196,7 +196,7 @@ const Shop = () => {
 
 
                     <div className='t-flex t-justify-around t-flex-wrap t-space-y-14 md:t-space-y-0 t-mb-16 t-w-full'>
-                        {products.map((element, index) => { return <Product key={index} sku={element.sku} price={"$" + roundPrice(element.variations[0].sale_price)} title={element.name.en} image1={element.images[0]} image2={element.images[1] ? element.images[1] : element.images[0]}></Product> })}
+                        {products.map((element, index) => { return <Product key={index} variations={element.variations} sku={element.sku} price={"$" + roundPrice(element.variations[0].sale_price)} title={element.name.en} image1={element.images[0]} image2={element.images[1] ? element.images[1] : element.images[0]}></Product> })}
 
                     </div>
                     <div className='t-w-full t-space-x-2 t-items-center t-justify-center t-flex t-mb-20'>
