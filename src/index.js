@@ -4,7 +4,7 @@ import App from './components/App';
 import { RecoilRoot } from "recoil"
 
 const state = {
-  url: "http://localhost/myjewery/backend"
+  url: "http://127.0.0.1/jewel-git/drop-Shipping-myjewerly/backend/"
 }
 
 export const context = React.createContext()

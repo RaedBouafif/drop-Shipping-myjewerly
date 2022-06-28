@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Product from './Product/Product'
-import NavBonde from "../navBonde/NavBonde"
+import NavBonde from "../NavBonde/NavBonde"
 import { context } from "../../index"
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
