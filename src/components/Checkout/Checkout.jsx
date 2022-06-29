@@ -60,7 +60,7 @@ const Checkout = () => {
                                             <input type="text" />
                                         </div>
                                         <div className="mb-20 t-flex t-items-center t-space-x-4 lg:t-space-x-20">
-                                            <label htmlFor="country">country <span>*</span></label>
+                                            <label htmlFor="country">country<span>*</span></label>
                                             <select className="t-border-2 t-w-52 lg:t-w-60 t-border-neutral-700 t-rounded-sm t-px-1 t-py-2 " name="cuntry" id="country">
                                                 <Options />
                                             </select>
@@ -112,9 +112,6 @@ const Checkout = () => {
                                     </div>
                                     <div className="payment_method">
 
-                                        <div className="order_button">
-                                            <button type="submit">Proceed to PayPal</button>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
