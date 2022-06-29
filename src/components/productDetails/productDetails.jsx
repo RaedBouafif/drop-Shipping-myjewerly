@@ -152,7 +152,7 @@ const ProductDetails = () => {
         if (!addToCartState) {
             var productAttributs = {
                 id: productData.sku,
-                price: roundPrice(priceItem),
+                price: priceItem,
                 image: productData.images[0],
                 quantity: quantity.current.value,
                 name: productData.name.en
