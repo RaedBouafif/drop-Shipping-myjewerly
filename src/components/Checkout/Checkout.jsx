@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import NavBonde from '../navBonde/NavBonde'
+import NavBonde from '../NavBonde/NavBonde'
 import "./Checkout.scss"
 import { UseLogged } from "../../hooks/UseLogged"
 import { useCookies } from 'react-cookie'
 import { useRecoilState } from "recoil"
 import { cartAtom } from "../SharedState/cartAtom"
 import Options from '../Sign/Options'
+import Paypal from './Paypal'
 const Checkout = () => {
     UseLogged("/login")
     const [cookie, setCookie] = useCookies()
@@ -113,7 +114,7 @@ const Checkout = () => {
                                     <div className="payment_method">
 
                                         <div className="order_button">
-                                            <button type="submit">Proceed to PayPal</button>
+                                            <Paypal total={calculTotal()}></Paypal>
                                         </div>
                                     </div>
                                 </form>
