@@ -4,7 +4,7 @@ export default function Paypal({total}) {
   const roundPrice = (price) => {
     price = price + ""
     if (price.indexOf(".") != -1) {
-        price = price.slice(0, price.indexOf(".") + 5)
+        price = price.slice(0, price.indexOf(".") + 3)
     }
     return Number(price)
   }
@@ -18,7 +18,7 @@ export default function Paypal({total}) {
                         purchase_units: [
                             {
                                 amount: {
-                                    value: 30000,
+                                    value: roundPrice(total),
                                 },
                             },
                         ],

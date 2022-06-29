@@ -3,25 +3,24 @@
 namespace Knawat;
 
 include './createInstance.php';
-include './checkNodeLevel.php';
-if (isset($_GET["sku"])) {
-    $prod_sku = $mp->getProductBySku($_GET["sku"]);
-    $cat = $prod_sku->{'categories'};
-    $n = count($prod_sku->{'categories'}); //4
-    $tab = array();
-    for ($i = 0; $i < $n; $i++) {
-        if (($cat[$i]->{'treeNodeLevel'} == 2 or $cat[$i]->{'treeNodeLevel'} == 3) and (checkNode($tab, $cat[$i]->{'treeNodeLevel'}) == 1)) {
-            array_push($tab, $cat[$i]);
+if (isset($_GET["sku"])){
+    $nbr = $mp->countProducts();
+    $n = $nbr->{'total'};
+    $products1 = $mp->getProducts($n,1);
+    $products = $products1->{'products'};
+    $result = array();
+    foreach ($products as $key => $value){
+        if ($value->{"sku"}==$_GET["sku"]){
+            array_push($result,$value);
+            break;
         }
     }
-    $prod_sku->{'categories'} = $tab;
-
-    if (count($tab) > 1) {
-        if ($prod_sku->{'categories'}[0]->{'treeNodeLevel'} > $prod_sku->{'categories'}[1]->{'treeNodeLevel'}) {
-            $temp = $prod_sku->{'categories'}[0];
-            $prod_sku->{'categories'}[0] = $prod_sku->{'categories'}[1];
-            $prod_sku->{'categories'}[1] = $temp;
-        }
-    }
-    print_r(json_encode($prod_sku));
+    // $result[0]->{'price_sale_scy'}= $result[0]->{'price_sale'};
+    $prix = $result[0]->{'variations'}[0]->{'sale_price'};
+    $result[0]->{'variations'}[0]->{'sale_price_scy'}=$prix;
+    print_r(json_encode($result[0]));
 }
+
+
+//price_sale => nrodou price_sale_scy
+?>
