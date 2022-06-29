@@ -34,7 +34,7 @@ const Panier = () => {
     const calculTotal = () => {
         var total = 0
         panier?.forEach(element => {
-            total += Number(element.price) * element.quantity
+            total += Number(roundPrice(element.price)) * element.quantity
         });
         return roundPrice(total)
     }
@@ -45,8 +45,8 @@ const Panier = () => {
     if (window.innerWidth > 991) {
         return (
             <div className="mini_cart_wrapper">
-                <a href="" onClick={(e) => { e.preventDefault() }}><i className="fa fa-shopping-bag"
-                    aria-hidden="true"></i>{"$" + calculTotal()} <i className="fa fa-angle-down"></i></a>
+                <Link to="/checkout"><i className="fa fa-shopping-bag"
+                    aria-hidden="true"></i>{"$" + calculTotal()} <i className="fa fa-angle-down"></i></Link>
                 <span className="cart_quantity">{cartNumber}</span>
                 <div className="mini_cart t-overflow-y-scroll mini_cart_scroll">
                     {panier?.map((element, index) => {
@@ -56,7 +56,7 @@ const Panier = () => {
                             </div>
                             <div className="cart_info">
                                 <Link to={"/product/" + element.id}>{element.name}</Link>
-                                <p>Qty: {element.quantity} X <span> {"$" + element.price} </span></p>
+                                <p>Qty: {element.quantity} X <span> {"$" + roundPrice(element.price)} </span></p>
                             </div>
                             <div className="cart_remove">
                                 <div className='t-cursor-pointer' onClick={() => { removeItemFromCart(element.id) }}><i className="ion-android-close"></i></div>

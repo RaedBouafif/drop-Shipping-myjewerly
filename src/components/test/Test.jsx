@@ -119,7 +119,7 @@ const Test = () => {
                         <div className="row t-flex t-items-center">
                             <div className="col-lg-1 t-z-50">
                                 <div className="t-flex t-items-center t-w-full ">
-                                    <Link to="/" className='t-text-[35px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewelry</Link>
+                                    <Link to="/" className='t-text-[35px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewery</Link>
                                     <div onClick={(e) => { document.querySelector(".Offcanvas_menu_wrapper").classList.replace("notactive", "active"); document.querySelector("#burger").style.display = "none" }} className="t-z-40" id="burger"><div className="burger t-h-12 t-w-12 t-flex t-flex-col t-justify-center lg:t-hidden t-items-center"></div></div>
                                 </div>
                             </div>

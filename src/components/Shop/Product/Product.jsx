@@ -78,7 +78,7 @@ const Product = ({ image1, image2, title, price, sku, variations }) => {
         if (!addToCartState && variations.map((element) => { if (element.quantity != 0) return element.quantity; }).filter(element => element).length) {
             var productAttributs = {
                 id: sku,
-                price: roundPrice(variations[0].sale_price),
+                price: variations[0].sale_price,
                 image: image1,
                 quantity: 1,
                 name: title

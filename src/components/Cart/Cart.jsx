@@ -42,7 +42,7 @@ const Cart = () => {
     const calculTotal = () => {
         var total = 0
         products?.forEach(element => {
-            total += Number(element.price) * element.quantity
+            total += Number(roundPrice(element.price)) * element.quantity
         });
         return roundPrice(total)
     }
@@ -90,15 +90,6 @@ const Cart = () => {
                                 <div className="coupon_code right">
                                     <h3>Cart Totals</h3>
                                     <div className="coupon_inner">
-                                        <div className="cart_subtotal">
-                                            <p>Subtotal</p>
-                                            <p className="cart_amount">{"$" + calculTotal()}</p>
-                                        </div>
-                                        <div className="cart_subtotal ">
-                                            <p>Shipping</p>
-                                            <p className="cart_amount"><span>Flat Rate:</span> {"$" + calculTotal()}</p>
-                                        </div>
-
                                         <div className="cart_subtotal">
                                             <p>Total</p>
                                             <p className="cart_amount">{"$" + calculTotal()}</p>
