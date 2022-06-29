@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie'
 import { useRecoilState } from "recoil"
 import { cartAtom } from "../SharedState/cartAtom"
 import Options from '../Sign/Options'
+import Paypal from './Paypal'
 const Checkout = () => {
     UseLogged("/login")
     const [cookie, setCookie] = useCookies()
@@ -15,14 +16,20 @@ const Checkout = () => {
         if (cookie.c_r != undefined) setProducts(cookie.c_r)
     }, [productNumber])
 
+    const roundPrice = (price) => {
+        price = price + ""
+        if (price.indexOf(".") != -1) {
+            price = price.slice(0, price.indexOf(".") + 3)
+        }
+        return price
+    }
     const calculTotal = () => {
         var total = 0
         products?.forEach(element => {
-            total += Number(element.price) * element.quantity
+            total += roundPrice(element.price) * element.quantity
         });
-        return total
+        return roundPrice(total)
     }
-
     return (
         <>
             <NavBonde paths={["Checkout"]}></NavBonde>
@@ -98,7 +105,7 @@ const Checkout = () => {
                                                 {products.map((element, index) => {
                                                     return (<tr key={index}>
                                                         <td> {element.name} <strong> × {element.quantity}</strong></td>
-                                                        <td> {"$" + (element.price * element.quantity)}</td>
+                                                        <td> {"$" + (roundPrice(element.price) * element.quantity)}</td>
                                                     </tr>)
                                                 })}
                                             </tbody>
@@ -111,7 +118,7 @@ const Checkout = () => {
                                         </table>
                                     </div>
                                     <div className="payment_method">
-
+                                        <Paypal total={calculTotal()} />
                                     </div>
                                 </form>
                             </div>

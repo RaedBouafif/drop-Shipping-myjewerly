@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { cartAtom } from '../SharedState/cartAtom'
 import { useCookies } from "react-cookie"
+import { NotificationAtom } from "../SharedState/NotificationAtom"
 import "./panier.scss"
 const Panier = () => {
     const [resize, setResize] = useState(true)
@@ -10,6 +11,7 @@ const Panier = () => {
     const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
     const [panier, setPanier] = useState([])
     const [cookie, setCookie] = useCookies()
+    const [notification, setNotification] = useRecoilState(NotificationAtom)
     const handleResize = () => {
         setResize(!resize)
     }
@@ -41,6 +43,12 @@ const Panier = () => {
     const removeItemFromCart = (id) => {
         setCartNumber(cartNumber - 1)
         setCookie("c_r", cookie.c_r.filter(element => element.id != id), { maxAge: 7 * 24 * 60 * 60 })
+        setNotification({
+            ...notification,
+            visible: true,
+            message: "Product is removed from Cart successfully",
+            type: "success"
+        })
     }
     if (window.innerWidth > 991) {
         return (
@@ -64,10 +72,6 @@ const Panier = () => {
                         </div>)
                     })}
                     <div className="mini_cart_table">
-                        <div className="cart_total">
-                            <span>Sub total:</span>
-                            <span className="price">{"$" + calculTotal()}</span>
-                        </div>
                         <div className="cart_total mt-10">
                             <span>total:</span>
                             <span className="price">{"$" + calculTotal()}</span>
@@ -103,7 +107,7 @@ const Panier = () => {
                                     </div>
                                     <div className="cart_info">
                                         <Link to={"/product/" + element.id}>{element.name}</Link>
-                                        <p>Qty: {element.quantity} X <span> {"$" + element.price} </span></p>
+                                        <p>Qty: {element.quantity} X <span> {"$" + roundPrice(element.price)} </span></p>
                                     </div>
                                     <div className="cart_remove">
                                         <div className='t-cursor-pointer' onClick={() => { removeItemFromCart(element.id) }} href="#"><i className="ion-android-close"></i></div>
@@ -111,10 +115,6 @@ const Panier = () => {
                                 </div>)
                             })}
                             <div className="mini_cart_table">
-                                <div className="cart_total">
-                                    <span>Sub total:</span>
-                                    <span className="price">{"$" + calculTotal()}</span>
-                                </div>
                                 <div className="cart_total mt-10">
                                     <span>total:</span>
                                     <span className="price">{"$" + calculTotal()}</span>

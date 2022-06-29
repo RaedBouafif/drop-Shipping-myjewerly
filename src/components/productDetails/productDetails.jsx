@@ -109,7 +109,7 @@ const ProductDetails = () => {
         setNotification({
             ...notification,
             visible: true,
-            message: "Product Added to WishList successfully",
+            message: "Product is Added to WishList successfully",
             type: "success"
         })
         setNumber(() => number + 1)
@@ -128,7 +128,7 @@ const ProductDetails = () => {
         setNotification({
             ...notification,
             visible: true,
-            message: "Product remove from WishList successfully",
+            message: "Product is removed from WishList successfully",
             type: "success"
         })
         setCookie("W_L", cookie.W_L ? cookie.W_L.filter((element) => element != id) : [], { maxAge: 14 * 24 * 60 * 60 })
@@ -163,12 +163,24 @@ const ProductDetails = () => {
             if (len) productAttributs.len = len
             setCookie("c_r", [...cookie.c_r, productAttributs], { maxAge: 7 * 24 * 60 * 60 })
             setCartNumber(cartNumber + 1)
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "Product is Added to Cart successfully",
+                type: "success"
+            })
         }
     }
     const removeItemFromCart = () => {
         if (addToCartState) {
             setCartNumber(cartNumber - 1)
             setCookie("c_r", cookie.c_r.filter(element => element.id != productData.sku), { maxAge: 7 * 24 * 60 * 60 })
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "Product is removed from Cart successfully",
+                type: "success"
+            })
         }
     }
     if (productData.images != undefined) return (
