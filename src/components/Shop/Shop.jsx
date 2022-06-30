@@ -195,9 +195,8 @@ const Shop = () => {
                     </div>
 
 
-                    <div className='t-flex t-justify-around t-flex-wrap t-space-y-14 md:t-space-y-0 t-mb-16 t-w-full'>
+                    <div className='t-flex t-justify-around t-flex-wrap t-min-h-screen t-space-y-14 md:t-space-y-0 t-mb-16 t-w-full'>
                         {products.map((element, index) => { return <Product key={index} variations={element.variations} sku={element.sku} price={"$" + roundPrice(element.variations[0].sale_price)} title={element.name.en} image1={element.images[0]} image2={element.images[1] ? element.images[1] : element.images[0]}></Product> })}
-
                     </div>
                     <div className='t-w-full t-space-x-2 t-items-center t-justify-center t-flex t-mb-20'>
                         {page.allPage?.map((element, index) => <div onClick={() => { changePage(element) }} key={index} className={`${element === page.page ? "t-border-2 t-border-neutral-900" : "t-border"}  t-cursor-pointer t-items-center t-justify-center t-flex t-w-10 t-h-10`}>

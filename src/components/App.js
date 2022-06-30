@@ -18,6 +18,7 @@ import { useCookies } from 'react-cookie'
 import { useRecoilState } from 'recoil'
 import { cartAtom } from './SharedState/cartAtom'
 import Checkout from './Checkout/Checkout'
+import Contact from './Contact/Contact'
 const App = () => {
   const [cookie, setCookie] = useCookies()
   const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
@@ -71,8 +72,8 @@ const App = () => {
                 <Route path="search/:name" element={<Shop />} />
               </Route>
 
-
             </Route>
+            <Route element={<Contact />} path="contact" />
           </Route>
         </Route>
 
