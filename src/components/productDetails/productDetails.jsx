@@ -38,15 +38,15 @@ const ProductDetails = () => {
 
     const { url } = useContext(context)
     const { id } = useParams()
-    const desc = useRef("")
     useEffect(() => {
         setIsLoading(true)
+
         axios.get(`${url}/knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
-            if (res.data.images) {
+
+            setIsLoading(false)
+            if (res.data.sku) {
                 setProductData(() => res.data)
                 setSelectedImage(res.data.images[0])
-                desc.current.innerHTML = res.data.description.tr
-                setIsLoading(false)
             }
         }).catch((err) => {
         })
@@ -85,7 +85,7 @@ const ProductDetails = () => {
             table = table.filter(element => element.attributes.filter(el => el.name.en == "Length")[0].option.en == len)
         }
         setPriceItem(table[0].sale_price_scy)
-        if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "") {
+        if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "" || quantity == 0) {
             setInstock(false)
             quantity.current.style.borderColor = "red"
         }
@@ -183,7 +183,7 @@ const ProductDetails = () => {
             })
         }
     }
-    if (productData.images != undefined) return (
+    if (productData.images != undefined && !isLoading) return (
         <div className="product_details t-mt-16 t-pb-20" >
             <div className="container">
                 <div className="row">
@@ -201,7 +201,7 @@ const ProductDetails = () => {
                                 <div ref={scrollContainer} className="photos_details t-scroll-smooth t-snap-x t-mt-5 t-flex t-items-center t-space-x-5 t-overflow-x-scroll">
                                     {productData.images.map((element, index) => {
                                         return (
-                                            <div onClick={() => { setSelectedImage(() => element) }}><Image key={index} src={element} className='lg:t-h-28 lg:t-w-36 t-w-32 t-h-24 t-flex-none t-snap-center t-cursor-pointer' /></div>)
+                                            <div key={index} onClick={() => { setSelectedImage(() => element) }}><Image src={element} className='lg:t-h-28 lg:t-w-36 t-w-32 t-h-24 t-flex-none t-snap-center t-cursor-pointer' /></div>)
                                     })}
                                 </div>
                                 <div onClick={handleScrollRight} className='t-flex-none t-relative t-top-2 t-right-4 t-rounded-full t-border-0 t-p-1.5 t-box-content t-z-50 t-bg-stone-300/70 hover:t-bg-stone-300 t-cursor-pointer'>
@@ -218,8 +218,8 @@ const ProductDetails = () => {
                                 <div className="price_box">
                                     <span className="current_price">{"$" + roundPrice(priceItem)}</span>
                                 </div>
-                                <div className="product_desc" ref={desc}>
-
+                                <div className="product_desc">
+                                    {productData.description.tr}
                                 </div>
                                 <div className="product_variant color t-flex-nowrap">
                                     <h3 className='t-flex-nowrap t-w-full'>Available Options {instock && <span className='t-text-white t-text-sm t-px-6 t-whitespace-nowrap t-py-2 t-bg-green-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>In Stock</span> || <span className='t-text-white t-px-6 t-whitespace-nowrap t-text-sm t-py-2 t-bg-red-400 t-rounded-md t-ml-2 t-tracking-widest t-font-[600]'>Sold Out</span>}</h3>
