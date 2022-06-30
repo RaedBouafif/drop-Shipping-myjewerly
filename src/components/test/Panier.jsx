@@ -17,7 +17,7 @@ const Panier = () => {
     }
     useEffect(() => {
         if (cookie.c_r != undefined) setPanier(cookie.c_r)
-    }, [cartNumber])
+    })
 
 
     useEffect(() => {
@@ -55,7 +55,7 @@ const Panier = () => {
             <div className="mini_cart_wrapper">
                 <Link to="/checkout"><i className="fa fa-shopping-bag"
                     aria-hidden="true"></i>{"$" + calculTotal()} <i className="fa fa-angle-down"></i></Link>
-                <span className="cart_quantity">{cartNumber}</span>
+                <span className="cart_quantity">{panier.length}</span>
                 <div className="mini_cart t-overflow-y-scroll mini_cart_scroll">
                     {panier?.map((element, index) => {
                         return (<div key={index} className="cart_item">
@@ -95,7 +95,7 @@ const Panier = () => {
             <div className="middel_right_info">
                 <div className="mini_cart_wrapper t-flex t-items-center t-flex-col" onClick={() => { setShowMobileNav(!showMobileNav) }}>
                     <div className='t-w-full t-ml-14 t-mb-5 t-flex t-items-center t-justify-center'>
-                        <span style={{ fontSize: "12px" }} className="t-border-0 t-w-5 t-text-center t-h-5 t-p-1 t-relative t-bottom-2.5 t-left-1 t-rounded-full t-text-white t-flex t-items-center t-justify-center t-bg-blue-700/90" >{cartNumber}</span>
+                        <span style={{ fontSize: "12px" }} className="t-border-0 t-w-5 t-text-center t-h-5 t-p-1 t-relative t-bottom-2.5 t-left-1 t-rounded-full t-text-white t-flex t-items-center t-justify-center t-bg-blue-700/90" >{panier.length}</span>
                         <i className="fa fa-shopping-bag" aria-hidden="true"></i>{"$" + calculTotal()}<i className="fa fa-angle-down"></i>
                     </div>
                     <div className="mini_cart mini_cart_scroll t-overflow-y-scroll t-h-auto" style={{ display: showMobileNav ? "block" : "none", position: "relative", right: 0 }}>

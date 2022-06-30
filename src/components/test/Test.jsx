@@ -8,6 +8,7 @@ import axios from "axios"
 import { context } from '../../index'
 import { useRecoilState } from "recoil"
 import { NotificationAtom } from '../SharedState/NotificationAtom'
+import Footer from '../Footer/Footer'
 const Test = () => {
     const [notification, setNotification] = useRecoilState(NotificationAtom)
     const [cookie, setCookies] = useCookies()
@@ -261,6 +262,7 @@ const Test = () => {
                 <img src="/assets/icons/top-arrow.png" className='t-relative t-bottom-px t-h-8 t-w-8' />
             </a>}
             <Outlet />
+            <Footer />
         </div >
     )
 }

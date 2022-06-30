@@ -85,7 +85,7 @@ const ProductDetails = () => {
             table = table.filter(element => element.attributes.filter(el => el.name.en == "Length")[0].option.en == len)
         }
         setPriceItem(table[0].sale_price_scy)
-        if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "" || quantity == 0) {
+        if (parseInt(table[0].quantity) - parseInt(quantity.current.value) < 0 || quantityValue === "" || quantityValue == 0) {
             setInstock(false)
             quantity.current.style.borderColor = "red"
         }
