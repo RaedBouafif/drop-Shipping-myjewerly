@@ -3,9 +3,9 @@
     include_once './generateId.php';
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    require './vendor/phpmailer/phpmailer/src/Exception.php';
-    require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
-    require './vendor/phpmailer/phpmailer/src/SMTP.php';
+    require '../vendor/phpmailer/phpmailer/src/Exception.php';
+    require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require '../vendor/phpmailer/phpmailer/src/SMTP.php';
    if (isset($_GET["email"])){
         try{
             $conn = new PDO("mysql:host=".$host.";dbname=".$dbName, $userName, $passWord);
@@ -28,10 +28,11 @@
                 $mail->SMTPAuth = true; // turn on SMTP authentication
                 $mail->Username = "_mainaccount@myjewery.com"; // SMTP username
                 $mail->Password = "Mlkdps54#@@5"; // SMTP password
-                $mail->AddAddress("raed.boafif@gmail.com",);
+                $mail->AddAddress($_GET["email"],);
                 $mail->SetFrom("_mainaccount@myjewery.com", "MyJewery-Account Verification E-mail");
                 $mail->Subject  = "E-mail verification";
                 $mail->Body     = "Hello, Here is your email ID verification <html><body><strong>".$id."</strong></body></html>";
+                $mail->IsHTML(true); 
                 $mail->WordWrap = 50;
                 if(!$mail->Send()) {
                 echo 'Message was not sent.';

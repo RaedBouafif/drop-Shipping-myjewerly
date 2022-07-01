@@ -126,7 +126,7 @@ const Sign = () => {
                 else {
                     data.code = res.data.code
                     setEmailExist(false)
-                    navigate("/verifyEmail", { state: data })
+                    navigate("/sign/emailVerify", { state: data })
                 }
             }).catch((err) => {
                 console.log("error : " + err)
