@@ -10,7 +10,7 @@ import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
-import ProductDetails from './ProductDetails/productDetails'
+import ProductDetails from './productDetails/ProductDetails'
 import WishList from './wishList/WishList'
 import Notification from './Notification/Notification'
 import Cart from './Cart/Cart'
