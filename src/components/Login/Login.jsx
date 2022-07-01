@@ -65,15 +65,15 @@ const Login = () => {
             <div className='t-w-full lg:t-fixed t-lg:inset-0 t-min-h-full t-flex t-items-center t-justify-center'>
                 <div className='t-min-h-screen lg:t-flex t-hidden t-w-7/12 t-bg-neutral-900 selection:t-bg-white selection:t-text-blue-300'>
                     <div className='t-mx-auto t-relative t-right-10 t-flex t-flex-col t-items-center t-justify-center'>
-                        <img className='t-h-[200px] t-mb-20 t-w-[300px]' src="/assets/images/final.png" alt="" />
+                        <img className='t-h-[450px] t-mb-3 t-w-[450px]' src="/assets/images/finalImage.png" alt="" />
                         <h1 className='t-text-lg t-text-white t-w-7/12 t-text-center t-mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</h1>
                     </div>
                 </div>
-                <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-7 t-top-7 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
-                    <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5' />
-                    <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800'>Home</p>
+                <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-1 t-top-2 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
+                    <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5 lg:t-hidden' />
+                    <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800 lg:t-text-white lg:t-decoration-white'>Home</p>
                 </Link>
-                <div className='selection:t-bg-blue-300 selection:t-text-white t-py-8 lg:t-w-5/12 t-w-full t-shadow-lg t-shadow-black/20 lg:t-relative t-bottom-5 t-rounded-lg t-right-24 t-bg-white  t-min-h-screen lg:t-min-h-min t-flex t-flex-col t-items-center t-justify-center'>
+                <div className='selection:t-bg-blue-300 selection:t-text-white t-py-14 lg:t-py-8 lg:t-w-5/12 t-w-full t-shadow-lg t-shadow-black/20 lg:t-relative t-bottom-5 t-rounded-lg t-right-24 t-bg-white  t-min-h-screen lg:t-min-h-min t-flex t-flex-col t-items-center t-justify-center'>
                     <h2 className='t-text-neutral-600 t-text-md t-mb-5 t-font-semibold'>Don't Have An Account ?<Link to="/sign" className="t-text-blue-500 hover:t-underline t-decoration-blue-500"> Sign Up</Link> </h2>
                     <div className='lg:t-w-6/12 t-w-9/12 t-flex t-items-center t-space-x-6 t-justify-center'>
                         <div className='t-h-1 t-bg-neutral-700 t-w-1/3'></div>
