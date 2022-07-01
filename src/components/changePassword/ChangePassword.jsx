@@ -18,14 +18,14 @@ const ChangePassword = () => {
     const password = useRef(null)
     const confirme = useRef(null)
 
-    const { accountName, operationId } = useParams()
+    const { operationId, email } = useParams()
 
     const navigate = useNavigate()
     const url = useContext(context)
 
 
     const checkValidOperation = () => {
-        axios.get(url + "/checkOperation?operation=" + operationId).then((res) => {
+        axios.get(url + "/checkOperation?operationId=" + operationId).then((res) => {
             if (!res.data.success) {
                 navigate("/error")
             }
@@ -33,7 +33,7 @@ const ChangePassword = () => {
     }
     useEffect(() => {
         checkValidOperation()
-    }, [])
+    }, [operationId])
 
 
     const errorPasswordFunction = (value) => {
@@ -81,8 +81,9 @@ const ChangePassword = () => {
             const data = new FormData()
             data.append("password", passwordValue)
             data.append("idOperation", operationId)
-            axios.post(url + "/changePassword.php", data).then((res) => {
-                setSucess(true)
+            data.append("email", email)
+            axios.post(url + "/resetPassword.php", data).then((res) => {
+                if (res.data.success) setSucess(true)
             }).catch((err) => {
                 console.log("err : " + err)
             })
