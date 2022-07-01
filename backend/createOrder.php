@@ -1,26 +1,27 @@
 <?php
 include './infoServer.php';
 include './generateId.php';
-if (isset($_POST["clid"])){
-    $id=$_POST["clid"];
-    $first_name=$_POST["first_name"];
-    $last_name=$_POST["last_name"];
-    $address_1=$_POST["address_1"];
+$data = json_decode(file_get_contents('php://input'));
+if (isset($data->{"clid"})){
+    $id=$data->{"clid"};
+    $first_name=$data->{"first_name"};
+    $last_name=$data->{"last_name"};
+    $address_1=$data->{"address_1"};
     $address_2="";
-    if (isset($_POST["address_2"])){
-        $address_2=$_POST["address_2"];
+    if (isset($data->{"address_2"})){
+        $address_2=$data->{"address_2"};
     }
-    $city=$_POST["city"];
-    $state=$_POST["state"];
-    $country=$_POST["country"];
-    $email=$_POST["email"];
-    $phone=$_POST["phone"];
-    $order_note=""; 
-    if (isset($_POST["order_note"])){
-        $order_note=$_POST["order_note"];
+    $city=$data->{"city"};
+    $state=$data->{"state"};
+    $country=$data->{"country"};
+    $email=$data->{"email"};
+    $phone=$data->{"phone"};
+    $order_note="";     
+    if (isset($data->{"order_note"})){
+        $order_note=$data->{"order_note"};
     }
-    $total=$_POST["total"];
-    $products=$_POST["products"];
+    $total=$data->{"total"};
+    $products=$data->{"products"};
     try {
         $conn = new PDO("mysql:host=".$host.";dbname=".$dbName, $userName, $passWord);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -42,6 +43,7 @@ if (isset($_POST["clid"])){
             $id
         ));
         foreach ($products as $key => $value){
+            echo "aaaaaaaaaaaaaaaaaaaaaaaaazezeaze";
             $sku= $value->{"id"};
             $img= $value->{"image"};
             $name= $value->{"name"};

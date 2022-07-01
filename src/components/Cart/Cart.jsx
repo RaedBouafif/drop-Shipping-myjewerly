@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { cartAtom } from "../SharedState/cartAtom"
 import CotrolledLinks from "../../customElement/CotrolledLinks"
-import NavBonde from '../navBonde/NavBonde'
+import NavBonde from '../NavBonde/NavBonde'
 
 const GenerateDesc = ({ element }) => {
 

@@ -34,7 +34,8 @@ const ForgetPassword = () => {
         e.preventDefault()
         if (!emailErrors.length) {
             setIsLoading(true)
-            axios.get(url + "/forgetPassword.php?email" + encodeURIComponent(email)).then((res) => {
+            axios.get(url + "/forgetPassword.php?email=" + encodeURIComponent(email)).then((res) => {
+                console.log(res.data)
                 if (res.data.success) {
                     setSuccess(true)
                 }
@@ -85,7 +86,7 @@ const ForgetPassword = () => {
                         {!success && ((!isLoading) && (<button onClick={handleSubmit} disabled={emailErrors.length != 0 || !email.length ? true : false} className={`t-will-change-auto ${emailErrors.length === 0 && email.length ? "hover:t-text-blue-400 hover:t-bg-white hover:t-shadow-none" : "t-opacity-30 t-cursor-not-allowed"} t-border-blue-400 t-border-2 t-duration-200 t-delay-75 t-h-12 t-w-full t-text-white t-bg-blue-400 t-text-lg t-rounded-md t-shadow-lg t-shadow-blue-300`}>Send Email</button>)
                             || (<Loader className="lg:t-mx-0 t-mx-auto" height="40px" size="35px" border="6px" color="#60a5fa" />))}
                         {success && <div className='t-w-full t-h-14 t-rounded-md t-flex t-items-center t-space-x-3 t-bg-green-200'>
-                            <img src="/assets/icons/checked.png" className='h-7 w-7 ml-3' />
+                            <img src="/assets/icons/checked.png" className='t-h-7 t-w-7 t-ml-3' />
                             <p className='t-text-green-600 t-text-[13px]'>An email has been sent to you successfully</p>
                         </div>}
                     </div>

@@ -8,9 +8,17 @@ import Options from "./Options"
 import "./Sign.scss"
 import { UseLogged } from "../../hooks/UseLogged"
 import { context } from "../../index"
+import { useCookies } from 'react-cookie'
 const Sign = () => {
     /* check if user connected*/
-    UseLogged("/");
+    const navigate = useNavigate()
+    const [cookie, setCookie] = useCookies()
+    const isLogged = cookie.clid != undefined
+    useEffect(() => {
+        if (isLogged) {/*must change to !isLogged*/
+            navigate("/")
+        }
+    }, [])
 
     const tel = useRef("")
     const firstName = useRef("")
@@ -25,8 +33,6 @@ const Sign = () => {
     /*Backend url*/
     const { url } = useContext(context)
     /* navigate instance*/
-    const navigate = useNavigate()
-
     /*errors function */
     const errorLastNameFunction = (value) => {
         var errors = []
@@ -126,7 +132,7 @@ const Sign = () => {
                 else {
                     data.code = res.data.code
                     setEmailExist(false)
-                    navigate("/sign/emailVerify", { state: data })
+                    navigate("/", { state: data })
                 }
             }).catch((err) => {
                 console.log("error : " + err)

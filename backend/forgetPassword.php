@@ -15,9 +15,11 @@
                 $_GET["email"]
             ));
             $res=$req1->fetch();
+            //print_r(json_encode($res));
             $data=array();
             $data["success"]=false;
-            if ($res>0){
+             if ($res[0]>0){
+                //$data["email"]=$_GET["email"];
                 $req3=$conn->prepare("SELECT id_operation FROM operation WHERE email=?");
                 $req3->execute(array($_GET["email"]));
                 $r3=$req3->fetchColumn();
@@ -45,7 +47,6 @@
                 $mail->SetFrom("_mainaccount@myjewery.com", "MyJewery-Reset your password");
                 $mail->Subject  = "E-mail verification";
                 $mail->Body     = "Hello ".$_GET["email"].", Here is a new link to enter your new password :: https://myjewery.com/account/changePassword/".$_GET['email']."/".$op_id;
-                //<html><body><a href='https://myjewery.com/account/changePassword/'.$_GET['email'].'/'.$op_id.'>https://myjewery.com/account/changePassword/'.$_GET['email'].'/'.$op_id.'</a></body></html>
                 $mail->IsHTML(true); 
                 $mail->WordWrap = 50;
                 if(!$mail->Send()) {

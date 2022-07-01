@@ -23,16 +23,19 @@ export default function Paypal({ total, orderData }) {
         });
     }
     const getResponse = (data, actions) => {
+        console.log(orderData)
         return actions.order.capture().then((details) => {
             if (details.status === "COMPLETED") {
                 axios.post(url + "/createOrder.php", orderData)
-                setCookie("c_r", [], { maxAge: 7 * 24 * 60 * 60 })
-                setProductNumber(0)
-                setNotification({
-                    ...notification,
-                    visible: true,
-                    message: "Payment was successful",
-                    type: "success"
+                .then ((res) => {
+                    setCookie("c_r", [], { maxAge: 7 * 24 * 60 * 60 })
+                    setProductNumber(0)
+                    setNotification({
+                        ...notification,
+                        visible: true,
+                        message: "Payment was successful",
+                        type: "success"
+                    })
                 })
             }
         });
