@@ -33,13 +33,12 @@
                 $mail->IsSMTP();  // telling the class to use SMTP
                 $mail->SMTPDebug = 2;
                 $mail->Mailer = "smtp";
-                $mail->Host =    "";
+                $mail->Host = "myjewery.com";
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
                 $mail->Port = 465;
                 $mail->SMTPAuth = true; // turn on SMTP authentication
                 $mail->Username = ""; // SMTP username
                 $mail->Password = ""; // SMTP password
-                $Mail->Priority = 1;
                 $mail->AddAddress("raed.boafif@gmail.com","Name");
                 $mail->SetFrom("baligh@mymetalsprice.com", "ez");
                 $mail->Subject  = "This is a Test Message";
