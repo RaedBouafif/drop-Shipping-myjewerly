@@ -12,7 +12,7 @@
                 $_POST["firstName"],
                 $_POST["lastName"],
                 $_POST["email"],
-                $_POST["phone"],
+                $_POST["tel"],
                 password_hash($_POST["password"], PASSWORD_DEFAULT)
             ));
             $tab= array();

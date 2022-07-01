@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import NavBonde from '../navBonde/NavBonde'
+import NavBonde from '../NavBonde/NavBonde'
 import "./Checkout.scss"
 import { UseLogged } from "../../hooks/UseLogged"
 import { useCookies } from 'react-cookie'

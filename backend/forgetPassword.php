@@ -15,6 +15,8 @@
                 $_GET["email"]
             ));
             $res=$req1->fetch();
+            $data=array();
+            $data["success"]=false;
             if ($res>0){
                 $req3=$conn->prepare("SELECT id_operation FROM operation WHERE email=?");
                 $req3->execute(array($_GET["email"]));
@@ -33,25 +35,28 @@
                 $mail->IsSMTP();  // telling the class to use SMTP
                 $mail->SMTPDebug = 2;
                 $mail->Mailer = "smtp";
-                $mail->Host =    "";
+                $mail->Host ="myjewery.com";
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
                 $mail->Port = 465;
                 $mail->SMTPAuth = true; // turn on SMTP authentication
-                $mail->Username = ""; // SMTP username
-                $mail->Password = ""; // SMTP password
-                $Mail->Priority = 1;
-                $mail->AddAddress("raed.boafif@gmail.com","Name");
-                $mail->SetFrom("baligh@mymetalsprice.com", "ez");
-                $mail->Subject  = "This is a Test Message";
-                $mail->Body     = "dsqdsqdsq "; // https://domain.com/account/changePassword/$_GET["email"]/$op_id
+                $mail->Username = "_mainaccount@myjewery.com"; // SMTP username
+                $mail->Password = "Mlkdps54#@@5"; // SMTP password
+                $mail->AddAddress($_GET["email"],);
+                $mail->SetFrom("_mainaccount@myjewery.com", "MyJewery-Reset your password");
+                $mail->Subject  = "E-mail verification";
+                $mail->Body     = "Hello ".$_GET["email"].", Here is a new link to enter your new password :: https://myjewery.com/account/changePassword/".$_GET['email']."/".$op_id;
+                //<html><body><a href='https://myjewery.com/account/changePassword/'.$_GET['email'].'/'.$op_id.'>https://myjewery.com/account/changePassword/'.$_GET['email'].'/'.$op_id.'</a></body></html>
+                $mail->IsHTML(true); 
                 $mail->WordWrap = 50;
                 if(!$mail->Send()) {
-                    echo 'Message was not sent.';
-                    echo 'Mailer error: ' . $mail->ErrorInfo;
+                echo 'Message was not sent.';
+                echo 'Mailer error: ' . $mail->ErrorInfo;
                 } else {
-                    echo 'Message has been sent.';
+                echo 'Message has been sent.';
                 }
+                $data["success"]=true;
             }
+            print_r(json_encode($data));
         }catch (PDOException $e){
              echo "connection failed :". $e->getMessage();
         }
