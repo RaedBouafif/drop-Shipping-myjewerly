@@ -34,7 +34,7 @@ const ForgetPassword = () => {
         e.preventDefault()
         if (!emailErrors.length) {
             setIsLoading(true)
-            axios.get(url + "/forgetPassword.php?email" + encodeURIComponent(email)).then((res) => {
+            axios.get(url + "/forgetPassword.php?email=" + encodeURIComponent(email)).then((res) => {
                 if (res.data.success) {
                     setSuccess(true)
                 }

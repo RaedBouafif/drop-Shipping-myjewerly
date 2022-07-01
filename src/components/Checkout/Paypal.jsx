@@ -25,7 +25,9 @@ export default function Paypal({ total, orderData }) {
     const getResponse = (data, actions) => {
         return actions.order.capture().then((details) => {
             if (details.status === "COMPLETED") {
-                axios.post(url + "/createOrder.php", orderData)
+                axios.post(url + "/createOrder.php", orderData).then((res) => {
+
+                })
                 setCookie("c_r", [], { maxAge: 7 * 24 * 60 * 60 })
                 setProductNumber(0)
                 setNotification({
