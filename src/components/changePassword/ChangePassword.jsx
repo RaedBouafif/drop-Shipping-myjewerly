@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
     const checkValidOperation = () => {
         axios.get(url + "/checkOperation?operation=" + operationId).then((res) => {
-            if (!res.success) {
+            if (!res.data.success) {
                 navigate("/error")
             }
         })

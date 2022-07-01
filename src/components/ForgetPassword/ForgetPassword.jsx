@@ -35,7 +35,7 @@ const ForgetPassword = () => {
         if (!emailErrors.length) {
             setIsLoading(true)
             axios.get(url + "/resetPassword.php?email" + encodeURIComponent(email)).then((res) => {
-                if (res.success) {
+                if (res.data.success) {
                     setSuccess(true)
                 }
                 else {
@@ -53,7 +53,7 @@ const ForgetPassword = () => {
             <div className='t-w-full lg:t-fixed lg:t-inset-0 t-min-h-full t-flex t-items-center t-justify-center'>
                 <div className='t-min-h-screen lg:t-flex t-hidden t-w-7/12 t-bg-neutral-900 selection:t-bg-white selection:t-text-blue-300'>
                     <div className='t-mx-auto t-relative t-right-10 t-flex t-flex-col t-items-center t-justify-center'>
-                        <img className='t-h-[450px] t-w-[600px]' src="/assets/images/online-shopping.png" alt="" />
+                        <img className='t-h-[450px] t-mb-3 t-w-[450px]' src="/assets/images/finalImage.png" alt="" />
                         <p className='t-text-lg t-text-white t-w-7/12 t-text-center t-mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</p>
                     </div>
                 </div>

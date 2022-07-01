@@ -120,11 +120,11 @@ const Sign = () => {
                 "password": passwordValue,
             }
             axios.get(url + `/verifyEmail.php?email=${encodeURIComponent(emailValue)}`).then((res) => {
-                if (res.emailExist) {
+                if (res.data.emailExist) {
                     setEmailExist(true)
                 }
                 else {
-                    data.code = res.code
+                    data.code = res.data.code
                     setEmailExist(false)
                     navigate("/verifyEmail", { state: data })
                 }
@@ -137,11 +137,11 @@ const Sign = () => {
         <div className='t-w-full t-min-h-screen t-flex t-items-center t-font-body'>
             <div className='t-w-6/12 t-min-h-screen t-bg-neutral-900 selection:t-bg-white selection:t-text-blue-300 lg:t-flex t-hidden t-fixed t-top-0 t-left-0 t-items-center t-justify-end'>
                 <div className='t-mx-auto t-flex t-flex-col t-h-full t-items-center t-justify-center'>
-                    <img className='t-h-[200px] t-mb-20 t-w-[300px]' src="/assets/images/final.png" alt="" />
+                    <img className='t-h-[450px] t-mb-3 t-w-[450px]' src="/assets/images/finalImage.png" alt="" />
                     <h1 className='t-text-lg t-text-white t-w-7/12 t-text-center t-mx-auto'>Hey, Customers Welcome to our awesome Store where we provides you the latest and the top branded jewelery. don't be stingy to Log-in with your account and navigate into our world.</h1>
                 </div>
             </div>
-            <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-top-10 t-z-50 lg:t-left-10 t-left-7 t-top-7 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
+            <Link to="/" className='lg:t-text-white t-flex t-items-center t-justify-center t-space-x-2 t-text-black t-absolute lg:t-fixed lg:t-top-10 t-z-50 lg:t-left-10 t-left-1 t-top-4 hover:t-text-underline lg:t-decoration-white t-decoration-black t-underline-offset-1 t-text-xl t-cursor-pointer'>
                 <img src="/assets/icons/left-arrow.png" className='t-h-5 t-w-5 lg:t-hidden' />
                 <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-800 lg:t-text-white'>Home</p>
             </Link>

@@ -6,13 +6,15 @@ import axios from "axios"
 import Loader from "../Loader/Loader"
 import { UseLogged } from "../../hooks/UseLogged"
 import { context } from "../../index"
+import { NotificationAtom } from "../SharedState/NotificationAtom"
+import { useRecoilState } from 'recoil'
 const Verify = () => {
 
     const [cookie, setCookie] = useCookies()
     const navigate = useNavigate()
     const location = useLocation()
     const data = location.state
-
+    const [notification, setNotification] = useRecoilState(NotificationAtom)
     useEffect(() => {
         if (!data) {
             navigate("/sign")
@@ -45,8 +47,14 @@ const Verify = () => {
             finalData.append("password", data.password)
             finalData.append("email", data.email)
             axios.post(url + "/signUp.php", finalData).then((res) => {
-                setCookie("clid", res.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
+                setCookie("clid", res.data.id, { maxAge: 7 * 24 * 60 * 60 })
                 navigate("/")
+                setNotification({
+                    ...notification,
+                    visible: true,
+                    message: "Account successfully created",
+                    type: "success"
+                })
             }).catch((err) => {
                 console.log("error : " + err)
             })
@@ -54,6 +62,12 @@ const Verify = () => {
         else {
             setIsLoading(false)
             setError(true)
+            setNotification({
+                ...notification,
+                visible: true,
+                message: "Please verify your code",
+                type: "warning"
+            })
         }
     }
 
@@ -65,8 +79,8 @@ const Verify = () => {
                 <p className='t-font-bold t-tracking-wider t-text-lg hover:t-underline t-underline-offset-1 t-decoration-neutral-600 t-text-neutral-600'>Back to Sign up</p>
             </Link>
             <form className="t-mx-auto t-rounded-md t-shadow-lg lg:t-py-16 t-py-7 t-min-h-screen lg:t-min-h-0 t-bg-white t-my-0 lg:t-my-16 t-flex t-flex-col t-items-center lg:t-w-6/12 t-w-full t-font-body">
-                <div className='t-mt-10 md:t-mt-0'>
-                    <img className="t-h-60 t-w-[32rem]" src="/assets/images/nice.png" alt="email illustration" />
+                <div className='t-mt-10 t-mb-5 md:t-mt-0'>
+                    <img className="t-h-72 t-w-[32rem]" src="/assets/images/finalImage2.png" alt="email illustration" />
                 </div>
                 <div className="t-space-y-3 t-mb-16">
                     <h2 className="t-text-2xl t-font-bold t-text-center t-tracking-widest t-text-neutral-600">Verify Your Email</h2>

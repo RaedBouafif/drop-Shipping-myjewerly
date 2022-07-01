@@ -8,7 +8,7 @@ export const UseLogged = (path) => {
     const [cookie, setCookie] = useCookies()
     const isLogged = cookie.clid != undefined
     useEffect(() => {
-        if (isLogged) {/*must change to !isLogged*/
+        if (!isLogged) {/*must change to !isLogged*/
             navigate(path)
         }
     }, [])
