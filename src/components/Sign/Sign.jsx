@@ -120,11 +120,11 @@ const Sign = () => {
                 "password": passwordValue,
             }
             axios.get(url + `/verifyEmail.php?email=${encodeURIComponent(emailValue)}`).then((res) => {
-                if (res.emailExist) {
+                if (res.data.emailExist) {
                     setEmailExist(true)
                 }
                 else {
-                    data.code = res.code
+                    data.code = res.data.code
                     setEmailExist(false)
                     navigate("/verifyEmail", { state: data })
                 }

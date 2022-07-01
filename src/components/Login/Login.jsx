@@ -46,8 +46,8 @@ const Login = () => {
             data.append("email", email)
             data.append("password", password)
             axios.post(url + "/login.php", data).then((res) => {
-                if (res.success) {
-                    setCookies("clid", res.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
+                if (res.data.success) {
+                    setCookies("clid", res.data.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
                     navigate("/")
                 }
                 else {

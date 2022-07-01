@@ -47,7 +47,7 @@ const Verify = () => {
             finalData.append("password", data.password)
             finalData.append("email", data.email)
             axios.post(url + "/signUp.php", finalData).then((res) => {
-                setCookie("clid", res.id, { maxAge: 7 * 24 * 60 * 60 })
+                setCookie("clid", res.data.id, { maxAge: 7 * 24 * 60 * 60 })
                 navigate("/")
                 setNotification({
                     ...notification,
