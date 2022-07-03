@@ -19,6 +19,7 @@ import { useRecoilState } from 'recoil'
 import { cartAtom } from './SharedState/cartAtom'
 import Checkout from './Checkout/Checkout'
 import Contact from './Contact/Contact'
+import Band from './Home/Band'
 const App = () => {
   const [cookie, setCookie] = useCookies()
   const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
@@ -73,6 +74,7 @@ const App = () => {
               </Route>
 
             </Route>
+            <Route element={<Band />} path="" />
             <Route element={<Contact />} path="contact" />
           </Route>
         </Route>
