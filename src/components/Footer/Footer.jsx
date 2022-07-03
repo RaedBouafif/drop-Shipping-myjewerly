@@ -18,7 +18,7 @@ const Footer = () => {
                                 <div className="footer_contact">
                                     <p><span>Mobile: </span><a
                                         href="tel:+962798898997">+962798898997</a> </p>
-                                    <p><span>Support: </span><a href="mailto:hazemalmasri@hotmail.com">hazemalmasri@hotmail.com</a>
+                                    <p><span>Support: </span><a href="mailto:hazemalmasri@hotmail.com">support@myjewery.com</a>
                                     </p>
                                 </div>
                             </div>

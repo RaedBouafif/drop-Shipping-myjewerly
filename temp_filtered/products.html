@@ -17,6 +17,13 @@
 </head>
 <body>	
 	<style>
+		#orderId 
+		{
+			font-size:20px;
+			color: black;
+			position: relative ; 
+			bottom : 100px ;
+		}
 			body{
 				width : 100vw ;
 				min-height: 100vh;
@@ -28,16 +35,30 @@
 			th{
 				min-width : 100px;
 				text-align: center;
+				color: black;
 			}
 			td{
 				min-width : 100px;
 				text-align: center;
+				color: black;
+			}
+			.del_button
+			{
+				height: 35px; 
+				width: 80px;
+				color:white; 
+				border: none;
+				border-radius: 7px;
+				background-color: rgb(252, 30, 30);
 			}
 	</style>
-			<div class="card-body">
-				<div class="table-responsive">
-					<div id="example2_wrapper" class="dataTables_wrapper"><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 563.672px; padding-right: 17px;">
-						<table class="display dataTable" style=" margin-left: 0px;" role="grid">
+	<div id="orderId">
+		order  : <span style="font-weight: 600;">5455465565456</span>
+	</div>
+	<div style="font-weight: 800;color: black;font-size: 20px;align-self: flex-start;margin-left: 20%; margin-bottom: 50px;">Products : </div>
+			<div class="dataTables_scrollHead" style="position: relative; border: 0px; width: 100%;display: flex; justify-content: center;">
+				<div class="dataTables_scrollHeadInner" style="box-sizing: content-box; padding-right: 17px;">
+						<table class="display dataTable table table-bordered" style=" margin-left: 0px;" role="grid">
 							<thead>
 								<tr>
 									<th>Sku</th>
@@ -48,13 +69,11 @@
 									<th>Color</th>
 									<th>len</th>
 									<th>Ring_size</th>
+									<th>operation</th>
 								</tr>
 							</thead>
-							<tfoot>
-								<tr style="height: 0px;"><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 62.9688px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Name</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 79.5469px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Position</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 55.8906px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Office</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 28.1562px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Age</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 66.3594px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Start date</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 54.75px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Salary</div></th></tr>
-							</tfoot>
 							<tbody>
-							<tr class="odd" role="row">
+								<tr class="odd" role="row">
 									<td class="sorting_1">Airi Satou</td>
 									<td>$162,700</td>
 									<td>Accountant</td>
@@ -63,23 +82,14 @@
 									<td>2008/11/28</td>
 									<td>$162,700</td>
 									<td>$162,700</td>
-								</tr><tr class="even" role="row">
-									<td class="sorting_1">Angelica Ramos</td>
-									<td>$1,200,000</td>
-									<td>Accountant</td>
-									<td>Tokyo</td>
-									<td>33</td>
-									<td>$162,700</td>
-									<td>2008/11/28</td>
-									<td>$162,700</td>
-								</tr></tbody>
-					</table></div><div class="dataTables_scrollFoot" style="overflow: hidden; border: 0px; width: 100%;"><div class="dataTables_scrollFootInner" style="width: 563.672px; padding-right: 17px;"><table class="display dataTable" style="width: 563.672px; margin-left: 0px;" role="grid"></table></div></div></div><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 57 of 57 entries</div></div>
-				</div>
+									<td><button class="del_button" onclick="deleteProduct(this);">Delete</button></td>
+								</tr>
+							</tbody>
+					</table>
+			</div>
 			</div>
 			
-        </div>
-    </div>
-
+	<script src="./js2/products.js"></script>
     <script src="./vendor/global/global.min.js"></script>
 	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="./js/custom.min.js"></script>
