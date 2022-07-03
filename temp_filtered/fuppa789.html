@@ -16,21 +16,53 @@
 	<link rel="stylesheet" href="./index.css"/>
 </head>
 <body>
-
-
-				<!--your code here-->
+				<style>
+					table 
+					{
+						width: 80vw;
+						background-color: white;
+					}
+					body {
+						width: 100vw;
+						min-height: 100vh;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
 				
+					th {
+						min-width: 82px;
+						text-align: center;
+					}
 				
-				<div style="position: absolute; bottom:0 ;" class="copyright">
-					<p><strong>Myjewery Admin Dashboard</strong> © 2022 All Rights Reserved</p>
-					<p>Made with <span class="heart"></span> by Myjewery</p>
-				</div>
-			
-	
-        <div class="content-body">
+					td {
+						min-width: 82px;
+						text-align: center;
+					}
+				
+					.del_button {
+						margin-bottom: 5px;
+						height: 35px;
+						width: 80px;
+						color: white;
+						border: none;
+						border-radius: 7px;
+						background-color: rgb(252, 30, 30);
+					}
+				
+					.del_button1 {
+						height: 35px;
+						width: 80px;
+						color: white;
+						border: none;
+						border-radius: 7px;
+						background-color: rgb(5, 52, 206);
+					}
+				</style>
             <!-- row -->
-		<div class="card">
-			<div class="container-fluid">
+			<div class="card">
+				<div style="padding-top: 50px;" class="container-fluid ">
 						<div class="form-head d-flex mb-3 mb-md-5 align-items-start">
 							<div class="mr-auto d-none d-lg-block">
 								<h3 class="text-primary font-w600">Welcome to Myjewery!</h3>
@@ -38,7 +70,7 @@
 							</div>
 						</div>	
 			
-						<div class="row">	
+						<div style="width: 80vw;" class="row">	
 							<div class="col-xl-6 col-xxl-12">
 								<div class="row">	
 									<div class="col-xl-6 col-lg-6 col-sm-6">
@@ -73,78 +105,42 @@
 									</div>
 								</div>
 							</div>
-					 </div>
-			</div> 
-		</div>
-		<style>
-			th{
-				min-width : 82px;
-				text-align: center;
-			}
-			td{
-				min-width : 82px;
-				text-align: center;
-			}
-			.del_button
-			{
-				margin-bottom: 5px;
-				height: 35px; 
-				width: 80px;
-				color:white; 
-				border: none;
-				border-radius: 7px;
-				background-color: rgb(252, 30, 30);
-			}
-			.del_button1
-			{
-				height: 35px; 
-				width: 80px;
-				color:white; 
-				border: none;
-				border-radius: 7px;
-				background-color: rgb(5, 52, 206);
-			}
-		</style>
-		
-					<div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; ">
-						<table class="display dataTable" style=" margin-left: 0px;" role="grid">
-							<thead>
-								<tr>
-									<th>First_Name</th>
-									<th>Last_Name</th>
-									<th>Address_1</th>
-									<th>Address_2</th>
-									<th>City</th>
-									<th>State</th>
-									<th>Country</th>
-									<th>Email Address</th>
-									<th>Phone</th>
-									<th>Total</th>
-									<th>Operation</th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr style="height: 0px;"><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 62.9688px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Name</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 79.5469px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Position</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 55.8906px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Office</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 28.1562px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Age</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 66.3594px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Start date</div></th><th rowspan="1" colspan="1" style="padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 54.75px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Salary</div></th></tr>
-							</tfoot>
-							<tbody>
-							<tr class="odd" role="row">
-									<td class="sorting_1">Airi Satou</td>
-									<td>$162,700</td>
-									<td>Accountant</td>
-									<td>Tokyo</td>
-									<td>Accountant</td>
-									<td>Accountant</td>
-									<td>Tokyo</td>
-									<td>33</td>
-									<td>2008/11/28</td>
-									<td>$162,700</td>
-									<td><button class="del_button" onclick="deleteProduct(this);">Delete</button><button class="del_button1" >Products</button></td>
-								</tr></tbody>
-					</table>
+					 	</div>
+					</div> 
 				</div>
-	
-       
-    </div>
+			</div>
+			<table style="width: 80vw;" class=" table table-bordered" style=" margin-left: 0px;" role="grid">
+				<thead>
+					<tr>
+						<th>First_Name</th>
+						<th>Last_Name</th>
+						<th>Address_1</th>
+						<th>Address_2</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Country</th>
+						<th>Email Address</th>
+						<th>Phone</th>
+						<th>Total</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="odd" role="row">
+						<td class="sorting_1">Airi Satou</td>
+						<td>$162,700</td>
+						<td>Accountant</td>
+						<td>Tokyo</td>
+						<td>Accountant</td>
+						<td>Accountant</td>
+						<td>Tokyo</td>
+						<td>33</td>
+						<td>2008/11/28</td>
+						<td>$162,700</td>
+						<td style="display:flex; flex-direction: column;"><button class="del_button" onclick="deleteProduct(this);">Delete</button><button class="del_button1" >Products</button></td>
+					</tr>
+				</tbody>
+		</table>      
 
     <script src="./vendor/global/global.min.js"></script>
 	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
