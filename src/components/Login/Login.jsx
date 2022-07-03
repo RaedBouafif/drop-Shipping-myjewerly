@@ -9,8 +9,14 @@ import Loader from '../Loader/Loader'
 import { UseLogged } from "../../hooks/UseLogged"
 const Login = () => {
 
-    UseLogged("/")
     const navigate = useNavigate()
+    const [cookie, setCookie] = useCookies()
+    const isLogged = cookie.clid != undefined
+    useEffect(() => {   
+        if (isLogged) {/*must change to !isLogged*/
+            navigate("/")
+        }
+    }, [])
 
 
     /*cookie */

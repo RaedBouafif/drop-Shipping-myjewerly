@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import { RecoilRoot } from "recoil"
+import { RecoilRoot, } from "recoil"
 
 const state = {
-  url: "http://localhost/myjewery/backend/"
+  url: "https://myjewery.com/backend",//http://myjewery.com//backend
 }
 
 export const context = React.createContext()

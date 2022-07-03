@@ -4,7 +4,6 @@ import { UseTrueString } from "../../hooks/strings"
 import { useCookies } from 'react-cookie'
 import axios from "axios"
 import Loader from "../Loader/Loader"
-import { UseLogged } from "../../hooks/UseLogged"
 import { context } from "../../index"
 import { NotificationAtom } from "../SharedState/NotificationAtom"
 import { useRecoilState } from 'recoil'
@@ -22,14 +21,19 @@ const Verify = () => {
     }, [])
 
     /* check if user connected*/
-    UseLogged("/");
+    const isLogged = cookie.clid != undefined
+    useEffect(() => {
+        if (isLogged) {/*must change to !isLogged*/
+            navigate("/")
+        }
+    }, [])
 
 
     /*backend url*/
     const { url } = useContext(context)
 
 
-    const codeInput = useRef("")
+    const codeInput = useRef(null)
     const [code, setCode] = useState("")
     const [error, setError] = useState(false)
     /*loading state */
@@ -38,7 +42,7 @@ const Verify = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setIsLoading(true)
-        if (data.code === code) {
+        if (data.code == code) {
             setError(false)
             var finalData = new FormData()
             finalData.append("firstName", data.firstName)
@@ -47,7 +51,7 @@ const Verify = () => {
             finalData.append("password", data.password)
             finalData.append("email", data.email)
             axios.post(url + "/signUp.php", finalData).then((res) => {
-                setCookie("clid", res.data.id, { maxAge: 7 * 24 * 60 * 60 })
+                setCookie("clid", res.data.id, { maxAge: 7 * 24 * 60 * 60 * 60 })
                 navigate("/")
                 setNotification({
                     ...notification,
@@ -90,7 +94,7 @@ const Verify = () => {
                     <input ref={codeInput} onInput={() => { setCode(() => UseTrueString(codeInput.current.value)) }} className="t-border-b-2 t-inputCode focus:t-bg-stone-50 t-rounded-t-md t-text-lg t-font-semibold t-text-neutral-800 t-tracking-widest lg:t-h-12 h-14 t-border-blue-400 t-w-full t-pl-1 t-outline-none"
                         type="text" placeholder="6 characters code" />
                 </div>
-                {error && (<div className='t-h-14 t-p-3 t-w-10/12 lg:t-w-auto t-space-x-2 t-bg-red-300 t-rounded-md t-items-center t-flex'>
+                {error && (<div className='t-h-14 t-mb-6 t-p-3 t-w-10/12 lg:t-w-auto t-space-x-2 t-bg-red-300 t-rounded-md t-items-center t-flex'>
                     <img src="/assets/icons/cross.png" className='t-h-5 t-w-5' />
                     <p className='t-text-sm t-text-red-500 t-tracking-widest t-font-semibold '>Invalid verification code</p>
                 </div>)}

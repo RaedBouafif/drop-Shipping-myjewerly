@@ -1,13 +1,15 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import axios from 'axios'
 import { UseTrueEmail, UseTrueString } from "../../hooks/strings"
 import { context } from "../../index"
 import { useRecoilState } from 'recoil'
 import { NotificationAtom } from '../SharedState/NotificationAtom'
+import Loader from "../Loader/Loader"
 const Contact = () => {
     const email = useRef()
     const message = useRef()
     const { url } = useContext(context)
+    const [isLoading, setLoading] = useState(false)
     const [notification, setNotification] = useRecoilState(NotificationAtom)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -34,8 +36,13 @@ const Contact = () => {
         }
         if (submit) {
             var data = new FormData()
+            setLoading(true)
             data.append("email", UseTrueString(email.current.value))
-            axios.post(url + "/contact.php", UseTrueString(message.current.value)).then((res) => {
+            data.append("message", UseTrueString(message.current.value))
+            axios.post(url + "/contact.php", data).then((res) => {
+                email.current.value = ""
+                message.current.value = ""
+                setLoading(false)
                 setNotification({
                     ...notification, message: "Message is sent successfully", type: "success", visible: true
                 })
@@ -73,7 +80,7 @@ const Contact = () => {
                                     <label> Your Message</label>
                                     <textarea ref={message} placeholder="Message *" className="form-control2"></textarea>
                                 </div>
-                                <button type="button" onClick={handleSubmit}>Send</button>
+                                {!isLoading && <button type="button" onClick={handleSubmit}>Send</button> || <Loader className="lg:t-mx-0 t-mx-auto" height="40px" size="35px" border="6px" color="#60a5fa" />}
                             </div>
 
                         </div>

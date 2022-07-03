@@ -41,7 +41,7 @@ const ProductDetails = () => {
     useEffect(() => {
         setIsLoading(true)
 
-        axios.get(`${url}/knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
+        axios.get(`${url}/Knawat/getProductBySku.php?sku=${encodeURIComponent(id)}`).then((res) => {
 
             setIsLoading(false)
             if (res.data.sku) {

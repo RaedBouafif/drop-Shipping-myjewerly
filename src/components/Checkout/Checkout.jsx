@@ -109,20 +109,21 @@ const Checkout = () => {
         e.preventDefault()
         if (checkInformation()) {
             setCanPurchase(true)
-            var data = new FormData()
-            data.append("clid", cookie.clid)
-            data.append("first_name", UseTrueString(firstName.current.value))
-            data.append("last_name", UseTrueString(lastName.current.value))
-            data.append("phone", UseTrueString(tel.current.value))
-            data.append("email", UseTrueString(email.current.value))
-            data.append("city", UseTrueString(city.current.value))
-            data.append("country", country.current.value)
-            data.append("state", UseTrueString(state.current.value))
-            data.append("total", calculTotal())
-            data.append("order_note", orderNote.current.value)
-            data.append("address_1", UseTrueString(address1.current.value))
-            data.append("address_2", UseTrueString(address2.current.value))
-            data.append("products", cookie.c_r)
+            var data = {
+                "clid": cookie.clid,
+                "first_name": UseTrueString(firstName.current.value),
+                "last_name": UseTrueString(lastName.current.value),
+                "phone": UseTrueString(tel.current.value),
+                "email": UseTrueString(email.current.value),
+                "city": UseTrueString(city.current.value),
+                "country": country.current.value,
+                "state": UseTrueString(state.current.value),
+                "total": calculTotal(),
+                "order_note": orderNote.current.value,
+                "address_1": UseTrueString(address1.current.value),
+                "address_2": UseTrueString(address2.current.value),
+                "products": cookie.c_r
+            }
             setOrderData(data)
         }
     }
