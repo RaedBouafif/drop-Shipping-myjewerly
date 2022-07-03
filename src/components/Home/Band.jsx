@@ -2,11 +2,11 @@ import React from 'react'
 
 const Band = () => {
     return (
-        <section class="shipping_area mb-70">
+        <section class="shipping_area t-mt-40">
             <div class="container">
                 <div class=" row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping">
+                    <div class="col-lg-3 col-md-6 t-justify-center t-items-center t-flex">
+                        <div class="single_shipping t-mx-auto">
                             <div class="shipping_icone">
                                 <img src="/temp/assets/img/about/shipping1.png" alt="" />
                             </div>
@@ -16,8 +16,8 @@ const Band = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping">
+                    <div class="col-lg-3 col-md-6 t-justify-center t-items-center t-flex">
+                        <div class="single_shipping t-mx-auto">
                             <div class="shipping_icone">
                                 <img src="/temp/assets/img/about/shipping2.png" alt="" />
                             </div>
@@ -27,7 +27,7 @@ const Band = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6 t-justify-center t-items-center t-flex">
                         <div class="single_shipping">
                             <div class="shipping_icone">
                                 <img src="/temp/assets/img/about/shipping3.png" alt="" />
@@ -38,7 +38,7 @@ const Band = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6 t-justify-center t-items-center t-flex">
                         <div class="single_shipping">
                             <div class="shipping_icone">
                                 <img src="/temp/assets/img/about/shipping4.png" alt="" />
