@@ -117,7 +117,7 @@ const Sign = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (!submit) {
-            setIsLoading(isLoading)
+            setIsLoading(true)
             var data = {
                 "firstName": firstNameValue,
                 "lastName": lastNameValue,
@@ -128,11 +128,12 @@ const Sign = () => {
             axios.get(url + `/verifyEmail.php?email=${encodeURIComponent(emailValue)}`).then((res) => {
                 if (res.data.emailExist) {
                     setEmailExist(true)
+                    setIsLoading(false)
                 }
                 else {
                     data.code = res.data.code
                     setEmailExist(false)
-                    navigate("/", { state: data })
+                    navigate("/sign/emailVerify", { state: data })
                 }
             }).catch((err) => {
                 console.log("error : " + err)

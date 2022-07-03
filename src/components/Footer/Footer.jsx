@@ -74,16 +74,10 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="footer_bottom">
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-lg-6 col-md-6">
-                            <div className="copyright_area">
-                                <p className="copyright-text">&copy; 2022  <Link to="/" className='t-text-[14px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewery </Link><i
-                                    className="fa fa-heart text-danger"></i> , All rights reserved.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div className="footer_bottom t-flex t-items-center t-justify-center" style={{ height: "50px", padding: "0" }}>
+                <div className="t-w-full">
+                    <p className="t-text-center">&copy; 2022  <Link to="/" className='t-text-[14px] t-mr-auto t-font-bold t-font-body t-text-blue-600'>MyJewery </Link><i
+                        className="fa fa-heart text-danger"></i> , All rights reserved.</p>
                 </div>
             </div>
         </footer >

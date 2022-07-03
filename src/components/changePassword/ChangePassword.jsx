@@ -21,11 +21,11 @@ const ChangePassword = () => {
     const { operationId, email } = useParams()
 
     const navigate = useNavigate()
-    const url = useContext(context)
+    const { url } = useContext(context)
 
 
     const checkValidOperation = () => {
-        axios.get(url + "/checkOperation?operationId=" + operationId).then((res) => {
+        if (operationId) axios.get(url + "/checkOperation.php?operationId=" + operationId).then((res) => {
             if (!res.data.success) {
                 navigate("/error")
             }

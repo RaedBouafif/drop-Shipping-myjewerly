@@ -42,7 +42,7 @@ const Notification = () => {
                     <img src={state.image} className="t-h-16 t-w-16" />
                 </div>
                 <div className='t-w-4/6 t-flex t-flex-col t-items-center t-justify-center'>
-                    <img onClick={hideNotification} src="/assets/icons/lettre-x.png" className='t-relative t-bottom-3 t-h-4 t-w-4 t-cursor-pointer t-mr-1 t-ml-auto t-justify-self-start' />
+                    <img onClick={hideNotification} src="/assets/icons/lettre-x.png" className='t-relative lg:t-bottom-3 t-bottom-4 t-h-4 t-w-4 t-cursor-pointer t-mr-1 t-ml-auto t-justify-self-start' />
                     <p className='t-text-center t-relative t-bottom-1 t-text-[15px] t-text-neutral-700 t-font-[500]'>{notification.message}</p>
                 </div>
             </div>

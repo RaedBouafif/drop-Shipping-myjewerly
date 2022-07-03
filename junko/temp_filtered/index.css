@@ -1,0 +1,10 @@
+.title-dash {
+  font-weight: 600;
+  color: rgb(102, 16, 240);
+  font-size: 30px;
+  margin-left: 20px;
+}
+.bestProduct .title {
+  color: rgba(0, 0, 0, 0.753);
+  font-weight: 600;
+}

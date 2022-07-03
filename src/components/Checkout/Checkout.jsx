@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import NavBonde from '../NavBonde/NavBonde'
+import NavBonde from '../navBonde/NavBonde'
 import "./Checkout.scss"
 import { UseLogged } from "../../hooks/UseLogged"
 import { useCookies } from 'react-cookie'
@@ -110,19 +110,19 @@ const Checkout = () => {
         if (checkInformation()) {
             setCanPurchase(true)
             var data = {
-                "clid" : cookie.clid,
-                "first_name":UseTrueString(firstName.current.value),
-                "last_name":UseTrueString(lastName.current.value),
-                "phone":UseTrueString(tel.current.value),
-                "email":UseTrueString(email.current.value),
-                "city":UseTrueString(city.current.value),
-                "country":country.current.value,
-                "state":UseTrueString(state.current.value),
-                "total":calculTotal(),
-                "order_note":orderNote.current.value,
-                "address_1":UseTrueString(address1.current.value),
-                "address_2":UseTrueString(address2.current.value),
-                "products":cookie.c_r
+                "clid": cookie.clid,
+                "first_name": UseTrueString(firstName.current.value),
+                "last_name": UseTrueString(lastName.current.value),
+                "phone": UseTrueString(tel.current.value),
+                "email": UseTrueString(email.current.value),
+                "city": UseTrueString(city.current.value),
+                "country": country.current.value,
+                "state": UseTrueString(state.current.value),
+                "total": calculTotal(),
+                "order_note": orderNote.current.value,
+                "address_1": UseTrueString(address1.current.value),
+                "address_2": UseTrueString(address2.current.value),
+                "products": cookie.c_r
             }
             setOrderData(data)
         }
