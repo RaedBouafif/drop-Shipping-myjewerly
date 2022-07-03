@@ -16,106 +16,6 @@
 	<link rel="stylesheet" href="./index.css"/>
 </head>
 <body>
-	<div id="preloader">
-		<div class="sk-three-bounce">
-			<div class="sk-child sk-bounce1"></div>
-			<div class="sk-child sk-bounce2"></div>
-			<div class="sk-child sk-bounce3"></div>
-		</div>
-	</div>
-	<!--****************
-	        Preloader end
-	    ********************-->
-	
-	<!--**********************************
-	        Main wrapper start
-	    ***********************************-->
-	<div id="main-wrapper">
-	
-		<!--**********************************
-	            Nav header start
-	        ***********************************-->
-		<div class="nav-header">
-			<a style="display: flex;align-items: center;" href="index.html" class="brand-logo">
-				<img class="logo-abbr" src="./images/logo.png" alt="">
-			</a>
-	
-			<div class="nav-control">
-				<div class="hamburger">
-					<span class="line"></span><span class="line"></span><span class="line"></span>
-				</div>
-			</div>
-		</div>
-		<!--**********************************
-	            Nav header end
-	        ***********************************-->
-	
-	
-	
-		<!--**********************************
-	            Header start
-	        ***********************************-->
-		<div class="header">
-			<div class="header-content">
-				<nav class="navbar navbar-expand">
-					<div class="collapse navbar-collapse justify-content-between">
-						<div class="header-left">
-							<div class="dashboard_bar">
-								Dashboard
-							</div>
-						</div>
-	
-						<ul class="navbar-nav header-right">
-							<li class="nav-item dropdown notification_dropdown">
-								<a class="nav-link dz-fullscreen" href="#">
-									<svg id="icon-full" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor"
-										stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-										class="css-i6dzq1">
-										<path
-											d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
-										</path>
-									</svg>
-									<svg id="icon-minimize" width="26" height="26" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2" stroke-linecap="round"
-										stroke-linejoin="round" class="feather feather-minimize">
-										<path
-											d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3">
-										</path>
-									</svg>
-								</a>
-							</li>
-							
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-		<!--**********************************
-	            Header end ti-comment-alt
-	        ***********************************-->
-	
-		<!--**********************************
-	            Sidebar start nav start
-	        ***********************************-->
-		<div class="deznav">
-			<div class="deznav-scroll">
-				<ul class="metismenu" id="menu">
-					<li><a href="index.php" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-home-1"></i>
-							<span class="nav-text">HOME</span>
-						</a>
-					</li>
-					<li><a href="add_product.php" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-archive"></i>
-							<span class="nav-text">ADD NEW PRODUCT</span>
-						</a>
-					</li>
-					<li><a href="product_management.php" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-archive"></i>
-							<span class="nav-text">PRODUCT MANAGEMENT</span>
-						</a>
-					</li>
-				</ul>
 
 
 				<!--your code here-->
@@ -125,8 +25,8 @@
 					<p><strong>Myjewery Admin Dashboard</strong> © 2022 All Rights Reserved</p>
 					<p>Made with <span class="heart"></span> by Myjewery</p>
 				</div>
-			</div>
-		</div>
+			
+	
         <div class="content-body">
             <!-- row -->
 		<div class="card">
@@ -178,27 +78,49 @@
 		</div>
 		<style>
 			th{
-				min-width : 100px;
+				min-width : 82px;
 				text-align: center;
 			}
 			td{
-				min-width : 100px;
+				min-width : 82px;
 				text-align: center;
 			}
+			.del_button
+			{
+				margin-bottom: 5px;
+				height: 35px; 
+				width: 80px;
+				color:white; 
+				border: none;
+				border-radius: 7px;
+				background-color: rgb(252, 30, 30);
+			}
+			.del_button1
+			{
+				height: 35px; 
+				width: 80px;
+				color:white; 
+				border: none;
+				border-radius: 7px;
+				background-color: rgb(5, 52, 206);
+			}
 		</style>
-			<div class="card-body">
-				<div class="table-responsive">
-					<div id="example2_wrapper" class="dataTables_wrapper"><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 563.672px; padding-right: 17px;">
-						<table class="display dataTable" style="width: 563.672px; margin-left: 0px;" role="grid">
+		
+					<div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; ">
+						<table class="display dataTable" style=" margin-left: 0px;" role="grid">
 							<thead>
 								<tr>
 									<th>First_Name</th>
 									<th>Last_Name</th>
 									<th>Address_1</th>
+									<th>Address_2</th>
+									<th>City</th>
+									<th>State</th>
 									<th>Country</th>
 									<th>Email Address</th>
 									<th>Phone</th>
 									<th>Total</th>
+									<th>Operation</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -210,28 +132,18 @@
 									<td>$162,700</td>
 									<td>Accountant</td>
 									<td>Tokyo</td>
-									<td>33</td>
-									<td>2008/11/28</td>
-									<td>$162,700</td>
-								</tr><tr class="even" role="row">
-									<td class="sorting_1">Angelica Ramos</td>
-									<td>$1,200,000</td>
+									<td>Accountant</td>
 									<td>Accountant</td>
 									<td>Tokyo</td>
 									<td>33</td>
 									<td>2008/11/28</td>
 									<td>$162,700</td>
+									<td><button class="del_button" onclick="deleteProduct(this);">Delete</button><button class="del_button1" >Products</button></td>
 								</tr></tbody>
-					</table></div><div class="dataTables_scrollFoot" style="overflow: hidden; border: 0px; width: 100%;"><div class="dataTables_scrollFootInner" style="width: 563.672px; padding-right: 17px;"><table class="display dataTable" style="width: 563.672px; margin-left: 0px;" role="grid"></table></div></div></div><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 57 of 57 entries</div></div>
+					</table>
 				</div>
-			</div>
-			
-        </div>
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="http://myjewery.com/" target="_blank">Myjewery</a> 2022</p>
-            </div>
-        </div>
+	
+       
     </div>
 
     <script src="./vendor/global/global.min.js"></script>

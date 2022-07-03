@@ -13,7 +13,7 @@ function handleSubmit(){
     }).then((res) => {
         res.json().then((data) => {
             if (data.success){
-                window.location.href="https://myjewery.com/add99/index.html";
+                window.location.href="https://myjewery.com/add99/fuppa789.html";
             }else{
                 alert("Invalid information : please check your Username or password")
             }
