@@ -16,9 +16,11 @@ const Footer = () => {
                                     <Link to="/" className='t-text-[38px] t-mr-auto t-font-bold t-font-body t-tracking-wide t-text-blue-600'>MyJewery</Link>
                                 </div>
                                 <div className="footer_contact">
-                                    <p><span>Mobile: </span><a
-                                        href="tel:+962798898997">+962798898997</a> </p>
-                                    <p><span>Support: </span><a href="mailto:hazemalmasri@hotmail.com">support@myjewery.com</a>
+                                    <p><span>Mobile1: </span><a
+                                        href="tel:+21696576964">+21696576964</a> </p>
+                                    <p><span>Mobile2: </span><a
+                                        href="tel:+21620271724">+21620271724</a> </p>
+                                    <p><span>Support: </span><a href="mailto:raed.bouaafif@gmail.com">raed.bouaafif@gmail.com</a>
                                     </p>
                                 </div>
                             </div>

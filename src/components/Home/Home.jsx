@@ -18,8 +18,8 @@ const Home = () => {
     }
     const { url } = useContext(context)
     useEffect(() => {
-        const jewerly = ["T2BS3391", "XLACIVI_TASLI_KARTIER_ALTIN-943", "GUGUM-T3922"]
-        const Watches = ["T2BS3391", "XLACIVI_TASLI_KARTIER_ALTIN-943", "GUGUM-T3922"]
+        const jewerly = ["GUGUM-LR2230019", "GUGUM-LR1480017", "LBLLBKDNKLY8682712005072-12872"]
+        const Watches = ["T2BS3360", "GEV220045569V13G-6129", "T2BS3346"]
 
         const j = jewerly.map((element) => axios.get(`${url}/Knawat/getProductBySku.php?sku=${encodeURIComponent(element)}`))
         axios.all(j).then((res) => {

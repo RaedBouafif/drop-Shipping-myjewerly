@@ -10,7 +10,7 @@ import ChangePassword from './changePassword/ChangePassword'
 import ErrorPage from './ErrorPage/ErrorPage'
 import Test from './test/Test'
 import Shop from "./Shop/Shop"
-import ProductDetails from './productDetails/ProductDetails'
+import ProductDetails from './productDetails/productDetails'
 import WishList from './wishList/WishList'
 import Notification from './Notification/Notification'
 import Cart from './Cart/Cart'
@@ -20,6 +20,7 @@ import { cartAtom } from './SharedState/cartAtom'
 import Checkout from './Checkout/Checkout'
 import Contact from './Contact/Contact'
 import Home from './Home/Home'
+import About from "./About/About"
 const App = () => {
   const [cookie, setCookie] = useCookies()
   const [cartNumber, setCartNumber] = useRecoilState(cartAtom)
@@ -76,6 +77,7 @@ const App = () => {
             </Route>
             <Route element={<Home />} path="" />
             <Route element={<Contact />} path="contact" />
+            <Route element={<About />} path="about" />
           </Route>
         </Route>
 

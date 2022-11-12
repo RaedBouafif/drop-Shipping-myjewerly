@@ -62,9 +62,9 @@ const Contact = () => {
                             <h3>contact us</h3>
                             <ul>
                                 <li><i className="fa fa-envelope-o"> </i> Email: <a
-                                    href="mailto:hazemalmasri@hotmail.com">hazemalmasri@hotmail.com</a>
+                                    href="mailto:raed.bouaafif@gmail.com">raed.bouaafif@gmail.com</a>
                                 </li>
-                                <li><i className="fa fa-phone"></i> Phone:<a href="tel:+962798898997"> +962798898997 </a> </li>
+                                <li><i className="fa fa-phone"></i> Phone:<a href="tel:+21696576964"> +21696576964 </a> </li>
                             </ul>
                         </div>
                     </div>

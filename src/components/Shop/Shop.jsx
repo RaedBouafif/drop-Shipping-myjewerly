@@ -133,9 +133,10 @@ const Shop = () => {
             axios.get(url + "/Knawat/getProducts.php?page=" + page.page + completPath).then((res) => {
                 setIsLoading(false)
                 if (Array.isArray(res.data)) {
+                    var prds = res.data.filter(element => element.name.en)
                     setProducts(() => {
-                        if (name) var table = res.data.filter((element) => (element.name.en?.toUpperCase().indexOf(name.toUpperCase()) != -1))
-                        else var table = res.data
+                        if (name) var table = prds.filter((element) => (element.name.en?.toUpperCase().indexOf(name.toUpperCase()) != -1))
+                        else var table = prds
                         return table.sort((a, b) => a.variations[0].sale_price - b.variations[0].sale_price)
                     })
                 }

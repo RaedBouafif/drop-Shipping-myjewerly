@@ -4,7 +4,10 @@ import { Link } from "react-router-dom"
 import { context } from '../..'
 const ScrollPhoto = () => {
     const [products, setProducts] = useState([])
-    const ids = [["Women's Zircon Gemmed Gold Metal Strap Watch", "T2BS3391"], ["Women's Gold Color Bracelet Set", "XLACIVI_TASLI_KARTIER_ALTIN-943"], ["Girl's Yellow Apple Design Silver Earrings", "GUGUM-T3922"],]
+    const ids = [["Men's Aqua Zircon Gemmed 925 Carat Silver Ring", "TEBT36934"],
+    ["Men's Infinity Metal Accessory Brown Leather Bracelet",
+        "T2EB2536-KS"],
+    ["Women's Silver Steel Cartier Bracelet", "T2BB3569"],]
     useEffect(() => {
 
         const j = ids.map((element) => axios.get(`${url}/Knawat/getProductBySku.php?sku=${encodeURIComponent(element[1])}`))
