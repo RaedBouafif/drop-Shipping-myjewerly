@@ -20,14 +20,14 @@
             $mail->IsSMTP();  // telling the class to use SMTP
             $mail->SMTPDebug = 0;
             $mail->Mailer = "smtp";
-            $mail->Host ="myjewery.com";
+            $mail->Host ="smtp.gmail.com";
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
             $mail->Port = 465;
             $mail->SMTPAuth = true; // turn on SMTP authentication
-            $mail->Username = "_mainaccount@myjewery.com"; // SMTP username
-            $mail->Password = "Mlkdps54#@@5"; // SMTP password
-            $mail->AddAddress("hazemalmasri@hotmail.com");
-            $mail->SetFrom("_mainaccount@myjewery.com", "MyJewery-Email Contact: ");
+            $mail->Username = "raed.bouaafif@gmail.com"; // SMTP username
+            $mail->Password = "rwuvgtpzbqatoshw"; // SMTP password
+            $mail->AddAddress("raed.bouafif@gmail.com");
+            $mail->SetFrom("raed.bouaafif@gmail.com", "MyJewery-Email Contact: ");
             $mail->Subject  = "E-mail sent from ".$email;
             $mail->Body= "Hello ,  <p>".$message."</p>";
             $mail->IsHTML(true); 
